@@ -1,0 +1,283 @@
+## Desarrollo Orientado a Objetos
+
+El proceso completo de diseñar una solución orientada a objetos, para un
+problema dado, está constituido por tres etapas consecutivas:\newline
+
+\centering\begin{tikzflowchart}
+  \node (a1) [concept, text width=40mm] {Análisis OO};
+  \node (a2) [concept, text width=40mm, below=8mm of a1] {Diseño OO};
+  \node (a3) [concept, text width=40mm, below=8mm of a2] {Implementación OO};
+  \draw[->, thick] (a1) -- (a2);
+  \draw[->, thick] (a2) -- (a3);
+\end{tikzflowchart}
+\vfill
+
+## Análisis Orientado a Objetos
+
+Es una manera de orientar el diseño ---o rediseño--- de la solución de un problema, el que puede ser de 
+cualquier índole, por ejemplo un proceso.\newline
+
+Consiste fundamentalmente en:
+
+- Considerar tanto el dominio del problema como su solución lógica en términos de \bld{objetos}.
+- Identificar los objetos relevantes para el problema.
+- Describirlos mediante la especificación de sus \bld{propiedades} y \bld{acciones}.
+- Considerar la manera en que interactúan entre sí.
+- Concepto clave: abstracción.
+    - Se modela un problema real desde un punto de vista abstracto.
+
+## Análisis Orientado a Objetos
+
+Resultado:
+
+- Siempre obtendremos una primera aproximación a la solución del problema.
+- La solución se compone de objetos con características propias.
+    - Propias y relevantes para el problema abordado.
+- Los objetos interactúan de una manera útil para la solución del problema.
+
+## Diseño Orientado a Objetos
+
+Se toma como punto de partida el resultado del análisis.\newline
+
+A partir de los objetos ya identificados, se refina el modelo, considerando
+limitaciones concretas tales como:
+
+- \itt{Hardware} a utilizar.
+- Lenguaje de programación escogido.
+- Requerimientos de desempeño.
+- Tipos de persistencia de datos (Bases de datos), etc.
+
+## Diseño Orientado a Objetos
+
+Resultado:
+
+- Un diseño más cercano a la implementación final.
+- Se define claramente los objetos que participarán en la solución.
+    - Se establecerá las \bld{responsabilidades} de cada uno.
+- Se podrá incluir objetos descartados en la fase de análisis y se
+podrá descartar objetos anteriormente considerados.
+- Se visualizará la eventual necesidad de \bld{objetos auxiliares}.
+
+## Implementación Orientada a Objetos
+
+Objetivos:
+
+- Implementar finalmente el diseño en el lenguaje de programación escogido.
+- Refinar el diseño para adecuarse estas eventualidades:
+    - Modificaciones cuya necesidad de vislumbró recién en esta etapa.
+    - Desajustes entre el diseño y determinados casos de uso definidos en
+    los requerimientos.
+
+Resultado:
+
+- El \itt{software} que lleva a cabo la solución de nuestro problema o rediseño.
+
+## Definiciones más formales de OOP
+
+\subsubtitleB{Objetos:}
+
+- Representa una entidad del mundo real.
+- Esta entidad está claramente identificada.
+    - Tiene límites bien definidos
+    - Tiene una identidad única.
+
+\begin{columns}[t,onlytextwidth]
+\column{0.6\textwidth}
+\begin{itemize}
+\item Está compuesto por: 
+    \begin{itemize}
+        \item Un \tikz\node[inlineBlock] (propiedadesFrame) {\bld{estado}};.
+        \item Un \tikz\node[inlineBlock] (comportamientoFrame) {\bld{comportamiento} definido};.
+    \end{itemize}
+\end{itemize}
+
+\column{0.4\textwidth}
+\begin{tikzpicture}[overlay]
+  \node[miniconcept, right=50mm of propiedadesFrame] (propiedadesFig) { Atributos };
+  \draw[->, thick] (propiedadesFig) -- ([xshift=3mm]propiedadesFrame.east);
+  \node[miniconcept, below=6mm of propiedadesFig] (comportamientoFig) { Métodos };
+  \draw[->, thick] (comportamientoFig) -- ([xshift=3mm]comportamientoFrame.east);
+\end{tikzpicture}
+
+\end{columns}
+
+## Definiciones más formales de OOP
+
+\subsubtitleB{Objetos:}\newline
+
+Cada objeto es individual y tiene una \bld{identidad}.\newline
+
+- Es una propiedad inherente de cada objeto el que pueda ser distinguible de los demás.
+- Dos objetos distintos pueden compartir casi todas sus propiedades.
+    - Dos gemelos son personas distintas.
+
+
+## Definiciones más formales de OOP
+
+\subsubtitleB{Clases:}
+
+- Son las ``fábricas'' que construyen objetos de un mismo tipo.
+- Corresponde más directamente a cada uno de los conceptos que se está modelando.
+    - El objeto corresponde a una de las muchas \bld{instancias} de aquel concepto
+    que estarán operando dentro de nuestra solución.
+
+\centering\scalebox{0.7}{%
+\begin{tikzpicture}[font={\baselineskip=2pt}]
+    \umlemptyclass[x=0,y=0]{Crédito}{}{}
+    \umlemptyclass[x=3,y=0]{Persona}{}{}
+    \umlemptyclass[x=6,y=0]{Aval}{}{}
+\end{tikzpicture}
+}
+
+## Definiciones más formales de OOP
+
+\subsubtitleB{Propiedades o atributos:}
+
+- Son las características relevantes de cada objeto de una clase.
+- Tienen un nombre que las identifica dentro de la clase.
+- Pueden tener un tipo de datos asociado.
+- La clase puede limitar el acceso de estas propiedades desde el ``mundo exterior''.
+
+\centering\scalebox{0.7}{%
+\begin{tikzpicture}
+    \umlclass[x=0,y=0]{Persona}%
+      {--Nombre\\ --Edad\\ --IdiomaNativo\\ --Residencia}%
+      {}
+    \umlclass[x=4,y=0]{Camión}%
+      {--Patente\\ --Año\\ --MáxCarga}%
+      {}
+    \umlclass[x=8,y=0]{Zorzal}%
+      {--ID\\ --Edad\\ --Género\\ --Hábitat}%
+      {}
+\end{tikzpicture}
+}
+
+## Definiciones más formales de OOP
+
+\subsubtitleB{Propiedades o atributos:}\newline
+
+Pueden ser:
+
+\begin{description}[leftmargin=3em]
+    \item[De instancia:] Cada objeto de la clase tiene un valor independiente.
+    \item[De clase:] La propiedad le pertenece a la clase: todos los objetos
+    comparten el mismo valor.
+\end{description}
+
+\vfill
+\bld{Estado de un objeto:}
+
+- Es el conjunto de las propiedades de un objeto en un momento dado.
+
+## Definiciones más formales de OOP
+
+\subsubtitleB{Métodos:}
+
+- Modelan el comportamiento de una clase de objetos.
+- Se consideran las acciones relevantes para el problema.
+- Invocar un método es \itt{ordenarle} a un objeto que haga una tarea.
+- Existen métodos especiales: \bld{constructores}.
+
+\vfill
+Son muy similares a las \bld{funciones} de la programación procedural:
+
+- Pueden recibir parámetros.
+- Pueden entregar un resultado tras ser invocados.
+
+## Definiciones más formales de OOP
+
+\subsubtitleB{Métodos:}
+
+\vfill
+
+\centering\scalebox{0.7}{%
+\begin{tikzpicture}
+    \umlclass[x=0,y=0]{Persona}%
+      {--Nombre\\ --Edad\\ --IdiomaNativo\\ --Residencia}%
+      {+Habla()\\ --Respira()\\ +DiceNombre()\\ +Camina()\\ --Sueña()}
+    \umlclass[x=4,y=0]{Camión}%
+      {--Patente\\ --Año\\ --MáxCarga}%
+      {+encender()\\ --revisaComb()\\ +prendeLuces()}
+    \umlclass[x=8,y=0]{Zorzal}%
+      {--ID\\ --Edad\\ --Género\\ --Hábitat}%
+      {+nace() \\ +vuela() \\ --come() \\ +muere()}
+\end{tikzpicture}
+}
+
+## Definiciones más formales de OOP
+
+\subsubtitleB{Visibilidad de propiedades y métodos:}\newline
+
+¿Se fijaron en los signos \bld{+} y \bld{--} en los Diagramas de Clase anteriores?\newline
+
+Existen fundamentalmente tres tipos de visibilidad:
+
+\begin{description}[leftmargin=3em]
+    \item[Pública (+):] Accesible y visible para todos los demás objetos.
+    \item[Privada (--):] Accesible y visible sólo dentro del propio objeto.
+    \item[Protegida (\#):] Accesible y visible sólo para objetos de la misma clase o de sus herederos.
+\end{description}
+
+## Definiciones más formales de OOP
+
+\subsubtitleB{Visibilidad de propiedades y métodos:}\newline
+
+Recomendaciones:
+
+- Que las propiedades sean privadas.
+    - Para acceder o modificar propidedades: métodos de acceso y de modificación.
+- Que los métodos sean públicos.
+
+## Definiciones más formales de OOP
+
+\subsubtitleB{Abstracción de Clase y Encapsulación:}\newline
+
+La \bld{abstracción de clase} es:
+
+- La separación entre la implementación de la clase y la manera en que ésta será
+finalmente usada.
+- Quien crea una clase provee una descripción de la clase y sus métodos que se pueden
+usar.
+    - Esto es el ``contrato de la clase''.
+
+
+La \bld{encapsulación} es:
+
+- El hecho que los detalles de la implementación están ocultos para quien usa la clase.
+
+\vfill
+
+Estos dos conceptos son las dos caras de una misma moneda.
+
+## Definiciones más formales de OOP
+
+\subsubtitleB{Herencia}
+
+- Es la derivación de nuevas clases a partir de otras ya existentes.
+- Una clase heredera es una versión más \itt{específica} que la heredada.
+- Este es uno de los conceptos más importantes en OOP.
+
+
+\centering\scalebox{0.7}{%
+\begin{tikzpicture}
+    \umlclass[x=0,y=0]{Persona}{}{}
+    \umlclass[x=-2,y=-3]{Cliente}{}{}
+    \umlclass[x=2,y=-3]{Aval}{}{}
+    \umlinherit{Cliente}{Persona}
+    \umlinherit{Aval}{Persona}
+    % \umlrelation[style={tikzuml inherit style}]{Cliente}{Persona}
+\end{tikzpicture}
+}
+
+\begin{center}
+% ## Definiciones más formales de OOP
+
+% Polimorfismo: diferentes clases pueden verse a través de interfaces comunes
+
+% ## Definiciones más formales de OOP
+
+% \subsubtitleB{Objetos, propiedades y métodos:}
+
+% - Encapsulan tanto su \bld{estado} como su \bld{comportamiento}.
+
+\end{center}

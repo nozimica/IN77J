@@ -1,0 +1,56 @@
+## Ejemplo 1
+
+Modelar la clase \bld{Préstamo}.\newline
+
+Un préstamo tiene las siguientes características:
+
+- Tasa de interés anual.
+- Duración en años.
+- Capital.
+- Fecha de inicio.
+
+Y tiene que ser capaz de lo siguiente:
+
+- Proveer acceso a las características descritas arriba.
+- Permitir la modificación de estas características.
+- Obtener la cuota mensual.
+- Obtener el costo total del crédito.
+
+## Ejemplo 1
+
+Modelar la clase \bld{Préstamo}.\newline
+
+\centering\scalebox{0.5}{%
+\begin{tikzpicture}
+    \umlclass[x=0,y=0]{Préstamo}%
+      {--tasaIntAnual\\ --periodoAnnos\\ --capital\\ --fechaInicio}%
+      {%
+      +Préstamo()\\
+      +Préstamo(tasaIntAnual, periodoAnnos, capital)\\
+      +obtTasaIntAnual()\\ +obtPeriodoAnnos()\\ +obtCapital()\\ +obtFechaInicio()\\
+      +estTasaIntAnual(tasaIntAnual)\\ +estPeriodoAnnos(periodoAnnos)\\ +estCapital(capital)\\ +estFechaInicio(fechaInicio)\\
+      +pagoMensual()\\ +costoTotal()
+      }
+\end{tikzpicture}
+}
+
+## Ejercicio 1
+
+Elaborar un modelo básico de los clientes de un banco.
+
+1. Un banco ofrece cuentas corrientes y cuentas vista a sus clientes.
+1. Los clientes se relacionan con el banco a través de sus ejecutivos.
+1. Debemos modelar todos los objetos involucrados en esta situación:
+    - Propiedades de cada objeto.
+    - Métodos de cada objeto.
+1. No más de 5 tipos de objetos.\vfill
+
+
+\begin{center}\begin{customRoundedBox}{}%
+\begin{itemize}
+  \item Tienen 15 minutos.
+  \item Ilustren el modelo con un diagrama.
+\end{itemize}
+\end{customRoundedBox}
+\end{center}
+

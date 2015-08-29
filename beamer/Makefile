@@ -8,6 +8,8 @@ default: $(TEXNAME).pdf
 
 $(TEXNAME).pdf: $(TEXNAME).tex in77j.sty $(TEXNAME)*.tex tex/*.tex
 	$(HOME)/.cabal/bin/pandoc -f markdown tex/1.01.md.tex -t beamer -o tex/1.01.tex
+	$(HOME)/.cabal/bin/pandoc -f markdown tex/1.02.md.tex -t beamer -o tex/1.02.tex
+	$(HOME)/.cabal/bin/pandoc -f markdown tex/1.03.md.tex -t beamer -o tex/1.03.tex
 	$(TEXCOMM) -no-pdf $(TEXNAME).tex && rm -f $(TEXNAME).xdv
 	bibtex $(TEXNAME)
 	# $(TEXCOMM) -interaction=batchmode $(TEXNAME).tex
@@ -33,3 +35,6 @@ handout:
 reduce:
 	gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dNOPAUSE -dQUIET -dBATCH \
 		-sOutputFile=$(TEXNAME)-reduc.pdf $(TEXNAME).pdf
+
+compileLive:
+	~/.local/bin/when-changed tex/1.01.md.tex tex/1.02.md.tex tex/1.03.md.tex in77j.tex -c make

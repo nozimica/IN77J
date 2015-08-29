@@ -1,5 +1,5 @@
 \usepackage{tikz}
-\usetikzlibrary{calc, shapes.multipart, shapes.geometric, arrows, positioning, chains, matrix, fit, scopes, backgrounds}
+\usetikzlibrary{calc, shapes, shapes, arrows, positioning, chains, matrix, fit, scopes, backgrounds}
 %\usetikzlibrary{shapes.geometric,shapes.arrows,decorations.pathmorphing}
 %\usetikzlibrary{matrix,chains,scopes,positioning,arrows,fit}
 \pgfdeclarelayer{foreground}
@@ -21,6 +21,8 @@
 
 \tikzstyle{feature} = [normalfig, rectangle, rounded corners=3mm, bottom color=green!30, draw=green!90!black!50]
 \tikzstyle{methods} = [normalfig, rectangle, rounded corners=3mm, bottom color=blue!30, draw=blue!90!black!50]
+\tikzstyle{concept} = [normalfig, rectangle, rounded corners=3mm, minimum height=2em, bottom color=blue!30, draw=blue!90!black!50]
+\tikzstyle{miniconcept} = [normalfig, rectangle, rounded corners=3mm, minimum height=1.5em, font=\tiny, bottom color=blue!30, draw=blue!90!black!50]
 
 \tikzstyle{arrowcomment} = [thick,rounded corners=1mm,very near start,draw=black!50, densely dashed]
 \newlength{\predefprocmargin}
@@ -51,3 +53,7 @@
   {\begin{tikzpicture}[#1,font=\sffamily\scriptsize,baseline={($(current bounding box.center)+(0,-0.5ex)$)}]}%
   {\end{tikzpicture}}
 
+\tikzstyle{namedArrow} = [midway, above=-1mm, color=black!70]
+
+\tikzstyle{every picture}+=[remember picture]
+\tikzstyle{inlineBlock} = [shape=rectangle,inner sep=0pt, text depth=0pt]

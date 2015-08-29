@@ -1,8 +1,8 @@
 ## Presentaciones
 
 * \subsubtitle{Estudiantes}
-    - \subsubtitleB{Conocimientos previos.}
-    - \subsubtitleB{Experiencia profesional.}
+    - \subsubtitleC{Conocimientos previos.}
+    - \subsubtitleC{Experiencia profesional.}
     \pause
 * \subsubtitle{Profesor:}
     \pause
@@ -13,14 +13,14 @@
     \centering
         \subsubtitle{Nicolás Eugenio Ozimica}\\
         \vspace{4mm}
-        \subsubtitleB{Ingeniero Civil en Computación}\\
-        \subsubtitleB{Universidad de Chile}
+        \subsubtitleC{Ingeniero Civil en Computación}\\
+        \subsubtitleC{Universidad de Chile}
     \end{customRoundedBox}
     
     \hspace{60mm}\begin{customRoundedBox}{}
     \centering
-        \subsubtitleB{nozimica@dcc.uchile.cl}\\
-        \subsubtitleB{nozimica@gmail.com}
+        \subsubtitleC{nozimica@dcc.uchile.cl}\\
+        \subsubtitleC{nozimica@gmail.com}
     \end{customRoundedBox}
     \end{center}
 
@@ -238,6 +238,7 @@ Un ejemplo de un código simple:
     - Mezcla HTML con PHP: desordenado y poco mantenible.
     - Pero es el primer y más sencillo ejemplo.
     - De hecho, es el que está en el tutorial oficial de PHP.
+
 ## Programación Orientada a Objetos
 
 - Según Grady Booch:\vspace{7mm}
@@ -283,9 +284,9 @@ Un ejemplo de un código simple:
 \node (a3) [process, below=10mm of bank, text width=15mm] {Banco};
 
 \draw[->,thick] (a2) -- (a1)
-  node[midway,above=1mm] {{\scriptsize vive en}};
+  node[namedArrow] {{\scriptsize \phantom{j} vive en}};
 \draw[->,thick] (a2) -- (a3)
-  node[midway,above=1mm] {{\scriptsize trabaja en}};
+  node[namedArrow] {{\scriptsize trabaja en}};
 \end{tikzpicture}
 
 ## Qué es la OOP
@@ -369,12 +370,20 @@ Un ejemplo de un código simple:
     - Métodos privados (internos): comportamiento interno del objeto.
 
 \begin{center}\begin{tikzpicture}[font=\sffamily\scriptsize]
+\tikzstyle{roundComment} = [ellipse, fill=white, draw=black!10, aspect=2, text width=25mm, align=center]
 \node[inner sep=0pt] (truck) at (0,0)
 {\includegraphics[width=20mm]{icons/703-emoji_android_delivery_truck.png}};
-\node (c1) [methods, left=18mm of truck, text width=25mm] {Encender};
-\node (c2) [methods, right=18mm of truck, text width=25mm] {Prender motor de arranque};
-\draw[->,thick] (truck) -- (c1.east);
-\draw[->,thick] (truck) -- (c2.west);
+\node (c1) [methods, left=13mm of truck, text width=25mm] {Encender\\camión};
+\node (c2) [methods, right=13mm of truck, text width=25mm] {Prender motor de arranque};
+\draw[->,thick] (truck) -- (c1.east)
+  node[namedArrow] {{\scriptsize público}};
+\draw[->,thick] (truck) -- (c2.west)
+  node[namedArrow] {{\scriptsize privado}};
+
+\node[roundComment, below=8mm of c1] (cloudpublic) {\tiny Utilizado por\\el conductor};
+\node[roundComment, below=8mm of c2] (cloudprivate) {\tiny No es necesario\\prenderlo manualmente};
+\draw[->,dotted] (cloudpublic) -- (c1.south);
+\draw[->,dotted] (cloudprivate) -- (c2.south);
 \end{tikzpicture}\end{center}
 
 ## Qué es la OOP: métodos
@@ -385,24 +394,4 @@ Un ejemplo de un código simple:
 - Permite un mejor control del uso del objeto por parte de los otros objetos.
 - Permite reflejar más fielmente la realidad.
 - Se puede modificar el diseño **interno** de un objeto, sin exponer ese cambio hacia el exterior.
-
-## Ejercicio
-
-Elaborar un modelo básico de los clientes de un banco.
-
-1. Un banco ofrece cuentas corrientes y cuentas vista a sus clientes.
-1. Los clientes se relacionan con el banco a través de sus ejecutivos.
-1. Debemos modelar todos los objetos involucrados en esta situación:
-    - Propiedades de cada objeto.
-    - Métodos de cada objeto.
-1. No más de 5 tipos de objetos.\vfill
-
-
-\begin{center}\begin{customRoundedBox}{}%
-\begin{itemize}
-  \item Tienen 15 minutos.
-  \item Ilustren el modelo con un diagrama.
-\end{itemize}
-\end{customRoundedBox}
-\end{center}
 

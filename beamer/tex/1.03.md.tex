@@ -1,40 +1,229 @@
-## Ejemplo 1
+# Relaciones entre Clases
 
-Modelar la clase \bld{Préstamo}.\newline
+## Asociación
 
-Un préstamo tiene las siguientes características:
+### Relaciones entre Clases
 
-- Tasa de interés anual.
-- Duración en años.
-- Capital.
-- Fecha de inicio.
+\subsubtitleB{Asociación}\newline
 
-Y tiene que ser capaz de lo siguiente:
+Hasta ahora hemos visto atributos que son simplemente datos:
 
-- Proveer acceso a las características descritas arriba.
-- Permitir la modificación de estas características.
-- Obtener la cuota mensual.
-- Obtener el costo total del crédito.
+- Edad
+- Tipo de cliente
+- Velocidad de procesador
 
-## Ejemplo 1
+Imaginémonos qué pasa al modelar una orden de compra.
 
-Modelar la clase \bld{Préstamo}.\newline
+### Relaciones entre Clases
 
-\centering\scalebox{0.5}{%
+\subsubtitleB{Asociación}\newline
+
+Pero qué pasa si estamos modelando la siguiente situación:
+
+- Existen \textcolor{blue}{Órdenes de compra}.
+
+    \begin{itemize}
+        \item Asociadas a una fecha.
+        \item Si fue prepagada.
+        \item Un \tikz\node[inlineBlock] (clienteFrame) {Cliente que la creó.};
+    \end{itemize}
+
+- Existen \textcolor{blue}{Clientes}.
+    - Tienen un nombre.
+    - Una dirección.
+    - Una antigüedad.
+
+\pause
+
+\begin{tikzpicture}[overlay]
+  \node[miniconcept, right=20mm of clienteFrame] (clienteFig) { Instancia de Cliente };
+  \draw[->, thick] (clienteFig.west) -- ([xshift=3mm]clienteFrame.east);
+\end{tikzpicture}
+
+\pause
+
+\begin{tikzpicture}[overlay]
+\tiny
+  \node[rectangle, below=15mm of clienteFig, text width=10em, align=center] (clienteComment) {Un cliente crea\\ninguna, una o varias\\órdenes de compra.};
+  \draw[dotted] (clienteFig) -- (clienteComment);
+\end{tikzpicture}
+
+### Relaciones entre Clases
+
+\subsubtitleB{Asociación}\newline
+
+La asociación entre clases es un concepto que permite conectar clases que están relacionadas.\newline
+
+Si bien son un atributo más en una clase, en un diagrama UML no se escribe en el cuadro de los
+atributos:
+
+\vfill
+
+\begin{center}
+\scalebox{0.5}{%
 \begin{tikzpicture}
-    \umlclass[x=0,y=0]{Préstamo}%
-      {--tasaIntAnual\\ --periodoAnnos\\ --capital\\ --fechaInicio}%
-      {%
-      +Préstamo()\\
-      +Préstamo(tasaIntAnual, periodoAnnos, capital)\\
-      +obtTasaIntAnual()\\ +obtPeriodoAnnos()\\ +obtCapital()\\ +obtFechaInicio()\\
-      +estTasaIntAnual(tasaIntAnual)\\ +estPeriodoAnnos(periodoAnnos)\\ +estCapital(capital)\\ +estFechaInicio(fechaInicio)\\
-      +pagoMensual()\\ +costoTotal()
-      }
+    \umlclass[x=0,y=0]{Orden}{--fecha : Integer\\--prepagada : Boolean}{}
+    \umlclass[x=6,y=0]{Cliente}{--nombre : String\\--dirección : String\\--antigüedad : Integer}{}
+    \umluniassoc{Orden}{Cliente}
+\end{tikzpicture}
+}
+\end{center}
+
+La flecha indica el sentido de la asociación.
+
+### Relaciones entre Clases
+
+\subsubtitleB{Asociación}\newline
+
+Pero a veces no basta con dibujar una flecha, porque puede ser necesario:
+
+- Indicar la multiplicidad:
+    - Cuántas instancias de una clase pueden estar asociadas con otra.
+- Darle un nombre a la asociación:
+    - Es el nombre del rol.
+
+\vfill
+\begin{center}
+\scalebox{0.5}{%
+\begin{tikzpicture}
+    \umlclass[x=0,y=0]{Orden}{--fecha : Integer\\--prepagada : Boolean}{}
+    \umlclass[x=10,y=0]{Cliente}{--nombre : String\\--dirección : String\\--antigüedad : Integer}{}
+    \umluniassoc[mult1=*,pos1=0.1,mult2=1,arg2=Emisor,pos2=0.85]{Orden}{Cliente}
+\end{tikzpicture}
+}
+\end{center}
+
+
+## Generalización y Herencia
+
+### Relaciones entre Clases
+
+\subsubtitleB{Generalización}\newline
+
+Cuando las Clases que componen un modelo tienen relaciones taxonómicas entre ellas, se
+dice que existe una relación de generalización.
+
+\vspace{-1em}
+\begin{center}\hspace{60mm}\begin{customRoundedBox}{}
+\centering Se pasa de lo \bld{genérico} a lo \bld{específico}.
+\end{customRoundedBox}\end{center}
+
+El elemento más específico consta de todas las propiedades y métodos del más
+genérico, y puede contener información adicional.
+
+### Relaciones entre Clases
+
+\subsubtitleB{Taxonomía}\newline
+
+Un típico ejemplo de cómo se va desde lo general a lo específico son las taxonomías:\newline
+
+\taxonomyOrg
+
+
+### Relaciones entre Clases
+
+\subsubtitleB{Clase Base y Clase Derivada}\newline
+
+Al haber una relación de generalización entre dos Clases, se tiene que:
+
+- A la clase más genérica se le denomina:
+    - Clase Base.
+    - Clase Padre.
+    - Superclase.
+
+- A la clase más específica se le denomina:
+    - Clase Derivada.
+    - Clase Hijo.
+    - Subclase.
+
+### Relaciones entre Clases
+
+\subsubtitleB{Herencia}\newline
+
+La manera de representar la generalización de clases en OOP se denomina ``Herencia'':
+
+- Se derivan nuevas clases a partir de otras ya existentes.
+- Una clase heredera es una versión más \itt{específica} que la heredada.
+- Este es uno de los conceptos más importantes en OOP.
+
+
+\centering\scalebox{0.6}{%
+\begin{tikzpicture}
+    \umlclass[x=0,y=0]{Persona}{}{}
+    \umlclass[x=-2,y=-3]{Cliente}{}{}
+    \umlclass[x=2,y=-3]{Aval}{}{}
+    \umlinherit{Cliente}{Persona}
+    \umlinherit{Aval}{Persona}
+    % \umlrelation[style={tikzuml inherit style}]{Cliente}{Persona}
 \end{tikzpicture}
 }
 
-## Ejercicio 1
+### Relaciones entre Clases
+
+\subsubtitleB{Ancestros y Descendientes}\newline
+
+Para una clase en particular, se denomina:
+
+\begin{description}[leftmargin=3em]
+    \item[Ancestros:] Al conjunto de sus padres más los ancestros de éstos.
+    \item[Descendientes:] Al conjunto de sus hijos más los descendientes de éstos.
+\end{description}
+
+
+### Relaciones entre Clases
+
+\subsubtitleB{Ancestros y Descendientes}\newline
+
+En la taxonomía anterior:
+
+\hspace{4em}\taxonomyOrg[0.5]
+
+- Tenemos que los ancestros de los mamíferos son: {vertebrados, animales, organismos}.
+- Tenemos que los descendientes de las plantas son: {árboles, angiospermas, gimnospermas, helechos}.
+
+### Relaciones entre Clases
+
+\subsubtitleB{Herencia simple y múltiple}\newline
+
+Si bien en la taxonomía anterior, toda clase tenía un solo padre, en algunos modelos nos podemos
+encontrar con que una clase sea la especificación de dos o más clases unidas.\newline
+
+\begin{columns}[t,onlytextwidth]
+\column{0.6\textwidth}
+{
+\centering\scalebox{0.7}{%
+\begin{tikzpicture}
+    \umlclass[x=0,y=0]{Empleado}{}{}
+    \umlclass[x=-3,y=-3]{Gerente}{}{}
+    \umlclass[x=0,y=-3]{Vendedor}{}{}
+    \umlclass[x=3,y=-3]{Ingeniero}{}{}
+    \umlinherit{Gerente}{Empleado}
+    \umlinherit{Vendedor}{Empleado}
+    \umlinherit{Ingeniero}{Empleado}
+    % \umlrelation[style={tikzuml inherit style}]{Cliente}{Persona}
+\end{tikzpicture}
+}
+}
+\column{0.4\textwidth}
+
+{
+    \vspace{-33mm}
+\centering\scalebox{0.7}{%
+\begin{tikzpicture}
+    \umlclass[x=-2,y=0]{Gerente}{}{}
+    \umlclass[x=2,y=0]{Vendedor}{}{}
+    \umlclass[x=0,y=-3]{Gte Ventas}{}{}
+    \umlinherit{Gte Ventas}{Gerente}
+    \umlinherit{Gte Ventas}{Vendedor}
+    % \umlrelation[style={tikzuml inherit style}]{Cliente}{Persona}
+\end{tikzpicture}
+}
+}
+\end{columns}
+
+
+
+### Ejercicio 1
 
 Elaborar un modelo básico de los clientes de un banco.
 
@@ -43,12 +232,14 @@ Elaborar un modelo básico de los clientes de un banco.
 1. Debemos modelar todos los objetos involucrados en esta situación:
     - Propiedades de cada objeto.
     - Métodos de cada objeto.
-1. No más de 5 tipos de objetos.\vfill
+1. No más de 8 clases.
+1. No menos de 4 atributos por clase.
+\vfill
 
 
 \begin{center}\begin{customRoundedBox}{}%
 \begin{itemize}
-  \item Tienen 15 minutos.
+  \item Tienen 20 minutos.
   \item Ilustren el modelo con un diagrama.
 \end{itemize}
 \end{customRoundedBox}

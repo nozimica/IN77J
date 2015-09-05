@@ -1,4 +1,6 @@
-## Presentaciones
+# Introducción
+
+### Presentaciones
 
 * \subsubtitle{Estudiantes}
     - \subsubtitleC{Conocimientos previos.}
@@ -24,7 +26,7 @@
     \end{customRoundedBox}
     \end{center}
 
-## Objetivos del Curso
+### Objetivos del Curso
 
 - Dominar el paradigma de programación orientada a objetos, desde un punto de vista 
   práctico, apoyado en un adecuado marco teórico.
@@ -40,7 +42,7 @@
 - Lo teórico sólo se domina a través de la práctica: 
     - Implementar algunos de nuestros diseños en un lenguaje de programación real: Java o Python.
 
-## Actividades
+### Actividades
 
 - Clases teóricas los días sábado:
     - Horario: 8:30 a 11:45.
@@ -56,7 +58,7 @@
         - Última clase de cátedra.
 
 
-## Contenido del curso
+### Contenido del curso
 
 1. Conceptos básicos de la Orientación a Objetos (OO).
 1. Arquitectura tecnológica y de software.
@@ -71,14 +73,16 @@
     - Modelos UML para entrega y distribución.
 1. Relación con la arquitectura de un *e-business*.
 
-## Bibliografía
+### Bibliografía
 
 \nocite{*}
 \bibliographystyle{apalike}
 {\scriptsize
 \bibliography{bibliog}}
 
-## Conceptos básicos de la OOP.
+# Conceptos básicos de la OOP.
+
+### Conceptos básicos de la OOP.
 
 - Sin **Lenguajes de programación** no hay aplicaciones.
 
@@ -96,7 +100,7 @@
     - Imperativa o Procedural.
     - Orientada a Objetos.
 
-## Programación imperativa
+### Programación imperativa
 
 - Planteamos nuestro algoritmo como un conjunto de subprocesos, los cuales manipulan los datos
 de la aplicación.
@@ -109,7 +113,7 @@ de la aplicación.
     - C
     - Fortran
 
-## Programación imperativa vs OOP
+### Programación imperativa vs OOP
 
 - En la programación imperativa, los datos se encuentran separados de los subprocesos.\vfill
 - En OOP, los datos y los subprocesos están integrados en las clases.
@@ -128,7 +132,7 @@ reutilizables.
 
 - Y junto con ser reutilizables, también son mantenibles más fácilmente.
 
-## Programación imperativa vs OOP
+### Programación imperativa vs OOP
 
 - Pero el paradigma imperativo no es tan opuesto al orientado a objetos:
     - Por lo general, un lenguaje OOP se puede utilizar ---con mayor o menor dificultad--- como
@@ -143,7 +147,7 @@ reutilizables.
 para ser compatibles con OOP:
     - PHP4 vs PHP5
 
-## Lenguajes OOP destacados
+### Lenguajes OOP destacados
 
 **C++**
 
@@ -153,7 +157,7 @@ para ser compatibles con OOP:
 - Soporta clases, encapsulación, sobrecarga de funciones y operadores, herencia múltiple, polimorfismo, clases/funciones parametrizadas (genéricas).
 
 
-## Lenguajes OOP destacados {.fragile}
+### Lenguajes OOP destacados {.fragile}
 
 **C++**\vfill
 
@@ -169,7 +173,7 @@ void main()
 
 - Si bien es C++, este código se tan simple que no es OOP.
 
-## Lenguajes OOP destacados
+### Lenguajes OOP destacados
 
 **Java**
 
@@ -178,7 +182,7 @@ void main()
 - Java es un lenguaje orientado a objetos más puro que C++ y menos puro que Smalltalk.
 - Soporta clases, encapsulación, herencia simple, polimorfismo, interfaces, garbage collection.
 
-## Lenguajes OOP destacados
+### Lenguajes OOP destacados
 
 **Java**
 
@@ -189,7 +193,7 @@ void main()
     - Pequeño.
     - Seguro.
 
-## Lenguajes OOP destacados {.fragile}
+### Lenguajes OOP destacados {.fragile}
 
 **Java**\vfill
 
@@ -204,7 +208,7 @@ public class HelloWorld {
 
 - Java, por muy simple que sea el programa, siempre se implementa en OOP.
 
-## Lenguajes OOP destacados
+### Lenguajes OOP destacados
 
 **PHP**
 
@@ -218,7 +222,7 @@ public class HelloWorld {
 - Es extremadamente simple para principiantes en la programación.
     - Usado adecuadamente, puede ser muy poderoso.
 
-## Lenguajes OOP destacados {.fragile}
+### Lenguajes OOP destacados {.fragile}
 
 **PHP**\vfill
 
@@ -239,14 +243,14 @@ Un ejemplo de un código simple:
     - Pero es el primer y más sencillo ejemplo.
     - De hecho, es el que está en el tutorial oficial de PHP.
 
-## Programación Orientada a Objetos
+### Programación Orientada a Objetos
 
 - Según Grady Booch:\vspace{7mm}
 
     - ``La Programación Orientada a Objetos es un método de implementación en el que los programas se organizan como **colecciones de objetos**, cada uno de los cuales representa una **instancia de alguna clase**, y cuyas clases pertenecen a una jerarquía.''\vspace{10mm}
     - ``Un objeto tiene **estado**, exhibe algún **comportamiento bien definido**, y tiene una **identidad única**.''
 
-## Programación Orientada a Objetos
+### Programación Orientada a Objetos
 
 - Es un enfoque diferente.\vfill
 
@@ -264,7 +268,7 @@ Un ejemplo de un código simple:
 - Los objetos tienen **características** propias.\vfill
 - Estos objetos **interactúan** entre sí por medio de mensajes.\vfill
 
-## Qué es la OOP
+### Qué es la OOP
 
 **Concepto clave:**
 
@@ -289,7 +293,7 @@ Un ejemplo de un código simple:
   node[namedArrow] {{\scriptsize trabaja en}};
 \end{tikzpicture}
 
-## Qué es la OOP
+### Qué es la OOP
 
 **Concepto clave:**
 
@@ -313,7 +317,7 @@ Un ejemplo de un código simple:
 \draw[->,thick] (elephant) -- (c5.west);
 \end{tikzpicture}
 
-## Qué es la OOP
+### Qué es la OOP
 
 **Concepto clave:**
 
@@ -337,7 +341,7 @@ Un ejemplo de un código simple:
 \draw[->,thick] (horse) -- (c5.west);
 \end{tikzpicture}
 
-## Qué es la OOP
+### Qué es la OOP
 
 **Concepto clave:**
 
@@ -361,7 +365,7 @@ Un ejemplo de un código simple:
 \end{tikzflowchart}\end{center}
 
 
-## Qué es la OOP: métodos
+### Qué es la OOP: métodos
 
 **Métodos de un objeto**:
 
@@ -386,7 +390,7 @@ Un ejemplo de un código simple:
 \draw[->,dotted] (cloudprivate) -- (c2.south);
 \end{tikzpicture}\end{center}
 
-## Qué es la OOP: métodos
+### Qué es la OOP: métodos
 
 **Métodos de un objeto**:
 

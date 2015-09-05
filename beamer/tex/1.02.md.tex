@@ -1,4 +1,6 @@
-## Desarrollo Orientado a Objetos
+# Desarrollo Orientado a Objetos
+
+### Desarrollo Orientado a Objetos
 
 El proceso completo de diseñar una solución orientada a objetos, para un
 problema dado, está constituido por tres etapas consecutivas:\newline
@@ -12,7 +14,7 @@ problema dado, está constituido por tres etapas consecutivas:\newline
 \end{tikzflowchart}
 \vfill
 
-## Análisis Orientado a Objetos
+### Análisis Orientado a Objetos
 
 Es una manera de orientar el diseño ---o rediseño--- de la solución de un problema, el que puede ser de 
 cualquier índole, por ejemplo un proceso.\newline
@@ -26,7 +28,7 @@ Consiste fundamentalmente en:
 - Concepto clave: abstracción.
     - Se modela un problema real desde un punto de vista abstracto.
 
-## Análisis Orientado a Objetos
+### Análisis Orientado a Objetos
 
 Resultado:
 
@@ -35,7 +37,7 @@ Resultado:
     - Propias y relevantes para el problema abordado.
 - Los objetos interactúan de una manera útil para la solución del problema.
 
-## Diseño Orientado a Objetos
+### Diseño Orientado a Objetos
 
 Se toma como punto de partida el resultado del análisis.\newline
 
@@ -47,7 +49,7 @@ limitaciones concretas tales como:
 - Requerimientos de desempeño.
 - Tipos de persistencia de datos (Bases de datos), etc.
 
-## Diseño Orientado a Objetos
+### Diseño Orientado a Objetos
 
 Resultado:
 
@@ -58,7 +60,7 @@ Resultado:
 podrá descartar objetos anteriormente considerados.
 - Se visualizará la eventual necesidad de \bld{objetos auxiliares}.
 
-## Implementación Orientada a Objetos
+### Implementación Orientada a Objetos
 
 Objetivos:
 
@@ -72,7 +74,11 @@ Resultado:
 
 - El \itt{software} que lleva a cabo la solución de nuestro problema o rediseño.
 
-## Definiciones más formales de OOP
+# Definiciones más formales de OOP
+
+## Objetos y Clases
+
+### Definiciones más formales de OOP
 
 \subsubtitleB{Objetos:}
 
@@ -94,14 +100,14 @@ Resultado:
 \column{0.4\textwidth}
 \begin{tikzpicture}[overlay]
   \node[miniconcept, right=50mm of propiedadesFrame] (propiedadesFig) { Atributos };
-  \draw[->, thick] (propiedadesFig) -- ([xshift=3mm]propiedadesFrame.east);
-  \node[miniconcept, below=6mm of propiedadesFig] (comportamientoFig) { Métodos };
-  \draw[->, thick] (comportamientoFig) -- ([xshift=3mm]comportamientoFrame.east);
+  \draw[->, thick] (propiedadesFig.west) -- ([xshift=3mm]propiedadesFrame.east);
+  \node[miniconcept, below=3mm of propiedadesFig] (comportamientoFig) { Métodos };
+  \draw[->, thick] (comportamientoFig.west) -- ([xshift=3mm]comportamientoFrame.east);
 \end{tikzpicture}
 
 \end{columns}
 
-## Definiciones más formales de OOP
+### Definiciones más formales de OOP
 
 \subsubtitleB{Objetos:}\newline
 
@@ -112,7 +118,7 @@ Cada objeto es individual y tiene una \bld{identidad}.\newline
     - Dos gemelos son personas distintas.
 
 
-## Definiciones más formales de OOP
+### Definiciones más formales de OOP
 
 \subsubtitleB{Clases:}
 
@@ -129,7 +135,9 @@ Cada objeto es individual y tiene una \bld{identidad}.\newline
 \end{tikzpicture}
 }
 
-## Definiciones más formales de OOP
+## Propiedades y Métodos
+
+### Definiciones más formales de OOP
 
 \subsubtitleB{Propiedades o atributos:}
 
@@ -138,7 +146,7 @@ Cada objeto es individual y tiene una \bld{identidad}.\newline
 - Pueden tener un tipo de datos asociado.
 - La clase puede limitar el acceso de estas propiedades desde el ``mundo exterior''.
 
-\centering\scalebox{0.7}{%
+\centering\scalebox{0.6}{%
 \begin{tikzpicture}
     \umlclass[x=0,y=0]{Persona}%
       {--Nombre\\ --Edad\\ --IdiomaNativo\\ --Residencia}%
@@ -152,7 +160,7 @@ Cada objeto es individual y tiene una \bld{identidad}.\newline
 \end{tikzpicture}
 }
 
-## Definiciones más formales de OOP
+### Definiciones más formales de OOP
 
 \subsubtitleB{Propiedades o atributos:}\newline
 
@@ -169,42 +177,114 @@ Pueden ser:
 
 - Es el conjunto de las propiedades de un objeto en un momento dado.
 
-## Definiciones más formales de OOP
+### Definiciones más formales de OOP
 
-\subsubtitleB{Métodos:}
+\subsubtitleB{Tipos de dato:}\newline
+
+Los atributos pueden pertenecer a distintas categorías:
+
+- Dependiendo de las características de sus datos.
+- No es lo mismo un número que una palabra.
+- Tampoco es lo mismo un número entero que otro real.
+
+\vfill
+Al momento de identificar los atributos de una clase, también
+es bueno identificar a qué tipo de dato pertenecen.
+
+### Definiciones más formales de OOP
+
+\subsubtitleB{Tipos de dato:}\newline
+
+Hay varios tipos de datos predefinidos en varios lenguajes de programación. \textcolor{blue}{Ojo}: no
+en todos.
+
+- Entero
+- Real
+- String
+- Fecha
+- Boolean
+
+Más tarde veremos que un atributo de una clase puede corresponder a una instancia de otra clase.
+
+### Definiciones más formales de OOP
+
+\subsubtitleB{Tipos de dato:}\newline
+
+Así que nuestro diagrama anterior, tras incorporar los tipos de dato de sus atributos, quedaría así:
+
+\vfill
+\centering\scalebox{0.5}{%
+\begin{tikzpicture}
+    \umlclass[x=0,y=0]{Persona}%
+      {--Nombre : String\\ --Edad : Integer\\ --IdiomaNativo : String\\ --Residencia : String}%
+      {}
+    \umlclass[x=6,y=0]{Camión}%
+      {--Patente : String\\ --Año : Integer\\ --MáxCarga : Double}%
+      {}
+    \umlclass[x=12,y=0]{Zorzal}%
+      {--ID : Integer\\ --Edad : Integer\\ --Género : Integer\\ --Hábitat : String}%
+      {}
+\end{tikzpicture}
+}
+
+\vfill
+
+Usaremos los nombres de los tipos de dato utilizados en Java.
+
+### Definiciones más formales de OOP
+
+\subsubtitleB{Métodos:}\newline
 
 - Modelan el comportamiento de una clase de objetos.
 - Se consideran las acciones relevantes para el problema.
 - Invocar un método es \itt{ordenarle} a un objeto que haga una tarea.
 - Existen métodos especiales: \bld{constructores}.
+    - Es el encargado de construir una nueva \textcolor{blue}{instancia} de la clase.
+    - Todo objeto se dice que es la \itt{instancia} de una clase determinada.
 
-\vfill
+### Definiciones más formales de OOP
+
+\subsubtitleB{Métodos:}\newline
+
 Son muy similares a las \bld{funciones} de la programación procedural:
 
 - Pueden recibir parámetros.
 - Pueden entregar un resultado tras ser invocados.
 
-## Definiciones más formales de OOP
+### Definiciones más formales de OOP
 
-\subsubtitleB{Métodos:}
+\subsubtitleB{Métodos vs Operaciones:}\newline
+
+En el contexto de UML se usa una nomenclatura levemente distinta:
+
+\begin{description}[leftmargin=3em]
+    \item[Operación:] la especificación de una acción
+u operación que toda instancia de una clase puede llevar a cabo.
+    \item[Método:] la implementación concreta de
+una operación, para una determinada clase.
+\end{description}
+
+### Definiciones más formales de OOP
+
+\subsubtitleB{Métodos (ejemplos):}
 
 \vfill
 
-\centering\scalebox{0.7}{%
+\centering\scalebox{0.6}{%
 \begin{tikzpicture}
     \umlclass[x=0,y=0]{Persona}%
-      {--Nombre\\ --Edad\\ --IdiomaNativo\\ --Residencia}%
+      {--Nombre : String\\ --Edad : Integer\\ --IdiomaNativo : String\\ --Residencia : String}%
       {+Habla()\\ --Respira()\\ +DiceNombre()\\ +Camina()\\ --Sueña()}
-    \umlclass[x=4,y=0]{Camión}%
-      {--Patente\\ --Año\\ --MáxCarga}%
+    \umlclass[x=6,y=0]{Camión}%
+      {--Patente : String\\ --Año : Integer\\ --MáxCarga : Double}%
       {+encender()\\ --revisaComb()\\ +prendeLuces()}
-    \umlclass[x=8,y=0]{Zorzal}%
-      {--ID\\ --Edad\\ --Género\\ --Hábitat}%
+    \umlclass[x=12,y=0]{Zorzal}%
+      {--ID : Integer\\ --Edad : Integer\\ --Género : Integer\\ --Hábitat : String}%
       {+nace() \\ +vuela() \\ --come() \\ +muere()}
 \end{tikzpicture}
 }
 
-## Definiciones más formales de OOP
+### Definiciones más formales de OOP
 
 \subsubtitleB{Visibilidad de propiedades y métodos:}\newline
 
@@ -218,7 +298,7 @@ Existen fundamentalmente tres tipos de visibilidad:
     \item[Protegida (\#):] Accesible y visible sólo para objetos de la misma clase o de sus herederos.
 \end{description}
 
-## Definiciones más formales de OOP
+### Definiciones más formales de OOP
 
 \subsubtitleB{Visibilidad de propiedades y métodos:}\newline
 
@@ -228,7 +308,45 @@ Recomendaciones:
     - Para acceder o modificar propidedades: métodos de acceso y de modificación.
 - Que los métodos sean públicos.
 
-## Definiciones más formales de OOP
+### Ejemplo 1
+
+Modelar la clase \bld{Préstamo}.\newline
+
+Un préstamo tiene las siguientes características:
+
+- Tasa de interés anual.
+- Duración en años.
+- Capital.
+- Fecha de inicio.
+
+Y tiene que ser capaz de lo siguiente:
+
+- Proveer acceso a las características descritas arriba.
+- Permitir la modificación de estas características.
+- Obtener la cuota mensual.
+- Obtener el costo total del crédito.
+
+### Ejemplo 1
+
+Modelar la clase \bld{Préstamo}.\newline
+
+\centering\scalebox{0.5}{%
+\begin{tikzpicture}
+    \umlclass[x=0,y=0]{Préstamo}%
+      {--tasaIntAnual\\ --periodoAnnos\\ --capital\\ --fechaInicio}%
+      {%
+      +Préstamo()\\
+      +Préstamo(tasaIntAnual, periodoAnnos, capital)\\
+      +obtTasaIntAnual()\\ +obtPeriodoAnnos()\\ +obtCapital()\\ +obtFechaInicio()\\
+      +estTasaIntAnual(tasaIntAnual)\\ +estPeriodoAnnos(periodoAnnos)\\ +estCapital(capital)\\ +estFechaInicio(fechaInicio)\\
+      +pagoMensual()\\ +costoTotal()
+      }
+\end{tikzpicture}
+}
+
+## Interfaces, Abstracción y Encapsulación
+
+### Definiciones más formales de OOP
 
 \subsubtitleB{Abstracción de Clase y Encapsulación:}\newline
 
@@ -236,8 +354,7 @@ La \bld{abstracción de clase} es:
 
 - La separación entre la implementación de la clase y la manera en que ésta será
 finalmente usada.
-- Quien crea una clase provee una descripción de la clase y sus métodos que se pueden
-usar.
+- Quien crea una clase provee una descripción de la clase y los métodos de ésta que pueden ser usados.
     - Esto es el ``contrato de la clase''.
 
 
@@ -249,25 +366,42 @@ La \bld{encapsulación} es:
 
 Estos dos conceptos son las dos caras de una misma moneda.
 
-## Definiciones más formales de OOP
-
-\subsubtitleB{Herencia}
-
-- Es la derivación de nuevas clases a partir de otras ya existentes.
-- Una clase heredera es una versión más \itt{específica} que la heredada.
-- Este es uno de los conceptos más importantes en OOP.
 
 
-\centering\scalebox{0.7}{%
-\begin{tikzpicture}
-    \umlclass[x=0,y=0]{Persona}{}{}
-    \umlclass[x=-2,y=-3]{Cliente}{}{}
-    \umlclass[x=2,y=-3]{Aval}{}{}
-    \umlinherit{Cliente}{Persona}
-    \umlinherit{Aval}{Persona}
-    % \umlrelation[style={tikzuml inherit style}]{Cliente}{Persona}
-\end{tikzpicture}
-}
+### Definiciones más formales de OOP
+
+\subsubtitleB{Interfaces}\newline
+
+Hay determinadas clases que más que heredar unas de otras, en realidad comparten
+solamente un determinado subconjunto de métodos u operaciones.\newline
+
+Por ejemplo, en una radio:
+
+- El panel frontal ofrece ---entre otras cosas--- comandos para manipular el CD-ROM.
+- El control remoto ofrece ---entre otras cosas--- esos mismos comandos.
+
+Aunque son objetos distintos, y sin heredar uno de otro, de todas maneras hay algo que comparten.
+
+### Definiciones más formales de OOP
+
+\subsubtitleB{Interfaces}\newline
+
+Una interfaz es un grupo de métodos u operaciones al que se le asigna un nombre.
+
+- Este grupo de métodos caracteriza una parte del comportamiento de las instancias de una clase.
+
+Es importante notar que:
+
+- Una interfaz \bld{no implementa} los métodos por ella comprendidos.
+- Simplemente se limita a especificar que esa lista de métodos deben ser implementados
+por la clase.
+
+Es decir:
+\vspace{-1em}
+\begin{center}\hspace{60mm}\begin{customRoundedBox}{}
+\centering Una clase \itt{implementa} una o varias interfaces.
+\end{customRoundedBox}\end{center}
+
 
 \begin{center}
 % ## Definiciones más formales de OOP

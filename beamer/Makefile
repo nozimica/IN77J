@@ -3,13 +3,14 @@ CN=in77j
 TEXNAME=$(CN)
 TEXCOMM=xelatex -halt-on-error
 #TEXCOMM=pdflatex -halt-on-error
+PANDOC=$(HOME)/.cabal/bin/pandoc -f markdown --slide-level=3
 
 default: $(TEXNAME).pdf
 
 $(TEXNAME).pdf: $(TEXNAME).tex in77j.sty $(TEXNAME)*.tex tex/*.tex
-	$(HOME)/.cabal/bin/pandoc -f markdown tex/1.01.md.tex -t beamer -o tex/1.01.tex
-	$(HOME)/.cabal/bin/pandoc -f markdown tex/1.02.md.tex -t beamer -o tex/1.02.tex
-	$(HOME)/.cabal/bin/pandoc -f markdown tex/1.03.md.tex -t beamer -o tex/1.03.tex
+	$(PANDOC) tex/1.01.md.tex -t beamer -o tex/1.01.tex
+	$(PANDOC) tex/1.02.md.tex -t beamer -o tex/1.02.tex
+	$(PANDOC) tex/1.03.md.tex -t beamer -o tex/1.03.tex
 	$(TEXCOMM) -no-pdf $(TEXNAME).tex && rm -f $(TEXNAME).xdv
 	bibtex $(TEXNAME)
 	# $(TEXCOMM) -interaction=batchmode $(TEXNAME).tex

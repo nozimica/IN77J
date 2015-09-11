@@ -6,7 +6,7 @@ export TEXMFHOME:=.:./texmf:~/texmf:${TEXMFHOME}
 TEXNAME=$(CN)
 TEXCOMM=xelatex -halt-on-error
 #TEXCOMM=pdflatex -halt-on-error
-PANDOC=$(HOME)/.cabal/bin/pandoc -f markdown --slide-level=3
+PANDOC=$(HOME)/.cabal/bin/pandoc -f markdown --filter overlay_filter --slide-level=3
 
 default: $(TEXNAME).pdf
 
@@ -41,7 +41,7 @@ reduce:
 		-sOutputFile=$(TEXNAME)-reduc.pdf $(TEXNAME).pdf
 
 compileLive:
-	~/.local/bin/when-changed tex/1.01.md.tex tex/1.02.md.tex tex/1.03.md.tex in77j.tex -c make
+	~/.local/bin/when-changed tex/1.01.md.tex tex/1.02.md.tex tex/1.03.md.tex tex/diagrams.tikz.tex in77j.tex -c make
 
 getOldPgf:
 	mkdir -p texmf/tex

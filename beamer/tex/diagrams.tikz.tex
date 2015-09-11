@@ -1,0 +1,17 @@
+\newsavebox{\umlAgregComp}
+
+\begin{lrbox}{\umlAgregComp}
+\centering\scalebox{0.6}{%
+\begin{tikzpicture}
+    \umlclass[x=0,y=0]{Punto}{}{}
+    \umlclass[x=-5,y=-1]{Polígono}{}{}
+    \umlclass[x=5,y=-1]{Círculo}{}{}
+    \umlclass[x=0,y=-4]{Estilo}{}{}
+    \umlHVHcompo[anchor1=20,mult2=3..*,pos2=2.7]{Polígono}{Punto}
+    \umlHVHcompo[anchor1=160,mult2=1,pos2=2.7]{Círculo}{Punto}
+    \umlHVHaggreg[anchor1=-20,mult1=*,mult2=1,pos2=2.7]{Polígono}{Estilo}
+    \umlHVHaggreg[anchor1=-160,mult1=*,mult2=1,pos2=2.7]{Círculo}{Estilo}
+    % \umluniassoc[mult1=*,pos1=0.1,mult2=1,arg2=Emisor,pos2=0.85]{Orden}{Cliente}
+\end{tikzpicture}
+}
+\end{lrbox}

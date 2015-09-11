@@ -16,7 +16,7 @@ $(TEXNAME).pdf: $(TEXNAME).tex in77j.sty $(TEXNAME)*.tex tex/*.tex
 	$(PANDOC) tex/1.03.md.tex -t beamer -o tex/1.03.tex
 	$(TEXCOMM) -no-pdf $(TEXNAME).tex && rm -f $(TEXNAME).xdv
 	bibtex $(TEXNAME)
-	# $(TEXCOMM) -interaction=batchmode $(TEXNAME).tex
+	$(TEXCOMM) -interaction=batchmode $(TEXNAME).tex
 	$(TEXCOMM) $(TEXNAME).tex
 
 clean:
@@ -45,7 +45,7 @@ compileLive:
 
 getOldPgf:
 	mkdir -p texmf/tex
-	mkdir -p tmptikz
+	rm -rf tmptikz && mkdir -p tmptikz
 	wget -P tmptikz ftp://tug.org/historic/systems/texlive/2013/tlnet-final/archive/pgf.tar.xz
 	tar Jxf tmptikz/pgf.tar.xz --directory tmptikz
 	mv tmptikz/tex/* texmf/tex

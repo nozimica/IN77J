@@ -94,22 +94,39 @@ Pero a veces no basta con dibujar una flecha, porque puede ser necesario:
 \end{center}
 
 
-## Generalización y Herencia
+## Herencia
 
 ### Relaciones entre Clases
 
-\subsubtitleB{Generalización}\newline
+\subsubtitleB{Taxonomía}\newline
 
 Cuando las Clases que componen un modelo tienen relaciones taxonómicas entre ellas, se
-dice que existe una relación de generalización.
+dice que existe una relación de generalización o de especialización.\newline
+
+\bld{Generalización}\newline
+
+De varias clases se identifican elementos comunes, los que dada su importancia será
+más conveniente agruparlos en una clase nueva, relacionada a las clases originales.
+
+\vspace{-1em}
+\begin{center}\hspace{60mm}\begin{customRoundedBox}{}
+\centering Se pasa de lo \bld{específico} a lo \bld{genérico}.
+\end{customRoundedBox}\end{center}
+
+### Relaciones entre Clases
+
+\subsubtitleB{Taxonomía}\newline
+
+\bld{Especialización}\newline
+
+El elemento más específico consta de todas las propiedades y métodos del más
+genérico y puede contener información adicional.
 
 \vspace{-1em}
 \begin{center}\hspace{60mm}\begin{customRoundedBox}{}
 \centering Se pasa de lo \bld{genérico} a lo \bld{específico}.
 \end{customRoundedBox}\end{center}
 
-El elemento más específico consta de todas las propiedades y métodos del más
-genérico, y puede contener información adicional.
 
 ### Relaciones entre Clases
 
@@ -222,7 +239,6 @@ encontrar con que una clase sea la especificación de dos o más clases unidas.\
 \end{columns}
 
 
-
 ### Ejercicio 1
 
 Elaborar un modelo básico de los clientes de un banco.
@@ -241,6 +257,21 @@ Elaborar un modelo básico de los clientes de un banco.
 \begin{itemize}
   \item Tienen 20 minutos.
   \item Ilustren el modelo con un diagrama.
+\end{itemize}
+\end{customRoundedBox}
+\end{center}
+
+
+### Ejercicio 2
+
+- Considere una aplicación de su teléfono.
+- Escriba la especificación de \itt{software} de esta aplicación.
+
+
+\begin{center}\begin{customRoundedBox}{}%
+\begin{itemize}
+  \item Tienen 15 minutos.
+  \item Escriba la especificación tal como usted sabe hacerlo ahora.
 \end{itemize}
 \end{customRoundedBox}
 \end{center}

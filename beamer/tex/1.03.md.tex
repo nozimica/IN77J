@@ -276,3 +276,104 @@ Elaborar un modelo básico de los clientes de un banco.
 \end{customRoundedBox}
 \end{center}
 
+### Relaciones entre Clases
+
+\subsubtitleB{Agregación}\newline
+
+\columnsbegin
+
+\column{.6\textwidth}
+
+En la \textcolor{blue}{agregación} tenemos que un objeto forma parte
+de un ``equipo'' de colaboradores.
+
+- Los colaboradores tienen vida propia.
+- La creación o destrucción del objeto destino no implica que lo mismo
+suceda con los colaboradores.
+
+\column{.4\textwidth}
+
+\centering\scalebox{0.6}{%
+\begin{tikzpicture}
+    \umlclass[x=0,y=0]{Teatro}{}{}
+    \umlclass[x=0,y=-3]{Película}{}{}
+    \umlaggreg[mult1=*,mult2=*]{Teatro}{Película}
+\end{tikzpicture}
+}
+
+\columnsend
+
+### Relaciones entre Clases
+
+\subsubtitleB{Composición}\newline
+
+\columnsbegin
+
+...
+
+\column{.5\textwidth}
+
+\centering\scalebox{0.6}{%
+\begin{tikzpicture}
+    \umlclass[x=0,y=0]{Teatro}{}{}
+    \umlclass[x=0,y=-3]{Boletería}{}{}
+    \umlcompo[mult1=1,mult2=1]{Teatro}{Boletería}
+\end{tikzpicture}
+}
+
+\columnsend
+
+### Relaciones entre Clases
+
+\subsubtitleB{Agregación y Composición}\newline
+
+
+\usebox{\umlAgregComp}\par
+
+Agregación:
+
+- Un polígono y un círculo pueden tener un estilo definido.
+- La \textcolor{blue}{existencia} del estilo es independiente de
+qué objetos estén asociados a él.
+
+### Relaciones entre Clases
+
+\subsubtitleB{Agregación y Composición}\newline
+
+\usebox{\umlAgregComp}\par
+
+Composición:
+
+- Una figura (polígono o círculo) está compuesta por puntos como parte
+de su descripción.
+- Al crear una figura, se crean los puntos necesarios.
+- Al eliminar una figura, se eliminan en cascada sus puntos.
+
+### Relaciones entre Clases
+
+\subsubtitleB{Agregación y Composición}\newline
+
+¿Cómo modelaríamos un automóvil, considerando sus componentes principales?
+
+- ¿Cuáles son los componentes principales de un automóvil?
+- Aquellos objetos, ¿existen necesariamente desde antes de que el vehículo
+esté armado?
+- ¿Qué tan fuerte es el vínculo entre estos componentes y el vehículo?
+- Al momento de ser destruido un vehículo, ¿necesariamente se destruyen
+sus componentes?
+
+### Relaciones entre Clases
+
+\subsubtitleB{Navegabilidad}\newline
+
+...
+
+
+### UML
+
+\subsubtitleB{Perspectivas en DC.}\newline
+
+- Conceptual
+    - Indican las responsabilidades de cada clase, más que su interfaz.
+- Especificación
+- Implementación

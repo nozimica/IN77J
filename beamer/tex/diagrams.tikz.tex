@@ -1,0 +1,21 @@
+\newsavebox{\umlAgregComp}
+
+\begin{lrbox}{\umlAgregComp}
+\centering\scalebox{0.6}{%
+\begin{tikzpicture}
+    \umlclass[x=0,y=0]{Punto}{}{}
+    \umlclass[x=-4,y=-1]{Polígono}{}{}
+    \umlclass[x=4,y=-1]{Círculo}{}{}
+    \umlclass[x=0,y=-4]{Estilo}{}{}
+    \umlHVHcompo[anchor1=30,mult2=3..*,pos2=2.7]{Polígono}{Punto}
+    \umlHVHcompo[anchor1=150,mult2=1,pos2=2.7]{Círculo}{Punto}
+    \umlHVHaggreg[anchor1=-30,mult1=*,mult2=1,pos2=2.7]{Polígono}{Estilo}
+    \umlHVHaggreg[anchor1=-150,mult1=*,pos1=0.3,mult2=1,pos2=2.7]{Círculo}{Estilo}
+    \umlclass[x=10,y=0]{Teatro}{}{}
+    \umlclass[x=8,y=-3]{Película}{}{}
+    \umlclass[x=12,y=-3]{Boletería}{}{}
+    \umlVHVaggreg[anchor1=-110,mult1=*,mult2=*,pos1=0.3,pos2=2.8]{Teatro}{Película}
+    \umlVHVcompo[anchor1=-70,mult1=1,mult2=1,pos1=0.3,pos2=2.8]{Teatro}{Boletería}
+\end{tikzpicture}
+}
+\end{lrbox}

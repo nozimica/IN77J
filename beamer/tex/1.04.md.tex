@@ -1,0 +1,411 @@
+# Requerimientos de Software
+
+## Ejemplo introductorio: Juego de Dados
+
+### Requerimientos de Software
+
+\subsubtitleB{Ejemplo introductorio: Juego de Dados}\newline
+
+Para introducir los siguientes conceptos, nos apoyaremos en un ejemplo simple pero muy útil:
+\textcolor{blue}{El Juego de Dados}.\newline
+
+Actividades a realizar:
+
+- Especificación de requerimientos.
+- Modelado del dominio.
+- Definición de las interacciones.
+- Definición de la estructura.
+- Ejemplo de codificación.
+
+
+## Especificación de requerimientos
+
+### Especificación de requerimientos
+
+\subsubtitleB{Requerimientos:}\newline
+
+Corresponde a una especificación muy concreta de lo que se espera que lleve a cabo el
+\itt{software} que estamos analizando.\newline
+
+En nuestro caso:
+
+- Se requiere de una aplicación que le permita a un jugador ``lanzar'' dos dados, obteniendo
+siempre el valor de cada uno de ellos.
+
+
+### Especificación de requerimientos
+
+\subsubtitleB{Clasificación de requerimientos:}\newline
+
+Existen fundamentalmente dos tipos:
+
+\begin{rboxx}{}
+\begin{description}
+    \item[Funcionales:] Los que motivan el problema a resolver.
+\end{description}
+\end{rboxx}
+
+\begin{rboxx}{}
+\begin{description}
+    \item[No funcionales:] Los que acompañan a los req. funcionales.
+\end{description}
+\end{rboxx}
+
+### Especificación de requerimientos
+
+\subsubtitleB{Requerimientos Funcionales:}\newline
+
+- Describen todas las cosas que debe hacer el sistema.
+    - Describen el \textcolor{blue}{¿Qué?}.
+    - No el \textcolor{blue}{¿Cómo?}.
+- En un principio son solamente requerimientos.
+- Al avanzar el proyecto se convierten en:
+    - Los algoritmos
+    - Las lógicas
+    - El código del \itt{software}.
+
+### Especificación de requerimientos
+
+\subsubtitleB{Requerimientos No Funcionales:}\newline
+
+Si bien no describen el problema propiamente tal, sí describen características anexas a éste y
+se suelen agrupar en:
+
+- Requerimientos de interfaz
+- Requerimientos ergonómicos
+- Requerimientos de desempeño
+- Requerimientos de disponibilidad
+- Requerimientos de entorno
+- Requerimientos de entrenamiento
+
+### Especificación de requerimientos
+
+\subsubtitleB{Requerimientos de interfaz:}\newline
+
+Una interfaz es la forma en que interactúan dos sistemas.\newline
+
+- En nuestro caso, es la forma en que se requiere que interactúe nuestro sistema:
+    - Con sus usuarios
+    - Con otros sistemas
+- Corresponde a la especificación formal de los datos que el sistema recibe o envía hacia
+el exterior.
+- Usualmente lo que se especifica es:
+    - El protocolo
+    - El tipo de información
+    - El medio de comunicación
+    - El formato de los datos comunicados
+
+### Especificación de requerimientos
+
+\subsubtitleB{Requerimientos ergonómicos:}\newline
+
+- Son fundamentalmente el opuesto a los requerimientos de interfaz:
+    - Corresponden a cómo deben interactuar los usuarios con el sistema.
+
+- Lo típico es especificar la ``GUI'': \itt{Graphic User Interface}.
+
+- La ergonomía va en cómo el sistema satisface y se adapta a las necesidades
+de sus usuarios.
+
+### Especificación de requerimientos
+
+\subsubtitleB{Requerimientos de desempeño:}\newline
+
+- Especifican el desempeño esperado de parte del sistema.
+    - Rapidez
+    - Transacciones a procesar
+    - Recursos a consumir
+
+- Especialmente importantes en sistemas que procesan datos en tiempo real.
+    - En estos casos el desempeño es crítico.
+    - Hay operaciones que no pueden demorarse ``tanto'' como uno o dos segundos.
+
+### Especificación de requerimientos
+
+\subsubtitleB{Requerimientos de disponibilidad:}\newline
+
+- Especifican cuán disponible ha de estar un sistema para sus usuarios (personas u
+otros sistemas).
+    - Tiempo mínimo de operación.
+    - Portabilidad: instalable en varios equipos o sistemas operativos.
+    - Flexibilidad: que funcione en distintas plataformas: celulares, tablets, etc.
+    - Actualizaciones: que estén disponibles oportunamente.
+
+- También son importantes en sistemas que procesan datos en tiempo real.
+    - Sistemas como éstos no pueden estar ``caídos'' mucho tiempo.
+
+### Especificación de requerimientos
+
+\subsubtitleB{Requerimientos de entorno:}\newline
+
+- Se refiere a los requerimientos asociados al entorno dentro del cual funcionará el sistema:
+    - Sistemas operativos
+    - Bases de datos
+
+- El entorno puede implicar peligros que amenacen el funcionamiento del sistema:
+    - Se requerirá de determinado grado de robustez para tolerar adecuadamente estos problemas.
+    - Peligros tales como:
+        - Congestión de usuarios.
+        - Congestión de dispositivos.
+        - Errores en los datos recibidos.
+
+### Especificación de requerimientos
+
+\subsubtitleB{Requerimientos de entrenamiento:}\newline
+
+- Requerimientos enfocados en quienes utilizarán el sistema.
+    - Qué tipos de usuarios y/u operadores.
+    - Listado de los manuales necesarios.
+    - Idiomas de los manuales.
+
+- La mayoría de las veces estos requerimientos no se ven reflejados en la implementación
+del sistema propiamente tal, sino que repercuten en la entrega de manuales o incluso en
+la organización de sesiones de entrenamiento para los futuros operadores.
+
+## Definición de las interacciones.
+
+### Definición de las interacciones.
+
+Para especificar más claramente los requerimientos de un sistema, es bueno concentrarse en
+las interacciones que se espera que ocurran una vez que éste esté operando.\newline
+
+Estas interacciones se suelen ilustrar mediante:
+
+\begin{rboxx}{}
+    \textcolor{blue}{Diagramas de Casos de Uso.}
+\end{rboxx}
+
+## Diagramas de Casos de Uso
+
+### Diagramas de Casos de Uso
+
+\subsubtitleB{Introducción}\newline
+
+- Es un tipo de diagrama que mediante símbolos específicos, documentan la manera en que los
+actores interactúan con el sistema, y viceversa.
+
+- Establecen las funcionalidades necesarias para que los usuarios interactúen exitosamente con el sistema.
+
+\begin{rboxx}{}
+    Son un ``índice'' de las funcionalidades del sistema,
+    asociadas a los actores que las utilizan.
+\end{rboxx}
+
+- Su objetivo es especificar las distintas interacciones entre el sistema y sus usuarios, los que
+están siempre en el mundo exterior.
+
+### Diagramas de Casos de Uso
+
+\subsubtitleB{Ejemplo:} funcionalidades de un cajero automático\newline
+
+\exA
+
+### Diagramas de Casos de Uso
+
+\subsubtitleB{Elementos: casos de uso}\newline
+
+\columnsbegin
+
+\column{.3\textwidth}
+
+\centering\scalebox{0.9}{%
+\begin{tikzpicture}%
+    \umlusecase{Cargar BIP!}
+\end{tikzpicture}%
+}
+
+\column{.1\textwidth}
+\column{.6\textwidth}
+\bld{Caso de uso:} Identifica una funcionalidad o una meta que el sistema debe lograr o que debe ofrecer
+a sus usuarios.
+
+- Se describen con una frase de caracter verbal.
+- Su nombre debe ser lo más breve posible.
+- Identifican una funcionalidad concreta del sistema.
+- Están centrados en la meta, no en el proceso.
+
+\columnsend
+
+### Diagramas de Casos de Uso
+
+\subsubtitleB{Elementos: estereotipos}\newline
+
+\columnsbegin
+
+\column{.3\textwidth}
+
+\centering\scalebox{0.6}{%
+\begin{tikzpicture}%
+    \umlusecase[name=Sacar]{Sacar dinero}
+    \umlusecase[x=3,y=-4,name=Valida]{Valida usuario}
+    \umlinclude{Sacar}{Valida}
+\end{tikzpicture}%
+}
+
+\column{.1\textwidth}
+\column{.6\textwidth}
+\bld{Estereotipos:} Se usa cuando para indicar que un caso de uso \textcolor{blue}{incluye} 
+la lógica contenida en otro caso de uso.
+
+- Por lo general son casos de uso incluidos por más de un caso de uso.
+- No necesariamente están asociados a actor alguno.
+
+Existe un estereotipo llamado ``extend'', el cual no es tan conveniente de usar.
+
+\columnsend
+
+### Diagramas de Casos de Uso
+
+\subsubtitleB{Elementos: actores}\newline
+
+\columnsbegin
+
+\column{.3\textwidth}
+
+\centering\scalebox{0.9}{%
+\begin{tikzpicture}%
+    \umlactor{Usuario}
+\end{tikzpicture}%
+}
+
+\column{.1\textwidth}
+\column{.6\textwidth}
+\bld{Actor:} Más que un actor, corresponde a un \textcolor{blue}{rol} que es interpretado por una entidad
+externa con respecto al sistema.
+
+- Puede ser una persona.
+- Puede ser otro sistema.
+- Incluso puede corresponder a un dispositivo.
+
+Son los \textcolor{blue}{sujetos} en las oraciones que describen cómo es utilizado un sistema.
+
+\columnsend
+
+### Diagramas de Casos de Uso
+
+\subsubtitleB{Elementos: sub-actores}\newline
+
+\columnsbegin
+
+\column{.3\textwidth}
+
+\centering\scalebox{0.7}{%
+\begin{tikzpicture}%
+    \umlactor{Usuario}
+    \umlactor[x=0,y=-4]{Cliente}
+    \umlinherit{Cliente}{Usuario}
+\end{tikzpicture}%
+}
+
+\column{.1\textwidth}
+\column{.6\textwidth}
+\bld{Sub-actor:} Corresponde a un actor que es una \textcolor{blue}{especialización} de
+otro actor, a quien apunta la flecha.
+
+- El sub-actor está relacionado a sus propios casos de uso.
+- Y también está relacionado a los casos de uso del actor a quien especializa.
+- Es una especie de ``herencia'', pero en roles.
+
+\columnsend
+
+### Diagramas de Casos de Uso
+
+\subsubtitleB{Elementos: asociaciones}\newline
+
+\columnsbegin
+
+\column{.3\textwidth}
+
+\centering\scalebox{0.6}{%
+\begin{tikzpicture}%
+    \umlactor{Cliente}
+    \umlusecase[x=4,name=Deposita]{Deposita sobre}
+    \umlassoc{Cliente}{Deposita}
+\end{tikzpicture}%
+}
+
+\column{.1\textwidth}
+\column{.6\textwidth}
+\bld{Asociación:} Indica la relación entre un actor y un caso de uso.
+
+- Se representa mediante una línea contínua que conecta un actor a un caso de uso.
+- No se suele indicar dirección.
+- De hacerlo, hay que indicar qué se quiere expresar con ello:
+    - Flujo de información.
+    - Si el actor es el que invoca al caso de uso o al revés.
+
+\columnsend
+
+### Diagramas de Casos de Uso
+
+\subsubtitleB{Elementos: sistema}\newline
+
+\columnsbegin
+
+\column{.3\textwidth}
+
+\centering\scalebox{0.5}{%
+\begin{tikzpicture}%
+    \begin{umlsystem}[x=4]{Cajero automático}%
+    \end{umlsystem}%
+\end{tikzpicture}%
+}
+
+\column{.1\textwidth}
+\column{.6\textwidth}
+\bld{Sistema:} Establece el límite del sistema con respecto a los actores:
+
+- En su interior, los casos de uso.
+- En su exterior, los actores.
+
+Deja en claro que el sistema modelado corresponde a los usos llevados a cabo por actores externos.
+
+\columnsend
+
+### Diagramas de Casos de Uso
+
+\subsubtitleB{Características}\newline
+
+- Los casos de uso especifican los requerimientos del problema modelado.
+- Especifican \textcolor{blue}{lo que debe hacer} el sistema.
+- No cómo esas metas serán logradas.\newline
+
+Están centrados en lo que el sistema ofrece a los actores que usarán el sistema.
+
+## Modelado del dominio
+
+### Modelado del dominio
+
+El modelado del dominio es un modelo conceptual que describe los aspectos más importantes de un
+problema:
+
+- Conceptos clave.
+- Relaciones básicas entre conceptos.
+- Define un vocabulario mínimo.\newline
+
+Se pueden usar símbolos muy parecidos a los de diagramas de clases.
+
+\centering\scalebox{0.6}{%
+\begin{tikzpicture}
+    \umlclass[x=0,y=0]{Dominio}{- atributos}{}
+\end{tikzpicture}
+}
+
+### Modelado del dominio
+
+Para nuestro ejemplo de los dados:\newline
+
+\centering\scalebox{0.6}{%
+\begin{tikzpicture}
+    \umlclass[x=0,y=0]{Jugador}{- nombre}{}
+    \umlclass[x=9,y=0]{Dado}{- valor}{}
+    \umlclass[x=0,y=-4]{Juego}{- fecha}{}
+    \umlassoc[mult1=1,pos1=0.1,mult2=2,pos2=0.9,name=tira]{Jugador}{Dado}
+    \draw (tira-1) {} node[above=0.2cm] {tira};
+    \umlassoc[mult1=1,pos1=0.1,mult2=1,pos2=0.9,name=juega]{Jugador}{Juego}
+    \draw (juega-1) {} node[right=0.2cm] {juega};
+    \umlassoc[geometry=-|,mult1=1,pos1=0.1,mult2=2,pos2=1.9,name=incluye]{Juego}{Dado}
+    \draw (incluye-2) {} node[right=0.2cm] {incluye};
+\end{tikzpicture}
+}
+

@@ -90,7 +90,7 @@
 %\setbeamercolor{item projected}{fg=red}
 %\setbeamertemplate{enumerate items}[default]
 %\setbeamercolor{item projected}{fg=green}
-\setbeamercolor{uppercolor}{fg=white,bg=blue!35}
+\setbeamercolor{uppercolor}{fg=white,bg=blue!70}
 \setbeamercolor{lowercolor}{fg=black,bg=blue!10}
 \setbeamercolor{alerted text}{fg=blue}
 %\setbeamercolor*{enumerate item}{fg=red}
@@ -187,6 +187,11 @@
     {\begin{beamerboxesrounded}[upper=uppercolor,lower=lowercolor,shadow=true,width=#1]{#2}}%
     {\end{beamerboxesrounded}}
 
+\newenvironment{rboxx}[1]%
+    {\vspace{-1em}\begin{center}\hspace{60mm}\begin{customRoundedBox}[90mm]{#1}\centering}%
+    {\end{customRoundedBox}\end{center}}
+
+
 \newcommand{\frametitleSec}{\frametitle{\insertsectionhead}}
 \newcommand{\frametitleSubsec}{\frametitle{\insertsectionhead: \hspace{0pt plus 1 filll} \large\subsecname}} 
 \newcommand{\frametitleSubsecNewline}{\frametitle{\insertsectionhead:\\~~\hfill\hfill\hfill\large\subsecname}} 
@@ -230,43 +235,8 @@
 \usepackage{tikz-uml}
 \usepackage{etex}
 
-\newcommand{\columnsbegin}{\begin{columns}[t,onlytextwidth]}
-\newcommand{\columnsend}{\end{columns}}
+\newcommand{\columnsbegin}{\begin{columns}[t,onlytextwidth]}%
+\newcommand{\columnsend}{\end{columns}}%
 
-\newcommand{\taxonomyOrg}[1][0.7]{%
-\centering\scalebox{#1}{%
-\begin{tikzpicture}
-[sibling distance=6cm,-,thick]
-\footnotesize
-\node {organismos}
-  child {node {plantas}
-    [sibling distance=3cm]
-    child {node {árboles}
-      child {node {angiospermas}}
-      child {node {gimnospermas}}
-    }
-    child {node {helechos}}
-  }
-  child {node {animales}
-    [sibling distance=2.5cm]
-    child {node {invertebrados}}
-    child {node {vetebrados}
-      [sibling distance=5cm]
-      child {node {aves}
-        [sibling distance=2.0cm]
-        child {node {cormorán}}
-        child {node {kiwi}}
-        child {node {loica}}
-      }
-      child {node {mamíferos}
-        [sibling distance=1.5cm]
-        child {node {delfín}}
-        child {node {humano}}
-        child {node {ballena}}
-      }
-    }
-  };
-\end{tikzpicture}
-}%
-}
-
+\newcommand{\importantboxbegin}[1]{\begin{center}\hspace{10mm}\begin{beamerboxesrounded}[upper=uppercolor,lower=lowercolor,shadow=true]{#1}}%
+\newcommand{\importantboxend}{\end{beamerboxesrounded}\end{center}}%

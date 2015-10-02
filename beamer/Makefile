@@ -14,6 +14,7 @@ $(TEXNAME).pdf: $(TEXNAME).tex in77j.sty $(TEXNAME)*.tex tex/*.tex
 	$(PANDOC) tex/1.01.md.tex -t beamer -o tex/1.01.tex
 	$(PANDOC) tex/1.02.md.tex -t beamer -o tex/1.02.tex
 	$(PANDOC) tex/1.03.md.tex -t beamer -o tex/1.03.tex
+	$(PANDOC) tex/1.04.md.tex -t beamer -o tex/1.04.tex
 	$(TEXCOMM) -no-pdf $(TEXNAME).tex && rm -f $(TEXNAME).xdv
 	bibtex $(TEXNAME)
 	$(TEXCOMM) -interaction=batchmode $(TEXNAME).tex
@@ -41,7 +42,7 @@ reduce:
 		-sOutputFile=$(TEXNAME)-reduc.pdf $(TEXNAME).pdf
 
 compileLive:
-	~/.local/bin/when-changed tex/1.01.md.tex tex/1.02.md.tex tex/1.03.md.tex tex/diagrams.tikz.tex in77j.tex -c make
+	~/.local/bin/when-changed tex/1.*.md.tex tex/diagrams.tikz.tex in77j.tex -c make
 
 getOldPgf:
 	mkdir -p texmf/tex

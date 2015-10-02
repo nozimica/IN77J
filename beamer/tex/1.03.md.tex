@@ -268,36 +268,183 @@ Elaborar un modelo básico de los clientes de un banco.
 - Escriba la especificación de \itt{software} de esta aplicación.
 
 
-\begin{center}\begin{customRoundedBox}{}%
-\begin{itemize}
-  \item Tienen 15 minutos.
-  \item Escriba la especificación tal como usted sabe hacerlo ahora.
-\end{itemize}
-\end{customRoundedBox}
-\end{center}
+\importantboxbegin
+
+- Tienen 15 minutos.
+- Escriba la especificación tal como usted sabe hacerlo ahora.
+
+\importantboxend
 
 ### Relaciones entre Clases
 
-\subsubtitleB{Agregación}\newline
+\subsubtitleB{Herencia múltiple}\newline
 
+No todos los lenguajes de programación ofrecen la posibilidad de implementar herencia múltiple.
+
+\vspace{-2em}
+\columnsbegin
+
+\column{.45\textwidth}
+
+\importantboxbegin{\bld{Sí lo ofrecen:}}
+
+- C++
+- Python
+
+\importantboxend
+
+\column{.1\textwidth}
+
+\column{.45\textwidth}
+
+\importantboxbegin{\bld{No lo ofrecen:}}
+
+- Java
+- PHP
+- C#
+- Visual Basic .NET
+- Objective-C
+
+\importantboxend
+
+\columnsend
+
+### Relaciones entre Clases
+
+\subsubtitleB{Herencia múltiple}\newline
+
+¿Qué hacer entonces cuando no podemos usar herencia múltiple?
+
+- Depende del lenguaje
+- De alguna manera nos pueden servir las \bld{Interfaces}.
+
+### Relaciones entre Clases
+
+\subsubtitleB{Herencia y operaciones}\newline
+
+- Una subclase \textcolor{blue}{hereda} las propiedades y las operaciones de la superclase.
+    - Los \bld{constructores} no se heredan.
+    - Se deben reimplementar, aunque sólo llamen al de la superclase.
+- Una subclase puede \textcolor{blue}{agregar} nuevas operaciones.
+- Una subclase puede \textcolor{blue}{modificar} operaciones heredadas de su superclase.
+
+### Relaciones entre Clases
+
+\subsubtitleB{Herencia y propiedades}\newline
+
+- Podemos agregar propiedades nuevas en la subclase.
+- No conviene crear una nueva propiedad con el mismo nombre de una ya heredada.
+    - Esto produce la \textcolor{blue}{ocultación} de propiedades: un objeto queda en realidad con
+    dos propiedades del mismo nombre.
+
+### Relaciones entre Clases
+
+\subsubtitleB{Polimorfismo}\newline
+
+Si las clases \bld{Camión} y \bld{Automóvil} heredan de la clase \bld{Vehículo}, podemos decir:
+
+\vspace{-1em}
 \columnsbegin
 
 \column{.6\textwidth}
 
-En la \textcolor{blue}{agregación} tenemos que un objeto forma parte
-de un ``equipo'' de colaboradores.
+- Un \bld{Camión} es un \bld{Vehículo}
+    - Puede hacer todo lo que hace un vehículo.
+- Un \bld{Automóvil} es un \bld{Vehículo}
+    - Puede hacer todo lo que hace un vehículo.
 
-- Los colaboradores tienen vida propia.
-- La creación o destrucción del objeto destino no implica que lo mismo
-suceda con los colaboradores.
+- Pero una instancia de la clase \bld{Vehículo}, no es a priori ni un \bld{Camión} ni un \bld{Automóvil}.
 
 \column{.4\textwidth}
 
 \centering\scalebox{0.6}{%
 \begin{tikzpicture}
-    \umlclass[x=0,y=0]{Teatro}{}{}
+    \umlclass[x=0,y=0]{Vehículo}{}{}
+    \umlclass[x=-2,y=-3]{Camión}{}{}
+    \umlclass[x=2,y=-3]{Automóvil}{}{}
+    \umlinherit{Camión}{Vehículo}
+    \umlinherit{Automóvil}{Vehículo}
+\end{tikzpicture}
+}
+
+\columnsend
+
+### Relaciones entre Clases
+
+\subsubtitleB{Polimorfismo}\newline
+
+De lo anterior podemos decir que:
+
+- Cuando tenemos una referencia de tipo \bld{Vehículo}, la podemos usar para apuntar a:
+    - Un \bld{Vehículo}.
+    - Un \bld{Camión} (porque también es un vehículo).
+    - Un \bld{Automóvil} (porque también es un vehículo).
+
+Es decir:
+\vspace{-2em}
+\importantboxbegin{}
+Un objeto que es una instancia de una subclase también es instancia de un vehículo.
+\importantboxend
+
+
+### Relaciones entre Clases
+
+\subsubtitleB{Interfaces}\newline
+
+Hay determinadas clases que más que heredar unas de otras, en realidad comparten
+solamente un determinado subconjunto de métodos u operaciones.\newline
+
+Por ejemplo, en una radio:
+
+- El panel frontal ofrece ---entre otras cosas--- comandos para manipular el CD-ROM.
+- El control remoto ofrece ---entre otras cosas--- esos mismos comandos.
+
+Aunque son objetos distintos, y sin heredar uno de otro, de todas maneras hay algo que comparten.
+
+### Relaciones entre Clases
+
+\subsubtitleB{Interfaces}\newline
+
+Una interfaz es un grupo de métodos u operaciones al que se le asigna un nombre.
+
+- Este grupo de métodos caracteriza una parte del comportamiento de las instancias de una clase.
+
+Es importante notar que:
+
+- Una interfaz \bld{no implementa} los métodos por ella comprendidos.
+- Simplemente se limita a especificar que esa lista de métodos deben ser implementados
+por la clase.
+
+Es decir:
+\vspace{-1em}
+\begin{center}\hspace{60mm}\begin{customRoundedBox}{}
+\centering Una clase \itt{implementa} una o varias interfaces.
+\end{customRoundedBox}\end{center}
+
+
+### Relaciones entre Clases
+
+\subsubtitleB{Agregación}\newline
+
+\vspace{-1em}
+\columnsbegin
+
+\column{.7\textwidth}
+
+En la \textcolor{blue}{agregación} tenemos que una instancia forma parte
+de un ``equipo'' de colaboradores.
+
+- Los colaboradores tienen vida propia.
+- La creación o destrucción de la instancia destino no implica que lo mismo
+suceda con los colaboradores.
+
+\column{.3\textwidth}
+
+\centering\scalebox{0.6}{%
+\begin{tikzpicture}
+    \umlclass[x=0,y=0]{Cine}{}{}
     \umlclass[x=0,y=-3]{Película}{}{}
-    \umlaggreg[mult1=*,mult2=*]{Teatro}{Película}
+    \umlaggreg[mult1=*,mult2=*]{Cine}{Película}
 \end{tikzpicture}
 }
 
@@ -307,17 +454,27 @@ suceda con los colaboradores.
 
 \subsubtitleB{Composición}\newline
 
+\vspace{-1em}
 \columnsbegin
 
-...
+\column{.7\textwidth}
 
-\column{.5\textwidth}
+En la \textcolor{blue}{composición} tenemos que una instancia A está compuesta por una
+instancia B.
+
+- La vida de B depende de la vida de A:
+    - Cuando A se construye, entonces se construye B.
+    - Cuando A se destruye, entonces se destruye B.
+    - Una instancia de B solamente estará asociada a una instancia de A.
+    - Una instancia de A puede estar compuesta por varias instancias de B.
+
+\column{.3\textwidth}
 
 \centering\scalebox{0.6}{%
 \begin{tikzpicture}
-    \umlclass[x=0,y=0]{Teatro}{}{}
+    \umlclass[x=0,y=0]{Cine}{}{}
     \umlclass[x=0,y=-3]{Boletería}{}{}
-    \umlcompo[mult1=1,mult2=1]{Teatro}{Boletería}
+    \umlcompo[mult1=1,mult2=1]{Cine}{Boletería}
 \end{tikzpicture}
 }
 
@@ -362,18 +519,3 @@ esté armado?
 - Al momento de ser destruido un vehículo, ¿necesariamente se destruyen
 sus componentes?
 
-### Relaciones entre Clases
-
-\subsubtitleB{Navegabilidad}\newline
-
-...
-
-
-### UML
-
-\subsubtitleB{Perspectivas en DC.}\newline
-
-- Conceptual
-    - Indican las responsabilidades de cada clase, más que su interfaz.
-- Especificación
-- Implementación

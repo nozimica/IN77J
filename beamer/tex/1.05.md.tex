@@ -1,0 +1,187 @@
+## Narrativa de Casos de Uso
+
+### Narrativa de Casos de Uso
+
+- Los casos de uso no solamente se presentan en la forma de diagramas.
+- Una vez que se tiene claro los actores y cómo éstos interactúan con el sistema, se hace
+necesario ahondar en esas interacciones:
+
+\begin{rboxx}{}
+    \textcolor{blue}{Hay que detallar cada Caso de Uso.}
+\end{rboxx}
+
+- Esto se consigue a través de la narrativa de cada uno de ellos.
+
+### Narrativa de Casos de Uso
+
+\subsubtitleB{Características}\newline
+
+- Una narrativa de un caso de uso es una descripción de la historia completa de lo que hacen los actores
+a medida que llevan a cabo un caso de uso.
+    - Esto termina cuando los actores involucrados logran su objetivo.
+- Corresponden a la herramienta más aplicada en la actualidad para especificar los requerimientos funcionales.
+- Dado que son una descripción textual, no se requiere de mayores conocimientos técnicos para comprenderlos.
+
+### Narrativa de Casos de Uso
+
+\subsubtitleB{Cómo escribirlos}\newline
+
+- Primero se identifica a los \textcolor{blue}{actores}.
+- Luego se identifican las necesidades de esos actores.
+    - Esto permite visualizar los casos de uso que ellos requieren.
+    - Se detectan tanto las necesidades de los actores como sus eventuales objetivos.
+- Estas necesidades dan origen a los casos de uso.
+- No es necesario detectar todos los casos de uso al primer análisis. Éstos van visualizándose
+a medida que se avanza en el desarrollo del proyecto.
+    - Primero se especifica los casos de uso más importantes.
+    - Se avanza con los otros de manera incremental.
+
+### Narrativa de Casos de Uso
+
+\subsubtitleB{Cómo escribirlos}\newline
+
+- A medida que se afinan las características de cada caso de uso, se pasa por los siguientes
+niveles:
+
+\begin{rboxx}[100mm]{}
+\begin{description}
+    \item[Identificado o detectado:] sólo se tiene su nombre y los actores asociados.
+\end{description}
+\end{rboxx}
+
+\begin{rboxx}[100mm]{}
+\begin{description}
+    \item[Especificado en alto nivel:] se incorpora una sinopsis.
+\end{description}
+\end{rboxx}
+
+\begin{rboxx}[100mm]{}
+\begin{description}
+    \item[Especificado de forma extendida:] se incorpora su historia de uso y sus
+    eventuales variantes.
+\end{description}
+\end{rboxx}
+
+
+### Ejemplo de Narrativa de Casos de Uso
+
+\vspace{-1em}
+\begin{tiny}
+\begin{usecase}
+
+\addtitle{Caso de uso \#}{Hacer pedido} 
+
+%Scope: the system under design
+\addfield{Alcance:}{Atención a público}
+
+%Level: "user-goal" or "subfunction"
+% \addfield{Level:}{User-goal}
+
+%Primary Actor: Calls on the system to deliver its services.
+\addfield{Actor principal:}{Cliente}
+% \addfield{Actores secund:}{}
+
+\addfield{Sinopsis:}{El cliente deberá tener la posibilidad de realizar un pedido, entregando
+todos los datos necesarios para poder ser procesado.}
+
+\addfield{Precondiciones:}{Se le presenta al cliente el menú disponible.}
+\addfield{Postcondiciones:}{\bld{Garantía}: El pedido queda registrado si el pedido es completado.}
+
+\addscenario{Escenario principal:}{
+    \item Usuario \underline{revisa el catálogo e indica sus opciones}.
+    \item Se le presenta el monto total de la compra.
+    \item Usuario indica forma de pago.
+    \item Se procesa la forma de pago.
+    \item Usuario recibe comprobante.
+}
+
+\addscenario{Escenario alternativo:}{
+    \item[5.a] Pago rechazado.
+}
+
+\end{usecase}
+\end{tiny}
+
+### Elementos en una Narrativa
+
+\subsubtitleB{Número y nombre:}\newline
+
+- Indican el nombre del caso de uso, y también se suele indicar un número, para maś fácil referencia.
+
+\subsubtitleB{Alcance:}\newline
+
+- Corresponde al entorno en el cual se desenvuelve este caso de uso dentro del sistema.
+- En sistemas pequeños, este elemento se puede omitir.
+
+### Elementos en una Narrativa
+
+\subsubtitleB{Actores principales y secundarios:}\newline
+
+- Es el listado de los actores principales involucrados en este caso de uso.
+    - Los actores principales son aquellos cuyos objetivos son satisfechos directamente
+    por el caso de uso.
+    - No necesariamente son quienes inician el caso de uso.
+- Opcionalmente, se puede segmentar algunos actores como secundarios.
+    - Si no se incluyen actores secundarios, simplemente omitir esa línea.
+
+
+### Elementos en una Narrativa
+
+\subsubtitleB{Sinopsis o resumen:}\newline
+
+- Es simplemente el resumen de lo que hace este caso de uso.
+- Es importante que sea breve.
+    - Resúmenes muy largos no los leen todas las personas involucradas.
+    - El detalle del caso de uso va realmente en el ``escenario principal''.
+
+### Elementos en una Narrativa
+
+\subsubtitleB{Precondiciones:}\newline
+
+- Son las condiciones necesarias para que el caso de uso se lleve a cabo.
+    - Si no son satisfechas, el caso de uso no se ejecuta.
+- Deben ser reglas conocidas por todos los actores.
+- En etapas posteriores del proyecto, estas precondiciones son útiles para
+saber qué cosas no hay que revisar dentro del presente módulo.
+
+### Elementos en una Narrativa
+
+\subsubtitleB{Postcondiciones:}\newline
+
+- Describen las principales consecuencias ---para el sistema--- luego de que el caso de uso haya
+concluido con éxito.
+- Se suele incorporar la palabra \textcolor{blue}{Garantizar}, para hacer énfasis en que
+esas condiciones deben estar garantizadas si el caso concluyó correctamente.
+    - También se puede indicar garantías mínimas, que son las cubiertas en todos los escenarios.
+
+
+### Elementos en una Narrativa
+
+\subsubtitleB{Escenario principal:}\newline
+
+- Es el elemento más importante dentro del caso de uso.
+- Corresponde a la descripción \textcolor{blue}{paso a paso} de cómo se lleva la interacción
+entre el o los actores y el sistema.
+- Cada paso debe estar descrito de la manera más concisa posible.
+- Debe quedar claro quién está ejecutando cada paso.
+- Nunca perder de vista que nos enfocamos en el \textcolor{blue}{qué}, no en el \textcolor{blue}{cómo}.
+- Denominado también como ``escenario típico'' o escenario ideal.
+
+### Elementos en una Narrativa
+
+\subsubtitleB{Escenario principal:}\newline
+
+- Alguno de estos pasos puede corresponder a su vez a otro caso de uso.
+    - En este caso, estamos frente a lo que ya definimos como \itt{include}.
+    - Para indicar que este es el caso, se puede subrayar el paso correspondiente.
+
+
+### Elementos en una Narrativa
+
+\subsubtitleB{Escenario alternativo:}\newline
+
+- En algunos casos es útil identificar algunos pasos ---dentro del escenario principal--- que
+pueden tener un resultado distinto a aquél que se considera como esperable.
+- Se mencionan indicando el número del paso correspondiente, adjuntando una letra correlativa.
+- Denominado también como ``extensión''.
+

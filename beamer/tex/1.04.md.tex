@@ -216,15 +216,16 @@ están siempre en el mundo exterior.
 
 \column{.1\textwidth}
 \column{.6\textwidth}
-\bld{Caso de uso:} Identifica una funcionalidad o una meta que el sistema debe lograr o que debe ofrecer
-a sus usuarios.
+\bld{Caso de uso:} Identifica una funcionalidad que el sistema
+debe ofrecer a sus usuarios o una meta que debe alcanzar.\newline
+
+\columnsend
 
 - Se describen con una frase de caracter verbal.
 - Su nombre debe ser lo más breve posible.
 - Identifican una funcionalidad concreta del sistema.
 - Están centrados en la meta, no en el proceso.
 
-\columnsend
 
 ### Diagramas de Casos de Uso
 
@@ -237,20 +238,20 @@ a sus usuarios.
 \centering\scalebox{0.6}{%
 \begin{tikzpicture}%
     \umlusecase[name=Sacar]{Sacar dinero}
-    \umlusecase[x=3,y=-4,name=Valida]{Valida usuario}
+    \umlusecase[x=0,y=-4,name=Valida]{Valida usuario}
     \umlinclude{Sacar}{Valida}
 \end{tikzpicture}%
 }
 
 \column{.1\textwidth}
 \column{.6\textwidth}
-\bld{Estereotipos:} Se usa cuando para indicar que un caso de uso \textcolor{blue}{incluye} 
+\bld{Estereotipos:} Se usan para indicar que un caso de uso \textcolor{blue}{incluye}
 la lógica contenida en otro caso de uso.
 
 - Por lo general son casos de uso incluidos por más de un caso de uso.
 - No necesariamente están asociados a actor alguno.
 
-Existe un estereotipo llamado ``extend'', el cual no es tan conveniente de usar.
+Existe un estereotipo llamado ``extend'', el cual no es muy conveniente de usar.
 
 \columnsend
 
@@ -262,6 +263,7 @@ Existe un estereotipo llamado ``extend'', el cual no es tan conveniente de usar.
 
 \column{.3\textwidth}
 
+\vspace{-5mm}
 \centering\scalebox{0.9}{%
 \begin{tikzpicture}%
     \umlactor{Usuario}
@@ -271,15 +273,14 @@ Existe un estereotipo llamado ``extend'', el cual no es tan conveniente de usar.
 \column{.1\textwidth}
 \column{.6\textwidth}
 \bld{Actor:} Más que un actor, corresponde a un \textcolor{blue}{rol} que es interpretado por una entidad
-externa con respecto al sistema.
+externa con respecto al sistema.\newline
+\columnsend
 
 - Puede ser una persona.
 - Puede ser otro sistema.
 - Incluso puede corresponder a un dispositivo.
+- Son los \textcolor{blue}{sujetos} en las oraciones que describen cómo es utilizado un sistema.
 
-Son los \textcolor{blue}{sujetos} en las oraciones que describen cómo es utilizado un sistema.
-
-\columnsend
 
 ### Diagramas de Casos de Uso
 
@@ -316,6 +317,7 @@ otro actor, a quien apunta la flecha.
 
 \column{.3\textwidth}
 
+\vspace{-5mm}
 \centering\scalebox{0.6}{%
 \begin{tikzpicture}%
     \umlactor{Cliente}
@@ -326,15 +328,15 @@ otro actor, a quien apunta la flecha.
 
 \column{.1\textwidth}
 \column{.6\textwidth}
-\bld{Asociación:} Indica la relación entre un actor y un caso de uso.
+\bld{Asociación:} Indica la relación entre un actor y un caso de uso.\newline
+
+\columnsend
 
 - Se representa mediante una línea contínua que conecta un actor a un caso de uso.
 - No se suele indicar dirección.
 - De hacerlo, hay que indicar qué se quiere expresar con ello:
     - Flujo de información.
     - Si el actor es el que invoca al caso de uso o al revés.
-
-\columnsend
 
 ### Diagramas de Casos de Uso
 
@@ -368,44 +370,18 @@ Deja en claro que el sistema modelado corresponde a los usos llevados a cabo por
 
 - Los casos de uso especifican los requerimientos del problema modelado.
 - Especifican \textcolor{blue}{lo que debe hacer} el sistema.
-- No cómo esas metas serán logradas.\newline
+- No especifican cómo esas metas serán logradas.
+- Están centrados en lo que el sistema ofrece a los actores que usarán el sistema.
+- El sistema se considera más como un conjunto de requerimientos que como una solución.
 
-Están centrados en lo que el sistema ofrece a los actores que usarán el sistema.
+### Diagramas de Casos de Uso
 
-## Modelado del dominio
+\subsubtitleB{Cómo diseñarlos}\newline
 
-### Modelado del dominio
-
-El modelado del dominio es un modelo conceptual que describe los aspectos más importantes de un
-problema:
-
-- Conceptos clave.
-- Relaciones básicas entre conceptos.
-- Define un vocabulario mínimo.\newline
-
-Se pueden usar símbolos muy parecidos a los de diagramas de clases.
-
-\centering\scalebox{0.6}{%
-\begin{tikzpicture}
-    \umlclass[x=0,y=0]{Dominio}{- atributos}{}
-\end{tikzpicture}
-}
-
-### Modelado del dominio
-
-Para nuestro ejemplo de los dados:\newline
-
-\centering\scalebox{0.6}{%
-\begin{tikzpicture}
-    \umlclass[x=0,y=0]{Jugador}{- nombre}{}
-    \umlclass[x=9,y=0]{Dado}{- valor}{}
-    \umlclass[x=0,y=-4]{Juego}{- fecha}{}
-    \umlassoc[mult1=1,pos1=0.1,mult2=2,pos2=0.9,name=tira]{Jugador}{Dado}
-    \draw (tira-1) {} node[above=0.2cm] {tira};
-    \umlassoc[mult1=1,pos1=0.1,mult2=1,pos2=0.9,name=juega]{Jugador}{Juego}
-    \draw (juega-1) {} node[right=0.2cm] {juega};
-    \umlassoc[geometry=-|,mult1=1,pos1=0.1,mult2=2,pos2=1.9,name=incluye]{Juego}{Dado}
-    \draw (incluye-2) {} node[right=0.2cm] {incluye};
-\end{tikzpicture}
-}
+- ¿Qué casos de uso incluiremos dentro del sistema?
+    - Los casos de uso conforman las características del sistema que se está modelando.
+    - Se presentan los casos de uso visibles y significativos para los actores.
+    - Si se requiere incluir muchos casos de uso, por lo general es mejor separarlos en dos diagramas.
+    - Un sistema con muchos casos de uso puede tratarse en realidad de dos sistemas que estamos mezclando.
+- ¿Qué actores son relevantes para esos casos de uso?
 

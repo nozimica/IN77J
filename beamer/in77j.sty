@@ -151,8 +151,6 @@
 \definecolor{RowColorOdd}{rgb}{1,1,1}
 \definecolor{RowColorEven}{rgb}{0.914,0.914,0.953}
 
-\renewcommand{\arraystretch}{1.5}
-
 \newcommand{\headerDefTwo}[2]{%
     \begin{definitionTableTwo} \textcolor{white}{#1} & \textcolor{white}{#2} \end{definitionTableTwo}
 }
@@ -187,8 +185,8 @@
     {\begin{beamerboxesrounded}[upper=uppercolor,lower=lowercolor,shadow=true,width=#1]{#2}}%
     {\end{beamerboxesrounded}}
 
-\newenvironment{rboxx}[1]%
-    {\vspace{-1em}\begin{center}\hspace{60mm}\begin{customRoundedBox}[90mm]{#1}\centering}%
+\newenvironment{rboxx}[2][90mm]%
+    {\vspace{-1em}\begin{center}\hspace{60mm}\begin{customRoundedBox}[#1]{#2}\centering}%
     {\end{customRoundedBox}\end{center}}
 
 
@@ -200,12 +198,12 @@
 
 \AtBeginSection[]{%
     \begin{frame}<*>{}
-      % \begin{multicols}{2}
+      \begin{multicols}{2}
         \frametitle{Contenidos}
         \linespread{1.5}
         \footnotesize
         \tableofcontents[currentsection]
-      % \end{multicols}
+      \end{multicols}
     \end{frame}
     \addtocounter{framenumber}{-1}% If you don't want them to affect the slide number
 }
@@ -234,9 +232,14 @@
 
 \usepackage{tikz-uml}
 \usepackage{etex}
+% \usepackage[style=numeric-comp,useprefix,hyperref,backend=biber]{biblatex}
+% \usepackage{csquotes}
+% \addbibresource{bibliog.bib}
 
 \newcommand{\columnsbegin}{\begin{columns}[t,onlytextwidth]}%
 \newcommand{\columnsend}{\end{columns}}%
 
 \newcommand{\importantboxbegin}[1]{\begin{center}\hspace{10mm}\begin{beamerboxesrounded}[upper=uppercolor,lower=lowercolor,shadow=true]{#1}}%
 \newcommand{\importantboxend}{\end{beamerboxesrounded}\end{center}}%
+
+\usepackage{usecases}

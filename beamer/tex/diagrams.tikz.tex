@@ -95,7 +95,7 @@
     \umlassoc{Banco}{usecase-4}
 }
 
-\newcommand{\exA}{%
+\newcommand{\exUseCaseA}{%
 \centering\scalebox{0.6}{%
 \begin{tikzpicture}
     \exAsystem
@@ -105,3 +105,44 @@
 }
 }
 
+\def\ucWidthB{8em}
+\newcommand{\exUseCaseB}{%
+\centering\scalebox{0.6}{%
+\begin{tikzpicture}
+    \umlactor{Cliente}
+    \umlactor[y=-3]{Solicitante}
+    \umlactor[y=-6]{Proveedor}
+    \begin{umlsystem}[x=6]{Local comida rápida}
+        \umlusecase[name=orden]{Ordenar pedido}
+        \umlusecase[name=contrata,width=\ucWidthB,y=-2]{Contratar personal}
+        \umlusecase[name=suministros,width=\ucWidthB,x=0,y=-4]{Pide más suministros}
+        \umlusecase[name=reportes,x=3,y=-6]{Genera reportes}
+        \umlusecase[name=inventario,width=\ucWidthB,x=-1,y=-8]{Control de inventario}
+    \end{umlsystem}
+    \umlactor[x=14,y=0]{Empleado}
+    \umlactor[x=14,y=-5]{Administrador}
+    \umlinherit{Administrador}{Empleado}
+    \umlassoc{Cliente}{orden}
+    \umlassoc{Empleado}{orden}
+    \umlassoc{Solicitante}{contrata}
+    \umlassoc{Administrador}{contrata}
+    \umlassoc{Proveedor}{suministros}
+    \umlassoc{Administrador}{suministros}
+    \umlassoc{Administrador}{reportes}
+    \umlinclude{suministros}{inventario}
+    \umlinclude{reportes}{inventario}
+\end{tikzpicture}
+}
+}
+
+\newcommand{\exUseCaseDices}{%
+\centering\scalebox{0.6}{%
+\begin{tikzpicture}
+    \umlactor{Jugador}
+    \begin{umlsystem}[x=4]{Juego de dados}
+        \umlusecase[name=jugar]{Jugar Dados}
+    \end{umlsystem}
+    \umlassoc{Jugador}{jugar}
+\end{tikzpicture}
+}
+}

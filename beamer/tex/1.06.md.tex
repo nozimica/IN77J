@@ -1,0 +1,220 @@
+## Ejemplo: Juego de Dados
+
+### Ejemplo: Juego de Dados
+
+\subsubtitleB{Ejemplo introductorio: Juego de Dados}
+
+Vamos a modelar un juego de dados.\newline
+
+- Tenemos dos dados.
+- El usuario cada vez que juegue, lanzará ambos dados.
+- Cada vez que lo haga, deseará recibir el valor de cada dado.
+
+### Dados: requerimientos funcionales
+
+\label{dados:clases}
+\subsubtitleB{Ejemplo introductorio: Juego de Dados}
+
+- Hay que diseñar un \alert{sistema} que simule el \alert{juego de dos dados}.
+    - Este juego consiste en el \alert{lanzamiento} dos \alert{dados}, primero uno y después el otro.
+- Está involucrado un solo \alert{jugador}.
+- Cada dado, al ser lanzado, da como \alert{resultado} un número en el rango [1, 6].
+
+### Dados: requerimientos funcionales
+
+\subsubtitleB{Ejemplo introductorio: Juego de Dados}
+
+- El juego consiste solamente en el lanzamiento de los dados:
+    - Comienza cuando el jugador lanza el \alert{primer dado}.
+    - Termina después de obtener el resultado del \alert{segundo dado}.
+- Durante su ejecución, el juego debe informar al \alert{usuario} ---a través de una \alert{interfaz gráfica}--- de lo siguiente:
+    - Cuándo se inicia el juego.
+    - Cuándo se lanza cada dado.
+    - El valor obtenido por cada dado.
+    - Cuándo el juego termina.
+
+### Dados: casos de uso
+
+\subsubtitleB{Ejemplo introductorio: Juego de Dados}
+
+Para este caso, el sistema simplemente está compuesto por un solo \textcolor{blue}{caso de uso}:
+
+- Jugar Dados.
+
+Y a su vez, hay un solo \textcolor{blue}{actor} involucrado:
+
+- El jugador
+
+
+\exUseCaseDices
+
+
+
+### Dados: narrativa de casos de uso
+
+\subsubtitleB{Ejemplo introductorio: Juego de Dados}
+
+\vspace{-1em}
+\begin{tiny}
+\begin{usecase}
+
+\addtitle{Caso de uso 1}{Jugar Dados} 
+
+\addfield{Alcance:}{Módulo principal}
+
+\addfield{Actor principal:}{Jugador}
+
+\addfield{Sinopsis:}{El jugador podrá lanzar dos dados, recibiendo el valor de cada uno de ellos.}
+
+\addfield{Precondiciones:}{Se le presenta al jugador la opción de lanzar dados.}
+\addfield{Postcondiciones:}{\bld{Garantía}: El jugador recibirá el resultado de los dos dados.}
+
+\addscenario{Escenario principal:}{
+    \item Jugador lanza los dados.
+    \item Sistema indica que el juego ha comenzado.
+    \item Sistema lanza el primer dado.
+    \item Sistema muestra el resultado del primer dado.
+    \item Sistema lanza el segundo dado.
+    \item Sistema muestra el resultado del segundo dado.
+    \item Sistema indica que el juego ha finalizado.
+}
+
+\end{usecase}
+\end{tiny}
+
+### Dados: modelado del dominio
+
+\subsubtitleB{Ejemplo introductorio: Juego de Dados}
+
+Para nuestro ejemplo de los dados:\newline
+
+\centering\scalebox{0.6}{%
+\begin{tikzpicture}
+    \umlclass[x=0,y=0]{Jugador}{- nombre}{}
+    \umlclass[x=9,y=0]{Dado}{- valor}{}
+    \umlclass[x=0,y=-4]{Juego}{- fecha}{}
+    \umlassoc[mult1=1,pos1=0.1,mult2=2,pos2=0.9,name=tira]{Jugador}{Dado}
+    \draw (tira-1) {} node[above=0.2cm] (tr) {tira};
+    \draw [-triangle 45,above=2mm] (tr)+(1,0) -- ++(1.1,0);
+    \umlassoc[mult1=1,pos1=0.1,mult2=1,pos2=0.9,name=juega]{Jugador}{Juego}
+    \draw (juega-1) {} node[right=0.2cm] (jga) {juega};
+    \draw [-triangle 45,above=2mm] (jga)+(0,-0.4) -- ++(0,-0.5);
+    \umlassoc[geometry=-|,mult1=1,pos1=0.1,mult2=2,pos2=1.9,name=incluye]{Juego}{Dado}
+    \draw (incluye-2) {} node[right=0.2cm] (ncly) {incluye};
+    \draw [-triangle 45,above=2mm] (ncly)+(1,0) -- ++(1.1,0);
+\end{tikzpicture}
+}
+
+### Dados: clases candidatas
+
+\subsubtitleB{Ejemplo introductorio: Juego de Dados}
+
+Tomando en cuenta las clases identificadas en la página \ref{dados:clases}, tenemos:
+
+\begin{itemize}
+    \item  \tikz\node[inlineBlock] (s1) {Sistema           };
+    \item  \tikz\node[inlineBlock] (s2) {Juego de dos dados};
+    \item  \tikz\node[inlineBlock] (s3) {Dados             };
+    \item  \tikz\node[inlineBlock] (s4) {Primer dado       };
+    \item  \tikz\node[inlineBlock] (s5) {Segundo dado      };
+    \item  \tikz\node[inlineBlock] (s6) {Resultado         };
+    \item  \tikz\node[inlineBlock] (s7) {Lanzamiento       };
+    \item  \tikz\node[inlineBlock] (s8) {Jugador           };
+    \item  \tikz\node[inlineBlock] (s9) {Usuario           };
+    \item  \tikz\node[inlineBlock] (s10){Interfaz gráfica  };
+\end{itemize}
+
+\pause
+
+\begin{tikzpicture}[overlay]
+  \node[miniconcept, right=50mm of s1] (juegoClass) { Clase Juego };
+  \draw[->, thick] ([xshift=1mm]s1.east) -- ([xshift=-2mm]juegoClass.west);
+  \draw[->, thick] ([xshift=1mm]s2.east) -- ([xshift=-2mm,yshift=-2mm]juegoClass.west);
+%
+  \node[miniconcept, right=50mm of s4] (dadoClass) { Clase Dado, y dos instancias };
+  \draw[->, thick] ([xshift=1mm]s3.east) -- ([xshift=-2mm,yshift=2mm]dadoClass.west);
+  \draw[->, thick] ([xshift=1mm]s4.east) -- ([xshift=-2mm,yshift=0mm]dadoClass.west);
+  \draw[->, thick] ([xshift=1mm]s5.east) -- ([xshift=-2mm,yshift=-2mm]dadoClass.west);
+%
+  \node[miniconcept, right=50mm of s6] (resultadoAttr) { Atributo de Dado };
+  \draw[->, thick] ([xshift=1mm]s6.east) -- ([xshift=-2mm]resultadoAttr.west);
+%
+  \node[miniconcept, right=20mm of s7] (lanzamientoAcc) { Método de Dado };
+  \draw[->, thick] ([xshift=1mm]s7.east) -- ([xshift=-2mm]lanzamientoAcc.west);
+%
+  \node[miniconcept, right=20mm of s9] (jugadorClass) { Instancia de la clase Jugador };
+  \draw[->, thick] ([xshift=1mm]s8.east) -- ([xshift=-2mm,yshift=2mm]jugadorClass.west);
+  \draw[->, thick] ([xshift=1mm]s9.east) -- ([xshift=-2mm]jugadorClass.west);
+%
+  \node[miniconcept, right=50mm of s10] (interfazClass) { Instancia de la clase Pantalla };
+  \draw[->, thick] ([xshift=1mm]s10.east) -- ([xshift=-2mm]interfazClass.west);
+\end{tikzpicture}
+
+## Diagrama de Secuencia
+
+### Dados: diagrama de Secuencia
+
+\subsubtitleB{Diagrama de Secuencia}
+
+Ya tenemos identificados el dominio, las clases y los casos de uso.\newline
+
+\pause
+
+Nos está faltando algo muy importante:
+
+\begin{rboxx}{}
+La interacción entre las clases
+\end{rboxx}
+
+\pause
+
+Para cubrir la interacción entre las componentes de nuestro sistema, es que UML
+incluye un nuevo diagrama:
+
+\begin{rboxx}{}
+\texthigh{Diagrama de secuencia}
+\end{rboxx}
+
+
+### Dados: diagrama de Secuencia
+
+\subsubtitleB{Diagrama de Secuencia}
+
+- Un diagrama de secuencia describe gráficamente los pasos que ya hemos visualizado en la narrativa
+del caso de uso.
+
+- Complementa esto último con una visualización gráfica de los actores involucrados en estos pasos.
+
+- Nos permite entender mucho mejor los métodos o acciones que los objetos deben proveer.
+
+### Dados: diagrama de Secuencia
+
+\subsubtitleB{Diagrama de Secuencia}
+
+\tikzinlinec[0.5]{
+    \begin{umlseqdiag}
+    \umlactor[class=Jugador]{j1}
+    \umlbasicobject{Pantalla}
+    \umlbasicobject{Juego}
+    \umlobject[class=Dado]{d1}
+    \umlobject[class=Dado]{d2}
+    \begin{umlcall}[op=jugar()]{j1}{Juego}
+    \end{umlcall}
+    \begin{umlcall}[op={muestra(``Inicia el juego'')}]{Juego}{Pantalla}
+    \end{umlcall}
+    \begin{umlcall}[op=tirar()]{Juego}{d1}
+    \end{umlcall}
+    \begin{umlcall}[op=pideValor(),return=v1]{Juego}{d1}
+    \end{umlcall}
+    \begin{umlcall}[op=muestra(v1)]{Juego}{Pantalla}
+    \end{umlcall}
+    \begin{umlcall}[op=tirar()]{Juego}{d2}
+    \end{umlcall}
+    \begin{umlcall}[op=pideValor(),return=v2]{Juego}{d2}
+    \end{umlcall}
+    \begin{umlcall}[op=muestra(v2)]{Juego}{Pantalla}
+    \end{umlcall}
+    \begin{umlcall}[op=muestra(``Termina el juego'')]{Juego}{Pantalla}
+    \end{umlcall}
+    \end{umlseqdiag}
+}

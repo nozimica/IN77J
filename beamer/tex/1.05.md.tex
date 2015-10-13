@@ -185,3 +185,305 @@ pueden tener un resultado distinto a aquél que se considera como esperable.
 - Se mencionan indicando el número del paso correspondiente, adjuntando una letra correlativa.
 - Denominado también como ``extensión''.
 
+
+
+## Modelado del dominio
+
+### Qué es el modelado del dominio
+
+\subsubtitleB{Definición:}
+
+El modelado del dominio es un modelo conceptual que describe los aspectos más importantes de un
+problema:
+
+- Conceptos significativos.
+- Relaciones básicas entre conceptos.
+- Define un vocabulario mínimo.\newline
+
+Se basa en que la raíz del \texthigh{análisis} orientado a objetos es la descomposición de un problema
+en \texthigh{conceptos individuales}.
+
+### Qué es el modelado del dominio
+
+\subsubtitleB{Para qué sirve:}
+
+- \bld{Introducción:} Breve descripción que sirve como introducción al modelo.
+- \bld{Lista de conceptos:} Los conceptos que serán las clases de nuestro sistema.
+- \bld{Lista de tipos:} Eventualmente presentará los tipos de datos que describan
+las propiedades de las clases.
+- \bld{Relaciones:} Presenta las relaciones de asociación o generalización entre las clases.
+
+
+### Qué es el modelado del dominio
+
+\subsubtitleB{Conceptos:}
+
+Se pueden usar símbolos muy parecidos a los de diagramas de clases:
+
+\centering\scalebox{0.6}{%
+\begin{tikzpicture}
+    \umlclass[type={domain class},x=0,y=0]{Nombre del dominio}{- atributos}{}
+\end{tikzpicture}
+}
+
+- Muchas veces se omite el estereotipo \itt{<<<domain class>>>}.
+    - Sobre todo cuando está claro que tenemos en frente un modelo de dominio.
+- Se incluye principalmente los atributos de cada dominio.
+    - Los métodos por lo general no se abordan en esta etapa.
+
+### Qué es el modelado del dominio
+
+\subsubtitleA{Conceptos:}{identificación}
+
+- Se comienza la construcción del modelo de dominio haciendo una \texthigh{lista de conceptos
+candidatos}.
+    - Técnicas comunes:
+        - Lista de categorías de conceptos.
+        - Identificación de sustantivos.
+
+Repasaremos a continuación cada una de ellas.
+
+### Conceptos
+
+\subsubtitleB{Lista de categorías de conceptos:}
+
+- Para cada categoría dentro de una lista de categorías típicas, se trata de identificar
+conceptos relacionados a ellas.
+    - Han de ser relevantes para lo que estamos modelando.
+
+\begin{center}
+\begin{footnotesize}
+\begin{tabular}{lcl}
+\toprule
+\bld{Categoría} & & \bld{Conceptos} \\
+\midrule
+Objetos físicos o tangibles & & Avión \\
+Descripciones de cosas & & DescripciónDeVuelo \\
+Lugares & & Aeropuerto \\
+Transacciones & & Reserva \\
+Roles & & Piloto \\
+\bottomrule
+\end{tabular} 
+\end{footnotesize}
+\end{center}
+
+### Conceptos
+
+\subsubtitleB{Lista de categorías de conceptos:}
+
+He aquí una lista más exhaustiva de las categorías más típicas:
+
+\begin{center}
+\begin{footnotesize}
+\begin{tabular}{l}
+\toprule
+\bld{Categoría} \\
+\midrule
+Contenedores de cosas \\
+Cosas contenidas en contenedores \\
+Sistemas externos \\
+Sustantivos abstractos \\
+Organizaciones \\
+Eventos \\
+Reglas y políticas \\
+Catálogos \\
+\bottomrule
+\end{tabular} 
+\end{footnotesize}
+\end{center}
+
+### Conceptos
+
+\subsubtitleB{Identificación de sustantivos:}
+
+- Dada una \texthigh{descripción textual} del problema, se identifican en ella
+los \texthigh{sustantivos} relevantes.
+    - Esta descripción puede ser una narrativa de caso de uso o alguna descripción
+    más informal.
+- Luego de este paso, hay que filtrar los conceptos realmente significativos.
+
+\subsubtitleB{Ejemplo:}
+
+- \itt{Un \texthigh{cliente} llega a un \texthigh{puesto de venta} para reservar un \texthigh{pasaje} de \texthigh{avión}.}
+- \itt{El \texthigh{empleado} hace la \texthigh{reserva} en el \texthigh{sistema de la aerolínea}.}
+
+
+### Conceptos
+
+\subsubtitleB{Sugerencias:}
+
+- Generar un \texthigh{listado de conceptos} utilizando cualquiera de las dos técnicas recién presentadas.
+- Incluir estos conceptos como los \texthigh{primeros elementos} del diagrama de dominio.
+- Identificar las \texthigh{asociaciones relevantes} entre estos conceptos.
+- Para cada concepto, identificar los \texthigh{atributos necesarios} para satisfacer los requerimientos de
+información.
+    - Cada atributo en este modelo representa \texthigh{información} que ha de ser \texthigh{necesaria}.
+
+### Conceptos
+
+\subsubtitleB{Importante tener en cuenta:}
+
+- ¿Granularidad fina o compleja?
+    - Se prefiere \texthigh{muchos} conceptos de \texthigh{granularidad fina}, que pocos pero muy complejos.
+- Es común no identificar todos los conceptos en esta etapa.
+    - Una vez descubiertos, se actualiza el modelo de dominio.
+- Podremos encontrar conceptos que \texthigh{carezcan de atributos}.
+    - Esto indica que no necesariamente guardarán información sobre su estado.
+
+### Conceptos
+
+\subsubtitleB{Errores comunes:}
+
+- Representar como atributo algo que en realidad es un concepto en sí mismo:
+    - Si un atributo identificado no es fácilmente representable como un número o un texto,
+    hay que pensarlo dos veces: puede ser un concepto.
+    - En caso de duda, se puede representar de inmediato como un concepto.
+    - O se puede dejar una anotación, para revisarlo en una etapa posterior del análisis,
+    cuando se tenga la idea global mucho más clara.
+
+### Conceptos
+
+\subsubtitleA{Errores comunes:}{ejemplo}
+
+Por ejemplo este vuelo:
+
+\tikzinlinec{
+    \umlclass[x=0,y=0]{Vuelo}{- código \\ - destino}{}
+}
+
+En realidad debiera ser:\newline
+
+\tikzinlinec{
+    \umlclass[x=-4]{Vuelo}{- código}{}
+    \umlclass[x=4]{Aeropuerto}{- nombre}{}
+    \umlassoc[name=finaliza]{Vuelo}{Aeropuerto}
+    \draw (finaliza-1) {} node[above=0.2cm] (finaliz) {finaliza en};
+    \draw [-triangle 45,above=2mm] (finaliz)+(1.2,0) -- ++(1.3,0);
+}
+
+### Conceptos
+
+\subsubtitleB{Errores comunes:}
+
+Analicemos esta situación, aparentemente muy específica:
+
+\columnsbegin
+
+\column{.8\textwidth}
+
+- Se tiene una clase \bld{Producto}, que representa un producto concreto dentro de una tienda.
+- Cada instancia de un producto tiene sus propios atributos.
+    - Éstos no aparecen en ninguna otra parte.
+    - Cuando un producto termina su vida en nuestro sistema (por ejemplo es vendido), la
+    instancia que lo representa es eliminada.
+        - Esto debe ser así, de lo contrario acumularíamos una cantidad descontrolada de objetos.
+
+\column{.2\textwidth}
+
+\tikzinlinec{
+    \umlclass[x=0,y=0]{Producto}{- serie\\ - código \\ - tipo\\ - nombre\\ - precio}{}
+}
+
+\columnsend
+
+### Conceptos
+
+\subsubtitleB{Errores comunes:}
+
+- Al no haber más productos de un determinado tipo, sus características habrán sido perdidas para siempre.
+    - No se podrá saber cuál era su precio.
+    - Tampoco cuál era su descripción.
+- Por lo tanto, necesitamos alguna manera de preservar esta información.
+    - Independiente de que por ahora no queden productos de aquel tipo.
+
+En este caso, necesitamos una \texthigh{descripción de producto} como un concepto propiamente tal.
+
+
+### Conceptos
+
+\subsubtitleA{Errores comunes:}{ejemplo}
+
+- Originalmente tendríamos:
+
+\tikzinlinec{
+    \umlclass[x=0,y=0]{Producto}{- serie\\ - código \\ - tipo\\ - nombre\\ - precio}{}
+    \umlclass[x=7,y=0]{p1 : Producto}{- serie = ``A228''\\ - código = ``34-46d''\\ - tipo = ``Libro'' \\ - nombre = ``El túnel''\\ - precio = 10.000}{}
+    \umlclass[x=13,y=0]{p2 : Producto}{- serie = ``A234''\\ - código = ``34-46d''\\ - tipo = ``Libro'' \\ - nombre = ``El túnel''\\ - precio = 10.000}{}
+}
+
+- En cambio, podemos modelar esta situación como:
+
+\tikzinlinec[0.5]{
+    \umlclass[x=-1,y=0]{Producto}{- serie}{}
+    \umlclass[x=4,y=0]{DescProd}{- código \\ - tipo\\ - nombre\\ - precio}{}
+%
+    \umlassoc[mult1=*,pos1=0.1,mult2=1,pos2=0.9,name=especifica]{Producto}{DescProd}
+    \draw (especifica-1) {} node[above=2mm] (espec) {descrito};
+    \draw [-triangle 45,above=2mm] (espec)+(1,0) -- ++(1.1,0);
+%
+    \umlclass[name=p1,x=9,y=1]{p1 : Producto}{- serie = ``A228''}{}
+    \umlclass[name=p2,x=9,y=-1.5]{p2 : Producto}{- serie = ``A234''}{}
+    \umlclass[name=dp0,x=15,y=0]{ep1 : DescProd}{- código = ``34-46d''\\ - tipo = ``Libro'' \\ - nombre = ``El túnel''\\ - precio = 10.000}{}
+    \umlassoc{p1}{dp0}
+    \umlassoc{p2}{dp0}
+}
+
+### Asociaciones
+
+\subsubtitleB{Conceptos clave:}
+
+- Para identificar las asociaciones entre conceptos hay que tener en cuenta:
+    - Que relación y/o dependencia existe entre los conceptos.
+    - Qué relación es necesaria para satisfacer los requerimientos de información.
+- Siempre identificarán una relación entre conceptos que refleje una conexión relevante o interesante entre ellos.
+- La relación puede no ser constante, sino que estará activa por un período de tiempo.
+    - Esto no implica que la relación no exista.
+
+### Asociaciones
+
+\subsubtitleB{Lista de categorías de asociaciones:}
+
+- Al igual que con los conceptos, se puede utilizar un listado de categorías de
+asociaciones típicas para ayudarnos en el proceso de identificación.
+
+\begin{center}
+\begin{footnotesize}
+\begin{tabular}{lcl}
+\toprule
+\bld{Categoría} & & \bld{Conceptos involucrados} \\
+\midrule
+A es una parte física de B & & Ala --- Avión \\
+A es una parte lógica de B & & Tramo --- Ruta \\
+A está contenido físicamente en B & & Pasajero --- Avión \\
+A está contenido lógicamente en B & & Vuelo --- PlanDeVuelo \\
+A es un miembro de B & & Piloto --- Aerolínea \\
+\bottomrule
+\end{tabular} 
+\end{footnotesize}
+\end{center}
+
+### Asociaciones
+
+\subsubtitleB{Lista de categorías de asociaciones:}
+
+He aquí una lista más exhaustiva de las categorías más típicas:
+
+\begin{center}
+\begin{footnotesize}
+\begin{tabular}{l}
+\toprule
+\bld{Categoría} \\
+\midrule
+A es una descripción de B \\
+A es un ítem de una transacción de B \\
+A es conocido/registrado/capturado en B \\
+A es una subunidad organizacional de B \\
+A usa o maneja a B \\
+A se comunica con B \\
+A coopera con B \\
+A es una propiedad de B \\
+\bottomrule
+\end{tabular} 
+\end{footnotesize}
+\end{center}
+

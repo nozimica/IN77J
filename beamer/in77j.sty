@@ -92,7 +92,7 @@
 %\setbeamercolor{item projected}{fg=green}
 \setbeamercolor{uppercolor}{fg=white,bg=blue!70}
 \setbeamercolor{lowercolor}{fg=black,bg=blue!10}
-\setbeamercolor{alerted text}{fg=blue}
+% \setbeamercolor{alerted text}{fg=blue}
 %\setbeamercolor*{enumerate item}{fg=red}
 %\setbeamercolor*{enumerate subitem}{fg=red}
 %\setbeamercolor*{enumerate subsubitem}{fg=red}
@@ -227,7 +227,11 @@
 \usepackage{multicol}
 
 \newcommand\subsubtitle{\fontsize{16}{18.2}\selectfont}
-\newcommand{\subsubtitleB}[1]{\vspace{0.4em}\bld{\Large #1}\newline\vspace{-0.5em}}
+
+\newcommand{\subsubtitleO}[1]{\vspace{0.4em}#1\newline\vspace{-0.5em}}
+\newcommand{\subsubtitleB}[1]{\subsubtitleO{\bld{\Large #1}}}
+\newcommand{\subsubtitleA}[2]{\subsubtitleO{\bld{\Large #1}~#2}}
+
 \newcommand\subsubtitleC{\fontsize{12}{14.2}\selectfont}
 
 \usepackage{tikz-uml}
@@ -242,4 +246,33 @@
 \newcommand{\importantboxbegin}[1]{\begin{center}\hspace{10mm}\begin{beamerboxesrounded}[upper=uppercolor,lower=lowercolor,shadow=true]{#1}}%
 \newcommand{\importantboxend}{\end{beamerboxesrounded}\end{center}}%
 
+\newcommand{\texthigh}[1]{\textcolor{blue}{#1}}
+
+% \newsavebox{\tempbox}
+% \newcommand*{\scalingfactor}{}
+% \newenvironment{tikzinlineb}[1]{%
+%     \renewcommand*{\scalingfactor}{#1}%
+%     \begin{lrbox}{\tempbox}%
+% }{%
+%     \end{lrbox}%
+%     \usebox{\tempbox}%
+% }
+
+% \newenvironment{tikzinline}[1][0.6]%
+%     {%
+%         \begin{tikzpicture}}%
+%     {\end{tikzpicture}}
+
+\newcommand*{\tikzinlinec}[2][0.6]{%
+    \begin{center}%
+    \scalebox{#1}{%
+    \begin{tikzpicture}%
+        #2%
+    \end{tikzpicture}%
+    }%
+    \end{center}%
+}
+
 \usepackage{usecases}
+% \usepackage{standalone}
+\usepackage{schemata}

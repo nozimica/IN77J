@@ -15,12 +15,13 @@ $(TEXNAME).pdf: $(TEXNAME).tex in77j.sty $(TEXNAME)*.tex tex/*.tex
 	$(PANDOC) tex/1.02.md.tex -t beamer -o tex/1.02.tex
 	$(PANDOC) tex/1.03.md.tex -t beamer -o tex/1.03.tex
 	$(PANDOC) tex/1.04.md.tex -t beamer -o tex/1.04.tex
-	$(PANDOC) tex/1.05.md.tex -t beamer -o tex/1.04.tex
+	$(PANDOC) tex/1.05.md.tex -t beamer -o tex/1.05.tex
+	$(PANDOC) tex/1.06.md.tex -t beamer -o tex/1.06.tex
 	# biber $(TEXNAME) --output_format bibtex
 	$(TEXCOMM) -no-pdf $(TEXNAME).tex && rm -f $(TEXNAME).xdv
 	bibtex $(TEXNAME)
 	$(TEXCOMM) -interaction=batchmode $(TEXNAME).tex
-	$(TEXCOMM) $(TEXNAME).tex
+	# $(TEXCOMM) $(TEXNAME).tex
 
 clean:
 	rm -f *.aux *.blg *.log *.toc *.lot *.lof *.bbl *.nav *.out *.snm *.vrb *.xdv tex/*.aux

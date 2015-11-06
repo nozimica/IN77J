@@ -1,0 +1,65 @@
+\documentclass[11pt]{article}
+
+\newcommand{\hmwkCode}{Control 1}
+\newcommand{\hmwkDueDate}{S\'{a}bado 3 de octubre de 2015}
+\newcommand{\hmwkClassTime}{Tiempo total: 40 minutos. Con apuntes personales.}
+\usepackage{in77j.exercise}
+
+\makeatletter 
+%\newcommand\mynobreakpar{\par\nobreak\@afterheading} 
+\@beginparpenalty=10000
+\makeatother
+
+\setlength{\parskip}{0.7\baselineskip}
+\begin{document}
+\begin{spacing}{1.2}
+\thispagestyle{empty}
+\evaluationTitle
+
+\newcommand{\separatorLine}{\begin{center}\rule{.6\textwidth}{1pt}\end{center}}
+
+\begin{Problem}
+
+    \bld{Considere el proceso de venta de entradas para conciertos.}
+
+    Existe una empresa encargada de vender entradas para cada uno de los conciertos que
+    tenga disponibles en un momento dado.
+
+    Este servicio se ofrece en un solo local físico, el cual cuenta con tres cajas que ---operadas
+    por sendas cajeras o cajeros--- atiende a los clientes.
+    
+    Estos clientes obtienen un número de atención correlativo al momento de llegar al local. En todo
+    momento hay un funcionario de la empresa encargado de avisar a los clientes cuando se desocupe
+    una caja. Para esto, evidentemente, se hace uso del número correlativo ya mencionado.
+
+    Se ofrece como medio de pago tanto el efectivo como tarjetas de débito o crédito. Para este último
+    medio de pago no se considera la compra en cuotas.
+
+    Es importante considerar que las entradas a todo concierto están limitadas en su cantidad.
+
+\begin{ProbPart}[difficulty={40}]
+
+    Diseñe un modelo de clases cuyo objetivo sea representar el proceso de atención de
+    un cliente en una caja determinada, el cual desea comprar
+    una o varias entradas para uno o varios conciertos.
+
+\end{ProbPart}
+\begin{ProbPart}[difficulty={15}]
+
+    Una vez pensada la parte anterior, ``eleve'' su perspectiva y fíjese ahora en todo el local.
+    Incorpore al modelo de la parte anterior no más de dos clases para considerar la atención de los
+    clientes según su número de atención.
+
+\end{ProbPart}
+
+\begin{ProbPart}[difficulty={5}]
+
+    Visualice una relación de herencia real entre dos clases de su modelo.
+
+\end{ProbPart}
+
+\end{Problem}
+
+
+\end{spacing}
+\end{document}

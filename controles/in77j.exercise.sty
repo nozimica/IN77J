@@ -1,0 +1,144 @@
+\usepackage{amsmath,amsfonts,amsthm,amssymb}
+\usepackage{setspace}
+%\usepackage{Tabbing}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+%\usepackage{extramarks}
+%\usepackage{chngpage}
+\usepackage{soul,color}
+\usepackage{graphicx,float,wrapfig}
+\usepackage{array}
+
+\usepackage{enumitem}
+\setlist[itemize]{label=\textbullet,itemsep=1pt}       % to get rounded bullets
+%\setlist{nolistsep}
+%\setlist[itemize]{label=\textbullet,itemsep=1pt, topsep=12pt, partopsep=0pt}
+\setlist[enumerate]{itemsep=0pt}
+\setlist[enumerate,2]{topsep=0pt}
+
+\usepackage{fixltx2e}
+\usepackage[spanish,activeacute,es-noshorthands]{babel}
+
+\usepackage{iftex}
+\ifPDFTeX
+    \usepackage[utf8]{inputenc}
+    \usepackage[T1]{fontenc}
+    %\PrerenderUnicode{áéíóúÁÉÍÓÚüÜ}
+\else
+    \ifXeTeX
+        \usepackage{xltxtra}
+
+        % set fonts
+        \usepackage{fontspec}
+        \setsansfont[ExternalLocation=../fonts/,
+          Ligatures=TeX,
+          BoldFont=FontinSansBold.otf,
+          BoldItalicFont=FontinSansBoldItalic.otf,
+          ItalicFont=FontinSansItalic.otf]{FontinSans.otf}
+    \else
+        \usepackage{luatextra}
+    \fi
+    \defaultfontfeatures{Ligatures=TeX}
+\fi
+
+\usepackage{textcomp} % To get good bullet symbols and avoid problems.
+
+\usepackage[margin=17mm,top=13mm]{geometry}
+
+% Setup the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkClass.\  \hmwkTitle}
+\rhead{}
+\cfoot{}
+\rfoot{Página\ \thepage\ de\ \pageref{LastPage}}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\newcommand{\evaluationTitle}{
+
+    \begin{center}
+        \raisebox{-0.6\height}{\includegraphics[width=110mm]{../beamer/img/fcfm_dii_50a.png}}
+        \hfill
+        \raisebox{-0.5\height}{\includegraphics[width=40mm]{../beamer/img/mbe.png}}
+        \\[2em]
+
+        %\vspace{-28mm}
+        {\Large \textmd{\textbf{\hmwkClass.~\hmwkTitle.}}}\\
+        \vspace{0.1in}
+        % \textmd{\textbf{\hmwkTitle}}\\
+        \textmd{\hmwkClassInstructor}\\
+        \large{\hmwkDueDate}.
+        \large{\textit{\hmwkClassTime}}
+        %\vspace{-9mm}
+    \end{center}
+}%
+
+% \usepackage{../_lib/ensia200.flowchart}
+% \usepackage{../_lib/ensia200.listings}
+\usepackage{../_lib/ensia200.common}
+
+\usepackage[noabbrev,spanish]{cleveref}
+
+% http://tex.stackexchange.com/a/34706/5185
+\newcommand\getcurrentref[1]{%
+ \ifnumequal{\value{#1}}{0}
+   {??}
+     {\the\value{#1}}%
+}
+
+\usepackage[noanswer]{exercise}
+
+\renewcommand{\ExerciseHeaderDifficulty}{
+    \ifnumequal{\number\ExerciseDifficulty}{1}
+        {(\number\ExerciseDifficulty~punto)}
+        {(\number\ExerciseDifficulty~puntos)}
+}
+\renewcommand{\ExePartHeaderDifficulty}{
+    \ifnumequal{\number\ExePartDifficulty}{1}
+        {(\number\ExePartDifficulty~punto)}
+        {(\number\ExePartDifficulty~puntos)}
+}
+\renewcommand{\ExerciseHeaderTitle}{\quad\ExerciseTitle\quad}
+\renewcommand{\ExerciseHeaderNB}{~\theExercise}
+\renewcommand{\ExerciseHeader}{\noindent\Large\textbf{\ExerciseName\ExerciseHeaderNB:\ExerciseHeaderTitle}\ExerciseHeaderDifficulty\ExerciseHeaderOrigin\vspace*{0.5em}}
+\renewcommand{\theExePart}{\alph{ExePart}}
+\renewcommand{\ExePartHeaderNB}{~\theExePart}
+\renewcommand{\ExePartHeader}{\vspace{1em}\noindent\Large\textbf{\ExePartName\ExePartHeaderNB:\ExePartHeaderTitle}\ExePartHeaderDifficulty\vspace*{-1.6em}}
+
+\renewcommand{\AnswerHeader}{\bigskip\noindent\textbf{\Large Solución del problema\ExerciseHeaderNB:}}
+
+\setlength{\ExerciseSkipBefore}{2em}
+\setlength{\Exeparsep}{2em}
+\newcounter{ProblemCounter}
+\newenvironment{Problem}[1][]
+  {\begin{Exercise}[name={Problema}, counter={ProblemCounter}, #1]}
+  {\setcounter{figure}{0}\end{Exercise}}
+
+\newenvironment{ProbPart}[1][]
+  %{\vspace*{0.7em}\noindent\begin{ExePart}[name={Parte}, #1]\nopagebreak\par\indent\ignorespaces\\\indent}
+  {\vspace{0.7em}\begin{ExePart}[name={Parte}, #1]\\\nopagebreak}
+  {\end{ExePart}}
+
+\newenvironment{ProbPartTitle}[2][]
+  %{\vspace*{0.7em}\noindent\begin{ExePart}[name={Parte}, #1]\nopagebreak\par\indent\ignorespaces\\\indent}
+  {\vspace{0.7em}\begin{ExePart}[name={Parte}, #1]#2~\\}
+  {\end{ExePart}}
+
+\newenvironment{NewAnswer}[1][]
+  %{\begin{Answer}[#1]\nopagebreak\par\indent\ignorespaces\\\indent}
+  {\begin{Answer}[#1]\\}
+  {\setcounter{figure}{0}\end{Answer}}
+
+\newenvironment{Comment}[2][]
+  {\begin{Exercise*}[name={#2}, #1]}
+  {\setcounter{figure}{0}\end{Exercise*}}
+
+\renewcommand\thefigure{\theExercise.\arabic{figure}}
+
+%%%%%%%%%%%%%%%%% Labels
+
+\newcommand{\hmwkClass}{IN77J: Orientaci\'{o}n a Objetos para E-Business}
+\newcommand{\hmwkTitle}{\hmwkCode}
+\newcommand{\hmwkClassInstructor}{Profesor: Nicol\'{a}s\ E. Ozimi\c{c}a.}
+% \newcommand{\hmwkClassInstructor}{Profesores: Pablo Morales M, Nicol\'{a}s\ E. Ozimica.\\Ayudantes: Valeria Lobos, Eduardo Lobos, Daniela Mart\'{i}nez.}
+\newcommand{\hmwkAuthorName}{}

@@ -1,0 +1,85 @@
+\documentclass[11pt]{article}
+
+\newcommand{\hmwkCode}{Control 2}
+\newcommand{\hmwkDueDate}{S\'{a}bado 7 de noviembre de 2015}
+\newcommand{\hmwkClassTime}{Tiempo total: 80 minutos. Con apuntes personales.}
+\usepackage{in77j.exercise}
+
+\setlength{\parskip}{0.7\baselineskip}
+\begin{document}
+\begin{spacing}{1.2}
+\thispagestyle{empty}
+\evaluationTitle
+
+\newcommand{\separatorLine}{\begin{center}\rule{.6\textwidth}{1pt}\end{center}}
+
+\begin{Problem}
+
+    \bld{Considere el proceso de toma de horas médicas en un hospital.}
+
+En esta evaluación vamos a analizar el proceso en que un paciente desea
+reservar o anular una hora médica con un doctor, en un hospital, de
+forma presencial en la misma institución.
+
+En particular, su modelo debe cubrir lo siguiente:
+\begin{enumerate}
+    \item Un paciente puede tener una ficha médica en el hospital.
+    \item Un paciente deseará agendar una hora médica:
+    \begin{enumerate}
+        \item Ya sea con un doctor en particular.
+        \item O con cualquier doctor de una especialidad dada.
+        \item En ambos casos hay que ofrecerle al paciente las primeras
+            horas disponibles, sean cuando sean.
+    \end{enumerate}
+    \item Un paciente podrá ir al hospital a anular una hora médica
+        previamente agendada.
+    \item Un paciente podrá llegar al hospital para ser atendido:
+    \begin{enumerate}
+        \item Deberá pagar su bono. Suponga que lo hace en efectivo, a un
+            valor que depende de cada médico, sin preocuparnos de diferentes
+            valores en función de Fonasa, Isapres o atención particular.
+        \item Al momento de ingresar a la oficina del médico, éste ya deberá
+            tener en sus manos la ficha del paciente (si es que hay). Fíjese
+            en quién debe estar a cargo de esto.
+    \end{enumerate}
+\end{enumerate}
+
+\begin{ProbPart}[difficulty={40}]
+
+Ilustre mediante un diagrama de casos de uso todo el proceso en cuestión. Tenga especial
+cuidado al identificar los actores.
+
+\end{ProbPart}
+
+\begin{ProbPart}[difficulty={40}]
+
+Elabore un diagrama de dominio para este proceso.
+
+\end{ProbPart}
+
+\begin{ProbPart}[difficulty={40}]
+
+Elabore para cada caso de uso (de ser más de 5 casos de uso, privilegie los 5 más importantes)
+un diagrama de secuencia ilustrando la interacción entre los objetos involucrados.
+
+\end{ProbPart}
+
+\begin{ProbPart}[difficulty={40}]
+
+En base a todo lo realizado anteriormente, elabore un diagrama de clases que incluya:
+
+\begin{itemize}[topsep=0pt]
+    \item Todas las clases involucradas en su modelo.
+    \item Todos los atributos verdaderamente relevantes.
+    \item Todas las operaciones visualizadas en el diagrama de secuencia.
+    \item Las relaciones relevantes para reflejar adecuadamente la realidad.
+\end{itemize}
+
+\end{ProbPart}
+\end{Problem}
+
+\begin{NewAnswer}
+\end{NewAnswer}
+
+\end{spacing}
+\end{document}

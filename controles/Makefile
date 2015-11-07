@@ -1,19 +1,18 @@
-CN=01
+CN=02
 
 TEXNAME=e$(CN)
 TEXCOMM=pdflatex -halt-on-error
 
 default: $(TEXNAME).pdf
-#default: complete
 
 $(TEXNAME).pdf: clean $(TEXNAME).tex in77j.exercise.sty
+	echo '\\answerstrue' > flags.tex
 	$(TEXCOMM) -no-pdf $(TEXNAME).tex && rm -f $(TEXNAME).xdv
-	sed -i 's:usepackage\[noanswer\]{exercise}:usepackage{exercise}:' in77j.exercise.sty
-	$(TEXCOMM) $(TEXNAME).tex
 	$(TEXCOMM) $(TEXNAME).tex
 	$(TEXCOMM) $(TEXNAME).tex
 	mv $(TEXNAME).pdf $(TEXNAME).pauta.pdf
-	sed -i 's:usepackage{exercise}:usepackage\[noanswer\]{exercise}:' in77j.exercise.sty
+	> flags.tex
+	$(TEXCOMM) $(TEXNAME).tex
 	$(TEXCOMM) $(TEXNAME).tex
 	$(MAKE) reduce
 
@@ -34,5 +33,5 @@ runEditor:
 	@test -s ~/.local/bin/when-changed && xterm -e ~/.local/bin/when-changed $(TEXNAME).tex -c make &
 	vim $(TEXNAME).tex
 
-runCompiler:
+compileLive:
 	@test -s ~/.local/bin/when-changed && ~/.local/bin/when-changed $(TEXNAME).tex -c make

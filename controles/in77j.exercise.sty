@@ -13,11 +13,16 @@
 \setlist[itemize]{label=\textbullet,itemsep=1pt}       % to get rounded bullets
 %\setlist{nolistsep}
 %\setlist[itemize]{label=\textbullet,itemsep=1pt, topsep=12pt, partopsep=0pt}
-\setlist[enumerate]{itemsep=0pt}
+\setlist[enumerate]{itemsep=0pt,topsep=0pt}
 \setlist[enumerate,2]{topsep=0pt}
 
 \usepackage{fixltx2e}
 \usepackage[spanish,activeacute,es-noshorthands]{babel}
+
+\makeatletter 
+%\newcommand\mynobreakpar{\par\nobreak\@afterheading} 
+\@beginparpenalty=10000
+\makeatother
 
 \usepackage{iftex}
 \ifPDFTeX
@@ -86,7 +91,13 @@
      {\the\value{#1}}%
 }
 
-\usepackage[noanswer]{exercise}
+\newif\ifanswers
+\input{flags}
+\ifanswers
+    \usepackage{exercise}
+\else
+    \usepackage[noanswer]{exercise}
+\fi
 
 \renewcommand{\ExerciseHeaderDifficulty}{
     \ifnumequal{\number\ExerciseDifficulty}{1}

@@ -12,11 +12,13 @@ default: $(TEXNAME).pdf
 
 $(TEXNAME).pdf: $(TEXNAME).tex in77j.sty $(TEXNAME)*.tex tex/*.tex
 	$(PANDOC) tex/1.01.md.tex -t beamer -o tex/1.01.tex
+	$(PANDOC) tex/1.01b.md.tex -t beamer -o tex/1.01b.tex
 	$(PANDOC) tex/1.02.md.tex -t beamer -o tex/1.02.tex
 	$(PANDOC) tex/1.03.md.tex -t beamer -o tex/1.03.tex
 	$(PANDOC) tex/1.04.md.tex -t beamer -o tex/1.04.tex
 	$(PANDOC) tex/1.05.md.tex -t beamer -o tex/1.05.tex
 	$(PANDOC) tex/1.06.md.tex -t beamer -o tex/1.06.tex
+	$(PANDOC) tex/1.06b.md.tex -t beamer -o tex/1.06b.tex
 	# biber $(TEXNAME) --output_format bibtex
 	$(TEXCOMM) -no-pdf $(TEXNAME).tex && rm -f $(TEXNAME).xdv
 	bibtex $(TEXNAME)

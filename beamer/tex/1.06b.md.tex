@@ -1,0 +1,701 @@
+## Diagrama de Secuencia
+
+### Dados: diagrama de Secuencia
+
+\subsubtitleB{Diagrama de Secuencia}
+
+Ya tenemos identificados el dominio, las clases y los casos de uso.\newline
+
+\pause
+
+Nos está faltando algo muy importante:
+
+\begin{rboxx}{}
+La interacción entre las clases
+\end{rboxx}
+
+\pause
+
+Para cubrir la interacción entre las componentes de nuestro sistema, es que UML
+incluye un nuevo diagrama:
+
+\begin{rboxx}{}
+\texthigh{Diagrama de secuencia}
+\end{rboxx}
+
+
+### Dados: diagrama de Secuencia
+
+\subsubtitleB{Diagrama de Secuencia}
+
+- Un diagrama de secuencia describe gráficamente los pasos que ya hemos visualizado en la narrativa
+del caso de uso.
+
+- Complementa esto último con una visualización gráfica de los actores involucrados en estos pasos.
+
+- Nos permite entender mucho mejor los métodos o acciones que los objetos deben proveer.
+
+### Dados: diagrama de Secuencia
+
+\subsubtitleB{Diagrama de Secuencia}
+
+\tikzinlinec[0.5]{
+    \begin{umlseqdiag}
+    \umlactor[no ddots]{Jugador}
+    \umlbasicobject{Pantalla}
+    \umlbasicobject{Juego}
+    \umlobject[class=Dado]{d1}
+    \umlobject[class=Dado]{d2}
+    \begin{umlcall}[op=jugar()]{Jugador}{Juego}
+    \end{umlcall}
+    \begin{umlcall}[op={muestra(``Inicia el juego'')}]{Juego}{Pantalla}
+    \end{umlcall}
+    \begin{umlcall}[op=tirar()]{Juego}{d1}
+    \end{umlcall}
+    \begin{umlcall}[op=pideValor(),return=v1]{Juego}{d1}
+    \end{umlcall}
+    \begin{umlcall}[op=muestra(v1)]{Juego}{Pantalla}
+    \end{umlcall}
+    \begin{umlcall}[op=tirar()]{Juego}{d2}
+    \end{umlcall}
+    \begin{umlcall}[op=pideValor(),return=v2]{Juego}{d2}
+    \end{umlcall}
+    \begin{umlcall}[op=muestra(v2)]{Juego}{Pantalla}
+    \end{umlcall}
+    \begin{umlcall}[op=muestra(``Termina el juego'')]{Juego}{Pantalla}
+    \end{umlcall}
+    \end{umlseqdiag}
+}
+
+### Diagrama de Secuencia
+
+\subsubtitleB{En qué consisten:}
+
+- Muestran la secuencia de mensajes entre los objetos que interactúan en un escenario en particular.
+- Están compuestos de dos dimensiones:
+    - Horizontal: los objetos se disponen de izquierda a derecha.
+    - Vertical: el tiempo avanza desde arriba hacia abajo.
+        - El primer mensaje es el que está más arriba.
+
+\tikzinlinec[0.6]{
+    \begin{umlseqdiag}
+    \umlobject[class=Clase1]{obj1}
+    \umlobject[class=Clase2]{obj2}
+    \umlobject[class=Clase3]{obj3}
+    \begin{umlcall}[op=primeraOp()]{obj1}{obj2}
+    \end{umlcall}
+    \begin{umlcall}[op=segundaOp()]{obj1}{obj3}
+    \end{umlcall}
+    \end{umlseqdiag}
+}
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Qué modelan:}
+
+- Modelan las interacciones a alto nivel:
+    - Entre los objetos activos de un sistema.
+    - Entre un usuario y el sistema.
+    - Entre varios sistemas.
+- Dado un caso de uso:
+    - Modelan todos los pasos de un escenario, ilustrando la interaccion entre los
+    objetos involucrados.
+- Son capaces de modelar determinados detalles de la interacción, tales como ciclos
+o decisiones.
+
+## Diagrama de Secuencia: Elementos
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: objetos}
+
+- Los objetos son los elementos dispuestos desde izquierda a derecha.
+- Una línea punteada avanzando hacia abajo indica su línea de vida:
+    - Dentro de ella se indicará con un rectángulo blanco el momento dentro de la
+    secuencia en que este objeto está activo.
+- Puede corresponder a:
+    - Una instancia específica de una clase.
+    - Una instancia cualquiera de una clase.
+    - Una clase en particular.
+    - Un actor externo al sistema.
+    - Una base de datos.
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: tipos de objetos}
+
+- Corresponden a una de las siguientes alternativas:
+    - Instancia de una clase en particular:
+\vspace{0.5em}
+\tikzinlinec[0.7]{
+    \begin{umlseqdiag}
+    \umlobject[class=nombreClase]{nombreInstancia}
+    \end{umlseqdiag}
+}
+\vspace{0.5em}
+    - Un actor externo al sistema:
+\tikzinlinec[0.7]{
+    \begin{umlseqdiag}
+    \umlactor[no ddots]{nombreActor}
+    \end{umlseqdiag}
+}
+\vspace{0.5em}
+    - Una base de datos:
+\tikzinlinec[0.7]{
+    \begin{umlseqdiag}
+    \umldatabase[no ddots]{nombreBaseDeDatos}
+    \end{umlseqdiag}
+}
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: tipos de objetos}
+
+- También se puede diferenciar los objetos en según su función en el sistema:
+    - Una instancia que sirve de \bld{frontera} (o interfaz) entre el sistema y sus actores.
+\tikzinlinec[0.7]{
+    \begin{umlseqdiag}
+    \umlboundary[class=nombreClase]{nombreInstancia}
+    \end{umlseqdiag}
+}
+    - Esta es una instancia de una clase como cualquier otra, salvo por un poderoso detalle:
+    sirve de vía de comunicación entre el sistema y el mundo exterior:
+        - Puede representar toda la interfaz gráfica del sistema.
+        - Puede corresponder a una consola de texto.
+        - Es lo que en la arquitectura MVC se denominta \bld{vista}.
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: tipos de objetos}
+
+- También se puede diferenciar los objetos en según su función en el sistema:
+    - Una instancia que representa las \bld{entidades}, que son los datos o información manejados por el sistema.
+\tikzinlinec[0.7]{
+    \begin{umlseqdiag}
+    \umlentity[class=nombreClase]{nombreInstancia}
+    \end{umlseqdiag}
+}
+    - No es la base de datos propiamente tal, sino que una clase que se encargará de la
+    \bld{persistencia} de los datos.
+        - Esta persistencia puede ser lograda tanto con bases de datos como con otros medios.
+        - Es lo que en la arquitectura MVC se denominta \bld{modelo}.
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: tipos de objetos}
+
+- También se puede diferenciar los objetos en según su función en el sistema:
+    - Una instancia que ejerce el \bld{control} entre la frontera y las entidades.
+\tikzinlinec[0.7]{
+    \begin{umlseqdiag}
+    \umlcontrol[class=nombreClase]{nombreInstancia}
+    \end{umlseqdiag}
+}
+    - La frontera nunca se comunica directamente con las entidades.
+        - Para esta comunicación siempre estará entre medio el controlador.
+        - Es lo que en la arquitectura MVC se denominta \bld{controlador}.
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: mensajes}
+
+- Los \bld{mensajes} entre dos objetos se representan mediante \bld{flechas} que unen las líneas de
+vida de esos dos objetos.
+    - Lo normal es que la ``entrega'' del mensaje sea inmediata:
+\vspace{0.5em}
+\tikzinlinec[0.7]{
+    \begin{umlseqdiag}
+    \umlbasicobject{Cajero}
+    \umlbasicobject{Caja}
+    \begin{umlcall}[op=crearVenta(),padding=3]{Cajero}{Caja}
+    \end{umlcall}
+    \end{umlseqdiag}
+}
+    - Si se sabe que habrá una \bld{demora}, la línea se dibuja \bld{oblicua hacia abajo}:
+\vspace{0.5em}
+\tikzinlinec[0.7]{
+    \begin{umlseqdiag}
+    \umlobject[class=Cliente]{cliObj}
+    \umlobject[x=6,class=ServTempHoraria]{tempHorObj}
+    \begin{umlcall}[delay=true,op=pideTemperatura(),return=temperatura,padding=3]{cliObj}{tempHorObj}
+    \end{umlcall}
+    \end{umlseqdiag}
+}
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: mensajes}
+
+- Cada flecha tiene escrita sobre ella el \bld{nombre} del mensaje correspondiente.
+    - Este mensaje puede ser la invocación de un método sobre el objeto receptor.
+    - En estos casos se puede especificar también los argumentos entregados a ese método.
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: mensajes}
+
+- Por \bld{cada mensaje}, se generan sendos \bld{rectángulos} en las líneas de vida de los objetos involucrados.
+    - Estos \bld{rectángulos} indican el \bld{tiempo} que se toma el mensaje en estar activo.
+- De ser necesario, se puede indicar el \bld{valor retornado} por el mensaje.
+    - Se hace mediante una \bld{línea discontínua (guiones)}.
+    - Puede indicar el nombre del dato retornado.
+
+\tikzinlinec[0.7]{
+    \begin{umlseqdiag}
+    \umlobject[class=Catálogo]{catObj}
+    \umlobject[x=6,class=Producto]{prod1}
+    \begin{umlcall}[op=pidePrecio(),return=precio,padding=3]{catObj}{prod1}
+    \end{umlcall}
+    \end{umlseqdiag}
+}
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: mensajes}
+
+- Los mensajes pueden ser:
+\vfill
+\begin{description}
+    \item[Síncronos:] si el \bld{objeto origen} del mensaje \bld{debe esperar} a que \bld{termine} el llamado antes
+    de continuar.
+        \begin{itemize}
+            \item Típicamente corresponde a la invocación de un método.
+        \end{itemize}
+\vfill
+    \item[Asíncronos:] si el \bld{objeto origen no se queda esperando} por el término del mensaje.
+        \begin{itemize}
+            \item Permite que los objetos interactúen concurrentemente.
+            \item De todas maneras el objeto destino puede retornar un valor al objeto origen.
+            \item Es una flecha con cabezal no relleno.
+        \end{itemize}
+\end{description}
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: mensajes}
+
+\bld{Ejemplo:}
+
+- Se tiene un estudiante que consulta una página con su información académica.
+- Después de ser creada, el estudiante la imprime.
+    - El objeto que representa a esa página envía a su vez la orden a la impresora física.
+    - En esa orden, la misma página es el parámetro.
+    - Este llamado u orden es asíncrono, pues no hay necesidad de esperar a que estén las hojas impresas
+    para que el estudiante pueda seguir navegando el sistema.
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: mensajes}
+
+\bld{Ejemplo:}
+
+\tikzinlinec[0.6]{
+    \begin{umlseqdiag}
+    \umlactor[no ddots]{Estudiante}
+    \umlcreatecall[stereo=boundary,class=PagInfoEstudiante,x=6]{Estudiante}{estudPag}
+    \umlactor[x=12,no ddots]{Impresora}
+    \begin{umlcall}[op=imprimeBoletin()]{Estudiante}{estudPag}
+        \begin{umlcall}[type=asynchron,op=imprimePagina(estudPag)]{estudPag}{Impresora}
+        \end{umlcall}
+    \end{umlcall}
+    \end{umlseqdiag}
+}
+
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: mensajes a sí mismo}
+
+- Hay veces que un objeto debe enviarse un mensaje a sí mismo.
+    - Un objeto puede proveer varios métodos, donde algunos sirven como ``auxiliares'' de otros.
+    - Por ejemplo, un objeto GUI puede mostrar un formulario de ingreso de datos que está
+    oculto mientras el usuario no lo pida.
+    - O, por ejemplo, un objeto debe actualizar la fecha de la última modificación de sí mismo.
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: mensajes a sí mismo}
+
+\tikzinlinec[0.5]{
+    \begin{umlseqdiag}
+    \umlactor[no ddots]{Usuario}
+    \umlboundary[class=ContactosGUI]{g}
+    \umlcontrol[class=ContactosControl]{c}
+    \umlentity[class=Contactos]{contactos}
+    \umlentity[class=Persona]{pers}
+    \begin{umlcall}[op=agregarNuevo(),padding=-1]{Usuario}{g}
+        \begin{umlcall}[op=muestraFormAgregar()]{g}{g}
+        \end{umlcall}
+    \end{umlcall}
+    \begin{umlcall}[op=envíaForm(),padding=-1]{Usuario}{g}
+        \begin{umlcall}[op=ejecutaEnvío(data)]{g}{c}
+            \begin{umlcall}[op=agregaContacto(data),return=éxito,padding=-2]{c}{contactos}
+                \begin{umlcall}[op=creaNvo(data)]{contactos}{pers}
+                \end{umlcall}
+                \begin{umlcallself}[op=fechaUltModif()]{contactos}
+                \end{umlcallself}
+            \end{umlcall}
+        \end{umlcall}
+    \end{umlcall}
+    \end{umlseqdiag}
+}
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: bloques}
+
+- Los diagramas de secuencia permiten encerrar algunos mensajes dentro de \bld{bloques}.
+- Estos bloques permiten:
+    - Establecer condiciones para la ejecución de los mensajes dentro de él.
+        \begin{rboxx}{}
+        Bloques condicionales.
+        \end{rboxx}
+    - Repetir todos los mensajes dentro del bloque mientras se dé alguna condición.
+        \begin{rboxx}{}
+        Bloques iterativos.
+        \end{rboxx}
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: bloques}
+
+- \bld{Cuidado}: si se quiere modelar el flujo de un programa en mayor detalle, un diagrama de secuencia
+puede no ser la mejor alternativa.
+    - Para ello, también podemos usar:
+\begin{rboxx}{}
+    \begin{itemize}
+        \item Diagramas de actividades.
+        \item Diagramas de flujo.
+        \item Pseudocódigo.
+        \item Código propiamente tal.
+    \end{itemize}
+\end{rboxx}
+- De todas maneras es conveniente saber cómo usar bloques: pueden ser de mucha ayuda en determinados casos.
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: bloques}
+
+- Un \bld{bloque} es un \bld{rectángulo}:
+    - Con una etiqueta en la esquina superior izquierda, que indica el tipo de bloque.
+    - Opcionalmente, con un texto encerrado entre corchetes, llamado condición de guarda, que establece la condición del bloque.
+    - Opcionalmente, puede estar subdividido en varias secciones, mediante una línea horizontal segmentada.
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: bloques}
+
+- Por ejemplo:
+
+\tikzinlinec[0.5]{
+    \begin{umlseqdiag}
+    \umlactor[no ddots]{Cliente}
+    \umlbasicobject{Orden}
+    \umlbasicobject{EnvioNormal}
+    \umlbasicobject{EnvioEspecial}
+    \begin{umlcall}[op=finalizaOrden()]{Cliente}{Orden}
+    \end{umlcall}
+    \begin{umlcall}[op=calculaValor(),return=valor]{Orden}{Orden}
+    \end{umlcall}
+    \begin{umlfragment}[type=alt,label=valor>10000,inner xsep=10]
+        \begin{umlcall}[op=despacha(),dt=7]{Orden}{EnvioEspecial}
+        \end{umlcall}
+        \umlfpart[si no]
+        \begin{umlcall}[op=despacha()]{Orden}{EnvioNormal}
+        \end{umlcall}
+    \end{umlfragment}
+    \end{umlseqdiag}
+}
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: bloques condicionales}
+
+- Una de las ventajas de un diagrama de secuencia es que permite incorporar ---sólo en caso
+de ser necesario--- bloques condicionales.
+    - Permite especificar cómo se comporta la interacción entre objetos \bld{con mayor detalle}.
+    - Incorporar bloques condicionales \bld{acerca} este diagrama al área de la \bld{implementación}.
+        - Usar esto con precaución.
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: bloques condicionales}
+
+- Fundamentalmente hay dos tipos de bloques condicionales:
+
+\begin{description}
+    \item[alt]: Un bloque con varios fragmentos, de los cuales solamente se activará aquel cuya
+    condición sea verdadera.
+    \item[opt:] Es una sola condición, sin otras alternativas.
+\end{description}
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: bloques condicionales}
+
+\bld{Ejemplo:}\newline
+
+- En el diagrama donde un usuario ingresaba un nuevo contacto, ocurría algo especial:
+    - Tras agregar un contacto, se retornaba el éxito de esa operación.
+    - Este valor retornado llegaba al objeto que invocó ese método, que era el \bld{controlador}.
+
+\vfill
+
+- ¿Era suficiente con que el controlador se enterase del resultado de ingresar un contacto?
+
+\pause
+
+\begin{rboxx}{}
+    \begin{itemize}
+        \item \bld{No} era suficiente: el usuario fue quien inició el proceso y esperará algún \itt{feedback}.
+    \end{itemize}
+\end{rboxx}
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: bloques condicionales}
+
+\tikzinlinec[0.5]{
+    \begin{umlseqdiag}
+    \umlactor[no ddots]{Usuario}
+    \umlboundary[class=ContactosGUI]{g}
+    \umlcontrol[class=ContactosControl]{c}
+    \umlentity[class=Contactos]{contactos}
+    \umlentity[class=Persona]{pers}
+    \begin{umlcall}[op=agregarNuevo(),padding=-1]{Usuario}{g}
+        \begin{umlcall}[op=muestraFormAgregar()]{g}{g}
+        \end{umlcall}
+    \end{umlcall}
+    \begin{umlcall}[op=envíaForm(),padding=-1]{Usuario}{g}
+        \begin{umlcall}[op=ejecutaEnvío(data)]{g}{c}
+            \begin{umlcall}[op=agregaContacto(data),return=éxito,padding=-2]{c}{contactos}
+                \begin{umlcall}[op=creaNvo(data)]{contactos}{pers}
+                \end{umlcall}
+                \begin{umlcallself}[op=fechaUltModif()]{contactos}
+                \end{umlcallself}
+            \end{umlcall}
+            \begin{umlfragment}[type=alt,label=éxito,inner xsep=5]
+                \begin{umlcall}[op=avisaÉxito()]{c}{g}
+                \end{umlcall}
+                \umlfpart[si no]
+                \begin{umlcall}[op=avisaError()]{c}{g}
+                \end{umlcall}
+            \end{umlfragment}
+        \end{umlcall}
+    \end{umlcall}
+    \end{umlseqdiag}
+}
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: bloques condicionales}
+
+- En el ejemplo anterior, podemos darnos cuenta de varias cosas:
+
+    - Es un bloque condicional de tipo \texthigh{alt}.
+    - Que cuenta con dos fragmentos.
+    - El primero se activa si el valor de ``éxito'' es verdadero.
+    - El segundo en caso contrario.
+    - En ambos casos, el controlador ejecutará un método ad-hoc de la GUI:
+        - Ambos servirán para informarle al usuario del resultado de la operación.
+        - A la GUI le basta con ejecutar esos métodos, no tiene que invocar
+        ningún ``método'' sobre el usuario.
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: bloques condicionales}
+
+\bld{Ejemplo: pedir un libro en una biblioteca}\newline
+
+- Una persona puede reservar un libro de una biblioteca.
+- De estar disponible el libro, lo puede ir a buscar.
+- Tras leerlo, lo devuelve a la biblioteca.
+- La biblioteca, al momento de recibir la devolución de un libro, cobrará una multa al usuario
+en caso de estar atrasado.
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: bloques condicionales}
+
+\bld{Ejemplo: pedir un libro en una biblioteca}\newline
+
+\vspace{-1em}
+\tikzinlinec[0.4]{
+    \begin{umlseqdiag}
+    \umlactor[no ddots]{Lector}
+    \umlboundary[no ddots]{PagWeb}
+    \umlcontrol[no ddots]{Controlador}
+    \umlentity[no ddots]{Catalogo}
+    \umlbasicobject{Biblioteca}
+    \begin{umlcall}[op=consultar(titulo),return=disponible]{Lector}{PagWeb}
+        \begin{umlcall}[op=consultar(titulo),return=disponible]{PagWeb}{Controlador}
+            \begin{umlcall}[op=consultar(titulo),return=disponible]{Controlador}{Catalogo}
+            \end{umlcall}
+        \end{umlcall}
+    \end{umlcall}
+    \begin{umlfragment}[type=opt,label=disponible,inner xsep=7]
+        \begin{umlcall}[op=pedir(titulo),return=libObj,dt=7]{Lector}{Biblioteca}
+        \umlcreatecall[class=Libro,x=6]{Biblioteca}{libObj}
+        \end{umlcall}
+        \begin{umlcall}[op=abrir()]{Lector}{libObj}
+        \end{umlcall}
+        \begin{umlcall}[op=devolver(libObj)]{Lector}{Biblioteca}
+            \begin{umlcall}[op=fechaLim(libObj),return=fecha]{Biblioteca}{Catalogo}
+            \end{umlcall}
+            \begin{umlfragment}[type=opt,label=fecha < hoy,inner xsep=7]
+                \begin{umlcall}[op=multar()]{Biblioteca}{Lector}
+                \end{umlcall}
+            \end{umlfragment}
+        \end{umlcall}
+    \end{umlfragment}
+    \end{umlseqdiag}
+}
+
+### Diagrama de Secuencia
+
+\subsubtitleB{Elementos: bloques iterativos}
+
+- En este caso, los mensajes dentro del bloque se repetirán \bld{mientras} se cumpla la condición definida en
+la condición de guarda.
+
+\bld{Ejemplo: reservar hotel por varios días}\newline
+
+\vspace{-1em}
+\tikzinlinec[0.5]{
+    \begin{umlseqdiag}
+    \umlactor[no ddots]{Cliente}
+    \umlbasicobject{Hotel}
+    \umldatabase{DbHabitaciones}
+    \begin{umlcall}[op=reservar(fechas),return=resObj]{Cliente}{Hotel}
+        \begin{umlfragment}[type=loop,label=para cada día,inner xsep=7]
+            \begin{umlcall}[op=hayDisp(día),return=disp]{Hotel}{DbHabitaciones}
+            \end{umlcall}
+        \end{umlfragment}
+        \begin{umlfragment}[type=opt,label=todas disp,inner xsep=7]
+            \umlcreatecall[class=Reserva]{Hotel}{resObj}
+        \end{umlfragment}
+    \end{umlcall}
+    \end{umlseqdiag}
+}
+
+### Diagrama de Secuencia de Sistema
+
+\subsubtitleB{Definición}
+
+- Para sistemas \bld{grandes}, es bueno pensar primero solamente en su interacción con sus usuarios.
+    - Todo lo que sucede dentro del sistema es desconocido.
+    - El sistema es una \bld{caja negra}.
+- Se trabaja a partir del diagrama de casos de uso principal.
+    - Todo el sistema es una unidad.
+    - Se especifica concretamente cómo interactúa el sistema con sus usuarios en cada caso de uso.
+
+### Diagrama de Secuencia de Sistema
+
+\subsubtitleB{Definición}
+
+- Nuevamente nos enfocamos en \texthigh{qué} es lo que se espera que haga el sistema.
+- Se toma en cuenta las interacciones de los usuarios sobre el sistema.
+    - No en sentido inverso.
+- Puede poner énfasis en los parámetros de los mensajes.
+
+### Diagrama de Secuencia de Sistema
+
+\subsubtitleB{Eventos}
+
+- Son estímulos externos.
+- Son generados por los actores.
+- Ante ellos, el sistema \bld{debe reaccionar}.
+
+\pause
+
+¿Cómo identificarlos?
+
+- Las acciones de los actores sobre el sistema dan una pista de los eventos.
+- Necesariamente tienen que ser eventos externos c/r al sistema.
+- Dependen de dónde está trazada la línea divisoria entre el sistema y el mundo exterior.
+
+### Diagrama de Secuencia de Sistema
+
+\subsubtitleB{Eventos}
+
+- Un cliente visita la librería y mira libros.
+    - No es un evento, pues este hecho no afecta al sistema.
+
+\vfill
+
+- Un cliente llega con un libro a la caja para cancelarlo.
+    - Tampoco es un evento, pues es una interacción entre actores.
+
+
+\vfill
+
+- El cajero ingresa la identificación del libro.
+    - Sí es un evento, pues el sistema debe reaccionar ante esto entregando, por ejemplo,
+    el valor del libro.
+
+### Diagrama de Secuencia de Sistema
+
+\subsubtitleB{Operaciones del sistema}
+
+- Los eventos, al ser activados, disparan operaciones sobre el sistema.
+- El sistema debe estar preparado para ejecutar esas opciones ante cada evento.
+- Es la ``instancia sistema'' la encargada de ejecutar estas operaciones.
+    - Esta es una instancia casi siempre ficticia, pues en la fase de diseño
+    se establecerá las clases que realmente participarán en la interacción.
+
+### Diagrama de Secuencia de Sistema
+
+\subsubtitleB{Operaciones del sistema}
+
+Si consideramos un \texthigh{Cajero} que interactúa con un \texthigh{Cliente} para procesar su compra,
+tenemos:
+
+\vfill
+
+- ``El cajero ingresa el identificador de un producto en el sistema'':
+    - Por ejemplo, leyendo su código de barras.
+    - Esto genera una operación \texttt{agregarProducto(producto, cantidad)}.
+
+
+\vfill
+
+- ``El cajero finaliza la venta'':
+    - Para que el sistema lleve a cabo los procesos finales.
+    - Esto genera una operación \texttt{terminarVenta()}.
+
+### Diagrama de Secuencia de Sistema
+
+\subsubtitleB{Ejemplo:}
+
+\tikzinlinec[0.5]{
+    \begin{umlseqdiag}
+    \umlactor[no ddots,x=0]{Cajero}
+    \umlbasicobject[x=8]{Sistema}
+    \begin{umlcall}[op=iniciarVenta()]{Cajero}{Sistema}
+    \end{umlcall}
+    \begin{umlfragment}[type=loop,label=para cada producto,inner xsep=13]
+        \begin{umlcall}[op=agregarProd({producto,cantidad}),dt=7,return=subtotal]{Cajero}{Sistema}
+        \end{umlcall}
+    \end{umlfragment}
+    \begin{umlcall}[op=terminarVenta(),return=total,dt=7]{Cajero}{Sistema}
+    \end{umlcall}
+    \begin{umlcall}[op=realizaPago(total),return={cambio,boleta},dt=7]{Cajero}{Sistema}
+    \end{umlcall}
+    \end{umlseqdiag}
+}
+
+### Ejercicio en clases
+
+\subsubtitleB{El sistema del bibliometro:}
+
+Analicemos el caso del bibliometro, pensando en los siguientes requisitos:
+
+- Gestionar los libros y revistas.
+    - Características.
+    - Disponibilidad.
+    - Administración.
+- Gestionar los socios.
+    - Datos.
+    - Préstamos.
+    - Administración.
+- Gestionar los préstamos.

@@ -45,10 +45,7 @@ Y a su vez, hay un solo \textcolor{blue}{actor} involucrado:
 
 - El jugador
 
-
 \exUseCaseDices
-
-
 
 ### Dados: narrativa de casos de uso
 
@@ -150,71 +147,3 @@ Tomando en cuenta las clases identificadas en la página \ref{dados:clases}, ten
   \draw[->, thick] ([xshift=1mm]s10.east) -- ([xshift=-2mm]interfazClass.west);
 \end{tikzpicture}
 
-## Diagrama de Secuencia
-
-### Dados: diagrama de Secuencia
-
-\subsubtitleB{Diagrama de Secuencia}
-
-Ya tenemos identificados el dominio, las clases y los casos de uso.\newline
-
-\pause
-
-Nos está faltando algo muy importante:
-
-\begin{rboxx}{}
-La interacción entre las clases
-\end{rboxx}
-
-\pause
-
-Para cubrir la interacción entre las componentes de nuestro sistema, es que UML
-incluye un nuevo diagrama:
-
-\begin{rboxx}{}
-\texthigh{Diagrama de secuencia}
-\end{rboxx}
-
-
-### Dados: diagrama de Secuencia
-
-\subsubtitleB{Diagrama de Secuencia}
-
-- Un diagrama de secuencia describe gráficamente los pasos que ya hemos visualizado en la narrativa
-del caso de uso.
-
-- Complementa esto último con una visualización gráfica de los actores involucrados en estos pasos.
-
-- Nos permite entender mucho mejor los métodos o acciones que los objetos deben proveer.
-
-### Dados: diagrama de Secuencia
-
-\subsubtitleB{Diagrama de Secuencia}
-
-\tikzinlinec[0.5]{
-    \begin{umlseqdiag}
-    \umlactor[class=Jugador]{j1}
-    \umlbasicobject{Pantalla}
-    \umlbasicobject{Juego}
-    \umlobject[class=Dado]{d1}
-    \umlobject[class=Dado]{d2}
-    \begin{umlcall}[op=jugar()]{j1}{Juego}
-    \end{umlcall}
-    \begin{umlcall}[op={muestra(``Inicia el juego'')}]{Juego}{Pantalla}
-    \end{umlcall}
-    \begin{umlcall}[op=tirar()]{Juego}{d1}
-    \end{umlcall}
-    \begin{umlcall}[op=pideValor(),return=v1]{Juego}{d1}
-    \end{umlcall}
-    \begin{umlcall}[op=muestra(v1)]{Juego}{Pantalla}
-    \end{umlcall}
-    \begin{umlcall}[op=tirar()]{Juego}{d2}
-    \end{umlcall}
-    \begin{umlcall}[op=pideValor(),return=v2]{Juego}{d2}
-    \end{umlcall}
-    \begin{umlcall}[op=muestra(v2)]{Juego}{Pantalla}
-    \end{umlcall}
-    \begin{umlcall}[op=muestra(``Termina el juego'')]{Juego}{Pantalla}
-    \end{umlcall}
-    \end{umlseqdiag}
-}

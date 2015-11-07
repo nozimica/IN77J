@@ -109,41 +109,41 @@ Para nuestro ejemplo de los dados:\newline
 Tomando en cuenta las clases identificadas en la página \ref{dados:clases}, tenemos:
 
 \begin{itemize}
-    \item  \tikz\node[inlineBlock] (s1) {Sistema           };
-    \item  \tikz\node[inlineBlock] (s2) {Juego de dos dados};
-    \item  \tikz\node[inlineBlock] (s3) {Dados             };
-    \item  \tikz\node[inlineBlock] (s4) {Primer dado       };
-    \item  \tikz\node[inlineBlock] (s5) {Segundo dado      };
-    \item  \tikz\node[inlineBlock] (s6) {Resultado         };
-    \item  \tikz\node[inlineBlock] (s7) {Lanzamiento       };
-    \item  \tikz\node[inlineBlock] (s8) {Jugador           };
-    \item  \tikz\node[inlineBlock] (s9) {Usuario           };
-    \item  \tikz\node[inlineBlock] (s10){Interfaz gráfica  };
+    \item Sistema            \tikz[inlineBlock] \coordinate (jds1) ;
+    \item Juego de dos dados \tikz[inlineBlock] \coordinate (jds2) ;
+    \item Dados              \tikz[inlineBlock] \coordinate (jds3) ;
+    \item Primer dado        \tikz[inlineBlock] \coordinate (jds4) ;
+    \item Segundo dado       \tikz[inlineBlock] \coordinate (jds5) ;
+    \item Resultado          \tikz[inlineBlock] \coordinate (jds6) ;
+    \item Lanzamiento        \tikz[inlineBlock] \coordinate (jds7) ;
+    \item Jugador            \tikz[inlineBlock] \coordinate (jds8) ;
+    \item Usuario            \tikz[inlineBlock] \coordinate (jds9) ;
+    \item Interfaz gráfica   \tikz[inlineBlock] \coordinate (jds10);
 \end{itemize}
 
 \pause
 
 \begin{tikzpicture}[overlay]
-  \node[miniconcept, right=50mm of s1] (juegoClass) { Clase Juego };
-  \draw[->, thick] ([xshift=1mm]s1.east) -- ([xshift=-2mm]juegoClass.west);
-  \draw[->, thick] ([xshift=1mm]s2.east) -- ([xshift=-2mm,yshift=-2mm]juegoClass.west);
+  \node[miniconcept, right=50mm of jds1] (juegoClass) { Clase Juego };
+  \draw[->, thick] ([xshift=1mm]jds1.east) -- ([xshift=-2mm]juegoClass.west);
+  \draw[->, thick] ([xshift=1mm]jds2.east) -- ([xshift=-2mm,yshift=-2mm]juegoClass.west);
 %
-  \node[miniconcept, right=50mm of s4] (dadoClass) { Clase Dado, y dos instancias };
-  \draw[->, thick] ([xshift=1mm]s3.east) -- ([xshift=-2mm,yshift=2mm]dadoClass.west);
-  \draw[->, thick] ([xshift=1mm]s4.east) -- ([xshift=-2mm,yshift=0mm]dadoClass.west);
-  \draw[->, thick] ([xshift=1mm]s5.east) -- ([xshift=-2mm,yshift=-2mm]dadoClass.west);
+  \node[miniconcept, right=50mm of jds4] (dadoClass) { Clase Dado, y dos instancias };
+  \draw[->, thick] ([xshift=1mm]jds3.east) -- ([xshift=-2mm,yshift=2mm]dadoClass.west);
+  \draw[->, thick] ([xshift=1mm]jds4.east) -- ([xshift=-2mm,yshift=0mm]dadoClass.west);
+  \draw[->, thick] ([xshift=1mm]jds5.east) -- ([xshift=-2mm,yshift=-2mm]dadoClass.west);
 %
-  \node[miniconcept, right=50mm of s6] (resultadoAttr) { Atributo de Dado };
-  \draw[->, thick] ([xshift=1mm]s6.east) -- ([xshift=-2mm]resultadoAttr.west);
+  \node[miniconcept, right=50mm of jds6] (resultadoAttr) { Atributo de Dado };
+  \draw[->, thick] ([xshift=1mm]jds6.east) -- ([xshift=-2mm]resultadoAttr.west);
 %
-  \node[miniconcept, right=20mm of s7] (lanzamientoAcc) { Método de Dado };
-  \draw[->, thick] ([xshift=1mm]s7.east) -- ([xshift=-2mm]lanzamientoAcc.west);
+  \node[miniconcept, right=20mm of jds7] (lanzamientoAcc) { Método de Dado };
+  \draw[->, thick] ([xshift=1mm]jds7.east) -- ([xshift=-2mm]lanzamientoAcc.west);
 %
-  \node[miniconcept, right=20mm of s9] (jugadorClass) { Instancia de la clase Jugador };
-  \draw[->, thick] ([xshift=1mm]s8.east) -- ([xshift=-2mm,yshift=2mm]jugadorClass.west);
-  \draw[->, thick] ([xshift=1mm]s9.east) -- ([xshift=-2mm]jugadorClass.west);
+  \node[miniconcept, right=20mm of jds9] (jugadorClass) { Instancia de la clase Jugador };
+  \draw[->, thick] ([xshift=1mm]jds8.east) -- ([xshift=-2mm,yshift=2mm]jugadorClass.west);
+  \draw[->, thick] ([xshift=1mm]jds9.east) -- ([xshift=-2mm]jugadorClass.west);
 %
-  \node[miniconcept, right=50mm of s10] (interfazClass) { Instancia de la clase Pantalla };
-  \draw[->, thick] ([xshift=1mm]s10.east) -- ([xshift=-2mm]interfazClass.west);
+  \node[miniconcept, right=50mm of jds10] (interfazClass) { Instancia de la clase Pantalla };
+  \draw[->, thick] ([xshift=1mm]jds10.east) -- ([xshift=-2mm]interfazClass.west);
 \end{tikzpicture}
 

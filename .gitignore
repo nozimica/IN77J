@@ -1,3 +1,5 @@
+beamer/old.*
+
 *.pdf
 .*.swp
 

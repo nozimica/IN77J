@@ -3122,7 +3122,7 @@
 \newcommand{\umlobject}[2][]{
   \stepcounter{tikzumlObjectNum}%
   %
-  \edef\tikzumlobject@ddot{:}%
+  \edef\tikzumlobject@ddot{{}~:~{}}%
   \pgfkeys{/tikzuml/obj/.cd,%
            x/.initial={tikzumlEmpty}, y/.initial=0, stereo/.initial=object,%
            class/.initial={}, scale/.initial=1,%
@@ -3158,7 +3158,7 @@
     \xdef\tikzumlIdList{\tikzumlIdListOld,\tikzumlObjectName}%
   \fi%
   %
-  \tikzstyle{tikzuml object box style}=[rectangle, text=\tikzumlobjecttext, font=\tikzumlfont]%
+  \tikzstyle{tikzuml object box style}=[rectangle, text depth=.25ex, text=\tikzumlobjecttext, font=\tikzumlfont]%
   %
   \ifthenelse{\equal{\tikzumlobjectstereo}{object}}{%
     \tikzstyle{tikzuml object box style}+=[draw=\tikzumlobjectdraw, fill=\tikzumlobjectfill]%
@@ -3284,6 +3284,9 @@
   \pgfkeys{/tikzuml/call/.cd,%
            dt/.initial={tikzumlEmpty}, name/.initial={call-\thetikzumlCallNum},%
            op/.initial={}, return/.initial={}, type/.initial=synchron,%
+           %<nozimica>
+           delay/.initial=false,%
+           %</nozimica>
            draw/.initial=\tikzumldrawcolor, fill/.initial=\tikzumlfillcallcolor,%
            text/.initial=\tikzumltextcolor,%
            padding/.initial=2,%
@@ -3299,6 +3302,9 @@
   \pgfkeys{/tikzuml/call/.cd,%
            dt/.get=\tikzumlcallDT, name/.get=\tikzumlcallname, op/.get=\tikzumlcallop,%
            return/.get=\tikzumlcallreturn, type/.get=\tikzumlcalltype,%
+           %<nozimica>
+           delay/.get=\tikzumlcalldelay,%
+           %</nozimica>
            padding/.get=\tikzumlcallpadding,%
            draw/.get=\tikzumlcalldraw, fill/.get=\tikzumlcallfill,%
            text/.get=\tikzumlcalltext}%
@@ -3307,6 +3313,7 @@
   \edef\tikzumldrawcall{\tikzumlcalldraw}%
   \edef\tikzumltextcall{\tikzumlcalltext}%
   \edef\tikzumltypecall{\tikzumlcalltype}%
+  \edef\tikzumldelaycall{}%
   %
   \ifthenelse{\equal{\tikzumlcallDT}{tikzumlEmpty}}{%
     \ifnum\thetikzumlCallNum=1%
@@ -3318,6 +3325,11 @@
     \fi%
   }{
     \def\tikzumlcallSrc{0}%
+  }%
+  \ifthenelse{\equal{\tikzumlcalldelay}{false}}{%
+    \edef\tikzumldelaycall{ 0,0 }%
+  }{%
+    \edef\tikzumldelaycall{ 0,.5em }%
   }%
   %
   \let\tikzumlCallStartNodeNameold\tikzumlCallStartNodeName%
@@ -3517,10 +3529,10 @@
     \pgfextractx{\tikzumlCall@xb}{\pgfpointanchor{\tikzumlCallEndNodeName}{center}}%
     %
     \ifthenelse{\tikzumlCall@xb>\tikzumlCall@xa}{%
-      \draw[\tikzumlcallstyle, \tikzumldrawcall] (st-\tikzumlCall@nodeName.east) -- (et-\tikzumlCall@nodeName.west) %
+      \draw[\tikzumlcallstyle, \tikzumldrawcall] (st-\tikzumlCall@nodeName.east) -- ($ (et-\tikzumlCall@nodeName.west) - (\tikzumldelaycall) $) %
                                                     node[font=\tikzumlfont, text=\tikzumltextcall, midway, above=-0.4ex, name=\tikzumlCall@nodeName-op] {\tikzumlcallop};%
     }{%
-      \draw[\tikzumlcallstyle, \tikzumldrawcall] (st-\tikzumlCall@nodeName.west) -- (et-\tikzumlCall@nodeName.east) %
+      \draw[\tikzumlcallstyle, \tikzumldrawcall] (st-\tikzumlCall@nodeName.west) -- ($ (et-\tikzumlCall@nodeName.east) - (\tikzumldelaycall) $) %
                                                     node[font=\tikzumlfont, text=\tikzumltextcall, midway, above=-0.4ex, name=\tikzumlCall@nodeName-op] {\tikzumlcallop};%
     }%
     %

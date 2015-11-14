@@ -24,6 +24,14 @@
 \tikzstyle{concept} = [normalfig, rectangle, rounded corners=3mm, minimum height=2em, bottom color=blue!30, draw=blue!90!black!50]
 \tikzstyle{miniconcept} = [normalfig, rectangle, rounded corners=3mm, minimum height=1.5em, font=\tiny, bottom color=blue!30, draw=blue!90!black!50]
 
+\tikzstyle{flowElem} = [normalfig, rectangle, rounded corners=1mm, minimum height=2em, text width=20mm, draw=black]
+\tikzstyle{flow0} = [flowElem, bottom color=black!40]
+\tikzstyle{flow1} = [flowElem, bottom color=red!40]
+\tikzstyle{flow2} = [flowElem, bottom color=blue!40]
+\tikzstyle{flow3} = [flowElem, bottom color=green!40]
+\tikzstyle{flow4} = [flowElem, bottom color=orange!40]
+\tikzstyle{flow5} = [flowElem, bottom color=teal!40]
+
 \tikzstyle{arrowcomment} = [thick,rounded corners=1mm,very near start,draw=black!50, densely dashed]
 \newlength{\predefprocmargin}
 \setlength{\predefprocmargin}{2mm}
@@ -50,7 +58,7 @@
   {\begin{tabular}[cl]{b{26mm}m{80mm}}}%
   {\end{tabular}}
 \newenvironment{tikzflowchart}[1][]%
-  {\begin{tikzpicture}[#1,font=\sffamily\scriptsize,baseline={($(current bounding box.center)+(0,-0.5ex)$)}]}%
+  {\begin{tikzpicture}[font=\sffamily\scriptsize,baseline={($(current bounding box.center)+(0,-0.5ex)$)},#1]}%
   {\end{tikzpicture}}
 
 \tikzstyle{namedArrow} = [midway, above=-1mm, color=black!70]

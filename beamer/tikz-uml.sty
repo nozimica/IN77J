@@ -116,17 +116,18 @@
 \tikzstyle{tikzuml template style}=[dashed, inner ysep=0.5em, inner xsep=1ex]%
 \tikzstyle{tikzuml control nodes style}=[fill=black, inner sep=1.5pt, circle]%
 %
-\tikzstyle{tikzuml association style}=[color=\tikzumldrawcolor, -]%
-\tikzstyle{tikzuml bidirectional association style}=[color=\tikzumldrawcolor, angle45-angle45]%
-\tikzstyle{tikzuml unidirectional association style}=[color=\tikzumldrawcolor, -angle 45]%
-\tikzstyle{tikzuml aggregation style}=[color=\tikzumldrawcolor, open diamond-]%
-\tikzstyle{tikzuml unidirectional aggregation style}=[color=\tikzumldrawcolor, open diamond-angle 45]%
-\tikzstyle{tikzuml composition style}=[color=\tikzumldrawcolor, diamond-]%
-\tikzstyle{tikzuml unidirectional composition style}=[color=\tikzumldrawcolor, diamond-angle 45]%
-\tikzstyle{tikzuml dependency style}=[color=\tikzumldrawcolor, -angle 45, dashed]%
-\tikzstyle{tikzuml import style}=[color=\tikzumldrawcolor, -angle 45, dashed]%
-\tikzstyle{tikzuml inherit style}=[color=\tikzumldrawcolor, -open triangle 45]%
-\tikzstyle{tikzuml implements style}=[color=\tikzumldrawcolor, -open triangle 45, dashed]%
+\tikzstyle{tikzuml class relation}=[color=\tikzumldrawcolor, line width=0.4mm]%
+\tikzstyle{tikzuml association style}=[tikzuml class relation, -]%
+\tikzstyle{tikzuml bidirectional association style}=[tikzuml class relation, angle 45-angle 45]%
+\tikzstyle{tikzuml unidirectional association style}=[tikzuml class relation, -angle 45]%
+\tikzstyle{tikzuml aggregation style}=[tikzuml class relation, open diamond-]%
+\tikzstyle{tikzuml unidirectional aggregation style}=[tikzuml class relation, open diamond-angle 45]%
+\tikzstyle{tikzuml composition style}=[tikzuml class relation, diamond-]%
+\tikzstyle{tikzuml unidirectional composition style}=[tikzuml class relation, diamond-angle 45]%
+\tikzstyle{tikzuml dependency style}=[tikzuml class relation, -angle 45, dashed]%
+\tikzstyle{tikzuml import style}=[tikzuml class relation, -angle 45, dashed]%
+\tikzstyle{tikzuml inherit style}=[tikzuml class relation, -open triangle 45]%
+\tikzstyle{tikzuml implements style}=[tikzuml class relation, -open triangle 45, dashed]%
 
 \pgfkeys{/tikzuml/assemblyconnectorrelation/.cd, anchors/.style args={#1 and #2}{anchor1=#1, anchor2=#2}}%
 

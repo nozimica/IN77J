@@ -308,6 +308,101 @@ Por ejemplo:
 \end{tikzpicture}
 }
 
+## Miembros estáticos
+
+### Miembros estáticos
+
+\subsubtitleB{Atributos, hasta ahora:}
+
+- Ya hemos visto que las clases pueden tener atributos.
+    - Los valores de los atributos son propios de cada instancia (objeto) creado.
+        - La clase \texthigh{Aeroplano} posee el atributo \texthigh{color}.
+        - Una instancia puede ser de color \textcolor{orange}{naranja}.
+        - Otra instancia puede ser de color \textcolor{gray}{gris}.
+        - Otra instancia puede ser de color \textcolor{green}{verde}.
+
+\vfill
+
+\columnsbegin
+\column{0.33\textwidth}
+\centering\includegraphics[width=20mm]{icons/92-emoji_android_airplane.png}
+\column{0.33\textwidth}
+\centering\includegraphics[width=20mm]{icons/92-emoji_android_airplane_gray.png}
+\column{0.33\textwidth}
+\centering\includegraphics[width=20mm]{icons/92-emoji_android_airplane_green.png}
+\columnsend
+
+### Miembros estáticos
+
+\subsubtitleB{Atributos estáticos:}
+
+- Una clase puede definir algunos atributos como \bld{\texthigh{estáticos}}:
+
+\buildrboxx[0.9\textwidth]{}
+
+- Todas sus instancias tienen este atributo.
+- Pero todas ellas \texthigh{comparten el mismo valor} de este atributo.
+    - Si una de ellas lo cambia, las demás también lo verán cambiado.
+
+\finishrboxx
+
+- Se les llama también \texthigh{atributos de clase}.
+
+### Miembros estáticos
+
+\subsubtitleB{Operaciones, hasta ahora:}
+
+- Para el caso de las operaciones, sabemos que todas las instancias de una clase
+tienen a su disposición las operaciones de esa clase.
+    - Todos los aeroplanos pueden volar.
+        - Dependiendo de su ubicación y velocidad actual, cada aeroplano volará en cada instante
+        ``a su propia manera''.
+    - Todos los aeroplanos puede entregar su cantidad actual de pasajeros.
+        - Cada instancia entregará un número en particular.
+
+\vfill
+
+\columnsbegin
+\column{0.33\textwidth}
+\centering\includegraphics[width=20mm]{icons/92-emoji_android_airplane_withpeople.png}
+\column{0.33\textwidth}
+\centering\includegraphics[width=20mm]{icons/92-emoji_android_airplane_gray_withpeople.png}
+\column{0.33\textwidth}
+\centering\includegraphics[width=20mm]{icons/92-emoji_android_airplane_green_withpeople.png}
+\columnsend
+
+### Miembros estáticos
+
+\subsubtitleB{Operaciones estáticas:}
+
+- Una clase puede definir algunas operaciones como \bld{\texthigh{estáticas}}:
+
+\buildrboxx[0.9\textwidth]{}
+
+- Las instancias \texthigh{no tienen acceso} a esa operación.
+- Pasa a ser una operación \texthigh{propia de la clase}.
+- El resultado ---y la manera de obtenerlo--- no dependen de las particularidades de ninguna instancia de la clase.
+
+\finishrboxx
+
+### Miembros estáticos
+
+\subsubtitleB{Operaciones estáticas:}
+
+- Hay clases que definen casi todas sus operaciones como estáticas:
+    - En Java, la clase \texttt{Math} provee funciones matemáticas.
+    - Calcular la tangente de un ángulo, o determinar el menor entre dos números, no son
+    operaciones que dependan de alguna circunstancia en particular.
+        - No existen ``distintas versiones de la matemática'' que las implementen de manera
+        diferenciada.
+
+### Interfaces
+
+TODO:
+
+\subsubtitleB{}
+
+
 ### Relación entre D.C. y D.S.
 
 Entre los diagramas de clases y de secuencia tenemos:

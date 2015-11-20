@@ -191,6 +191,8 @@
 \newenvironment{rboxx}[2][90mm]%
     {\vspace{-1em}\begin{center}\hspace{60mm}\begin{customRoundedBox}[#1]{#2}\centering}%
     {\end{customRoundedBox}\end{center}}
+\newcommand{\buildrboxx}[2][90mm]{\begin{rboxx}[#1]{#2}}
+\newcommand{\finishrboxx}{\end{rboxx}}
 
 
 \newcommand{\frametitleSec}{\frametitle{\insertsectionhead}}

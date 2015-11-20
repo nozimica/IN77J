@@ -21,7 +21,7 @@
 
 \makeatletter 
 %\newcommand\mynobreakpar{\par\nobreak\@afterheading} 
-\@beginparpenalty=10000
+% \@beginparpenalty=10000
 \makeatother
 
 \usepackage{iftex}
@@ -48,7 +48,7 @@
 
 \usepackage{textcomp} % To get good bullet symbols and avoid problems.
 
-\usepackage[margin=17mm,top=13mm]{geometry}
+\usepackage[margin=17mm,top=18mm,bottom=18mm]{geometry}
 
 % Setup the header and footer
 \pagestyle{fancy}
@@ -78,7 +78,7 @@
     \end{center}
 }%
 
-% \usepackage{../_lib/ensia200.flowchart}
+\usepackage{../_lib/ensia200.flowchart}
 % \usepackage{../_lib/ensia200.listings}
 \usepackage{../_lib/ensia200.common}
 
@@ -127,17 +127,17 @@
 
 \newenvironment{ProbPart}[1][]
   %{\vspace*{0.7em}\noindent\begin{ExePart}[name={Parte}, #1]\nopagebreak\par\indent\ignorespaces\\\indent}
-  {\vspace{0.7em}\begin{ExePart}[name={Parte}, #1]\\\nopagebreak}
+  {\par\begin{ExePart}[name={Parte}, #1]\\\nopagebreak}
   {\end{ExePart}}
 
 \newenvironment{ProbPartTitle}[2][]
   %{\vspace*{0.7em}\noindent\begin{ExePart}[name={Parte}, #1]\nopagebreak\par\indent\ignorespaces\\\indent}
-  {\vspace{0.7em}\begin{ExePart}[name={Parte}, #1]#2~\\}
+  {\par\begin{ExePart}[name={Parte}, #1]#2~\\}
   {\end{ExePart}}
 
 \newenvironment{NewAnswer}[1][]
   %{\begin{Answer}[#1]\nopagebreak\par\indent\ignorespaces\\\indent}
-  {\begin{Answer}[#1]\\}
+  {\begin{Answer}[#1]}
   {\setcounter{figure}{0}\end{Answer}}
 
 \newenvironment{Comment}[2][]
@@ -153,3 +153,25 @@
 \newcommand{\hmwkClassInstructor}{Profesor: Nicol\'{a}s\ E. Ozimi\c{c}a.}
 % \newcommand{\hmwkClassInstructor}{Profesores: Pablo Morales M, Nicol\'{a}s\ E. Ozimica.\\Ayudantes: Valeria Lobos, Eduardo Lobos, Daniela Mart\'{i}nez.}
 \newcommand{\hmwkAuthorName}{}
+
+\usepackage{tikz-uml}
+\usepackage{multirow}
+% \usepackage{multicol}
+\usepackage{booktabs}
+% \usepackage{longtable}
+\usepackage{xtab}
+
+\newcounter{nzuccounter}
+\newcommand{\nzuctitledef}{Caso de uso}
+\newcommand{\nzuctitle}[1]{\renewcommand{\nzuctitledef}{#1}}
+\newenvironment{nzusecase}[1][\scriptsize]{#1\begin{xtabular}{lcp{0.7\textwidth}}\toprule}
+{\bottomrule\end{xtabular}}
+\newcommand*{\nzucheader}[1]{\bld{\nzuctitledef~\stepcounter{nzuccounter}\arabic{nzuccounter}} & & \bld{#1} \\ \midrule}
+\newcommand*{\nzucitem}[2]{\itt{#1:} & & #2 \\ \midrule}
+\newcommand*{\nzucitembig}[2]{\multicolumn{3}{l}{\itt{#1:}} \\%
+    \multicolumn{3}{l}{%
+        \hspace{2em}\parbox{0.9\textwidth}{%
+            \begin{enumerate}[itemsep=-3pt,topsep=3pt] #2 \end{enumerate}%
+        }
+    } \\%
+}

@@ -1,8 +1,8 @@
-\documentclass[11pt]{article}
+\documentclass[11pt,letterpaper]{article}
 
 \newcommand{\hmwkCode}{Control 2}
 \newcommand{\hmwkDueDate}{S\'{a}bado 7 de noviembre de 2015}
-\newcommand{\hmwkClassTime}{Tiempo total: 80 minutos. Con apuntes personales.}
+\newcommand{\hmwkClassTime}{Tiempo total: 60 minutos. Con apuntes personales.}
 \usepackage{in77j.exercise}
 
 \setlength{\parskip}{0.7\baselineskip}
@@ -53,8 +53,7 @@ cuidado al identificar los actores.
 
 \begin{ProbPart}[difficulty={30}]
 
-Para cada caso de uso (de ser más de 5 casos de uso, privilegie los 5 más importantes)
-elabore la narrativa correspondiente.
+Para los 4 casos de uso más importantes, elabore la narrativa correspondiente.
 
 \end{ProbPart}
 
@@ -64,21 +63,136 @@ Para cada una de las narrativas anteriores, haga el diagrama de secuencia ilustr
 
 \end{ProbPart}
 
-\begin{ProbPart}[difficulty={30}]
-
-En base a todo lo realizado anteriormente, elabore un diagrama de clases que incluya:
-
-\begin{itemize}[topsep=0pt]
-    \item Todas las clases involucradas en su modelo.
-    \item Todos los atributos verdaderamente relevantes.
-    \item Todas las operaciones visualizadas en el diagrama de secuencia.
-    \item Las relaciones relevantes para reflejar adecuadamente la realidad.
-\end{itemize}
-
-\end{ProbPart}
 \end{Problem}
 
 \begin{NewAnswer}
+
+\begin{ProbPart}[difficulty={10}]
+
+El caso de uso es:
+
+\centering\scalebox{0.8}{%
+\begin{tikzpicture}%
+    \umlactor[x=-3,y=-2]{Paciente}
+    \umlactor[x=15,y=-2]{Funcionario}
+    \umlactor[x=15,y=-6]{Doctor}
+    \begin{umlsystem}[x=2]{Hospital}
+        \umlusecase[x=3,y=2,name=anular]{Anular hora médica}
+        \umlusecase[x=3,name=agendarMedico,width=7em]{Agenda hora\\con médico}
+        \umlusecase[y=-2,name=calendDoc,width=8em]{Obtiene agenda\\del doctor}
+        \umlusecase[x=3,y=-5,name=agendarEspec,width=7em]{Agenda hora\\por especialidad}
+        \umlusecase[x=6,y=-3,name=listadoDocs,width=8em]{Obtiene doctores\\por especialidad}
+        \umlusecase[x=3,y=-7,name=atenderse]{Atenderse}
+        \umlusecase[x=0,y=-9,name=obtFicha,width=6em]{Buscar ficha\\paciente}
+        \umlusecase[x=6,y=-9,name=pagarAtencion,width=6em]{Pagar\\bono}
+        \umlinclude{agendarMedico}{calendDoc}
+        \umlinclude{agendarEspec}{listadoDocs}
+        \umlinclude{listadoDocs}{calendDoc}
+        \umlinclude{atenderse}{obtFicha}
+        \umlinclude{atenderse}{pagarAtencion}
+    \end{umlsystem}
+    \umlassoc{Paciente}{agendarMedico}
+    \umlassoc{Funcionario}{agendarMedico}
+    \umlassoc{Paciente}{agendarEspec}
+    \umlassoc{Funcionario}{agendarEspec}
+    \umlassoc{Paciente}{anular}
+    \umlassoc{Funcionario}{anular}
+    \umlassoc{Paciente}{atenderse}
+    \umlassoc{Doctor}{atenderse}
+\end{tikzpicture}%
+}
+
+\end{ProbPart}
+
+\begin{ProbPart}[difficulty={30}]
+
+\begin{center}
+\begin{nzusecase}
+\nzucheader{Agendar hora con médico}
+\nzucitem{Alcance}{Módulo principal}
+\nzucitem{Actor principal}{Paciente, Funcionario}
+\nzucitem{Sinopsis}{El paciente solicita una hora para atenderse con un médico en particular, siempre y cuando haya horas disponibles de atención con aquel profesional.}
+\nzucitem{Precondiciones}{}
+\nzucitem{Postcondiciones}{Garantía: El paciente tendrá su hora agendada.}
+\nzucitembig{Escenario principal}{%
+    \item Paciente indica el nombre del médico de su preferencia.
+    \item Funcionario obtiene la agenda de ese médico.
+    \item Funcionario le presenta al paciente las próximas horas disponibles.
+    \item Paciente selecciona una de esas horas.
+    \item Funcionario marca en la agenda del médico esa hora como tomada.
+    \item Funcionario le confirma al paciente la hora tomada.
+}
+\nzucitembig{Escenarios alternativos}{%
+\item[3a.] No hay horas disponibles.
+}
+\nzucitembig{Escenarios alternativos}{%
+\item[4a.] Paciente no le sirve o no puede asistir a ninguna de las horas disponibles.
+}
+\end{nzusecase}
+\end{center}
+
+\begin{center}
+\begin{nzusecase}
+\nzucheader{Agendar hora por especialidad}
+\nzucitem{Alcance}{}
+\nzucitem{Actor principal}{Paciente, Funcionario}
+\nzucitem{Sinopsis}{El paciente solicita una hora para atenderse con cualquier médico disponible de una especialidad en particular.}
+\nzucitem{Precondiciones}{}
+\nzucitem{Postcondiciones}{Garantía: El paciente tendrá su hora agendada.}
+\nzucitembig{Escenario principal}{%
+    \item Paciente indica la especialidad en la que necesita atenderse.
+    \item Funcionario obtiene la agenda combinada de todos los médicos para la especialidad solicitada por el paciente.
+    \item Funcionario le presenta al paciente las próximas horas disponibles.
+    \item Paciente selecciona una de esas horas.
+    \item Funcionario marca en la agenda del médico esa hora como tomada.
+    \item Funcionario le confirma al paciente la hora tomada.
+}
+\nzucitembig{Escenarios alternativos}{%
+\item[3a.] No hay horas disponibles.
+}
+\nzucitembig{Escenarios alternativos}{%
+\item[4a.] Paciente no le sirve o no puede asistir a ninguna de las horas disponibles.
+}
+\end{nzusecase}
+\end{center}
+
+\begin{center}
+\begin{nzusecase}
+\nzucheader{Anular hora con médico}
+\nzucitem{Alcance}{}
+\nzucitem{Actor principal}{Paciente, Funcionario}
+\nzucitem{Sinopsis}{El paciente solicita anular una hora que tenía previamente agendada con algún doctor en el hospital.}
+\nzucitem{Precondiciones}{}
+\nzucitem{Postcondiciones}{Garantía: El paciente anulará su hora. La hora quedará disponible para otro paciente.}
+\nzucitembig{Escenario principal}{%
+    \item Paciente indica el médico y la hora en que tenía agendada una atención.
+    \item Funcionario obtiene la agenda de ese médico.
+    \item Funcionario marca en la agenda del médico esa hora como disponible.
+    \item Funcionario le confirma al paciente la hora anulada.
+}
+\end{nzusecase}
+\end{center}
+
+\begin{center}
+\begin{nzusecase}
+\nzucheader{Atenderse}
+\nzucitem{Alcance}{}
+\nzucitem{Actor principal}{}
+\nzucitem{Sinopsis}{}
+\nzucitem{Precondiciones}{}
+\nzucitem{Postcondiciones}{}
+\nzucitembig{Escenario principal}{%
+\item asdf
+}
+\end{nzusecase}
+\end{center}
+\end{ProbPart}
+
+\begin{ProbPart}[difficulty={30}]
+
+\end{ProbPart}
+
+
 \end{NewAnswer}
 
 \end{spacing}

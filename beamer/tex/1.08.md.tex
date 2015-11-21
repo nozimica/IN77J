@@ -27,6 +27,7 @@
 \end{tikzpicture}
 }
 
+
 ## Repaso: las relaciones en un D.C.
 
 ### Repaso: las relaciones en un D.C.
@@ -88,9 +89,7 @@ Límite inferior $\geq$ \bld{uno} & Es obligatorio. \\
 - Puede indicarse la \bld{cardinalidad} de la asociación.
 - Suele indicarse el nombre que la propiedad tiene en la clase ``contenedora''.
 
-\begin{center}
-\scalebox{0.5}{%
-\begin{tikzpicture}
+\tikzinlinec[0.5]{%
     \umlclass[x=0,y=0]{Orden}
         {--fecha : Integer\\--prepagada : Boolean}
         {+enviaEmail() : Boolean}
@@ -98,9 +97,7 @@ Límite inferior $\geq$ \bld{uno} & Es obligatorio. \\
         {--nombre : String\\--dirección : String\\--antigüedad : Integer}
         {}
     \umluniassoc[mult1=*,pos1=0.1,mult2=1,arg2=Emisor,pos2=0.85]{Orden}{Cliente}
-\end{tikzpicture}
 }
-\end{center}
 
 ### Repaso: las relaciones en un D.C.
 
@@ -110,9 +107,7 @@ Fundamentalmente tenemos dos casos:
 
 - Ambas clases son ``conscientes'' de la asociación: \bld{bi-direccional}.
 
-\begin{center}
-\scalebox{0.5}{%
-\begin{tikzpicture}
+\tikzinlinec[0.5]{%
     \umlclass[x=0,y=0]{Persona}
         {--nombre : String\\--edad : Integer\\--sexo : Char}
         {}
@@ -120,9 +115,7 @@ Fundamentalmente tenemos dos casos:
         {--color : String\\--marca : String\\--año : Integer}
         {}
     \umlbiassoc[mult1=0..1,arg1=dueño,pos1=0.15,mult2=*,pos2=0.85]{Persona}{Automóvil}
-\end{tikzpicture}
 }
-\end{center}
 
 - Implica algún mecanismo de ``sincronización''.
 - Se diagrama \bld{con dos flechas}, o también \bld{con ninguna}.
@@ -275,15 +268,12 @@ Por ejemplo:
     - Muchos de sus comportamientos son iguales.
     - Generamos una generalización llamada... \bld{Persona}.
 
-\centering\scalebox{0.6}{%
-\begin{tikzpicture}
+\tikzinlinec{%
     \umlclass[x=0,y=0]{Persona}{}{}
     \umlclass[x=-2,y=-3]{Cliente}{}{}
     \umlclass[x=2,y=-3]{Aval}{}{}
     \umlinherit{Cliente}{Persona}
     \umlinherit{Aval}{Persona}
-    % \umlrelation[style={tikzuml inherit style}]{Cliente}{Persona}
-\end{tikzpicture}
 }
 
 ### Repaso: las relaciones en un D.C.
@@ -298,121 +288,291 @@ Por ejemplo:
     a todos por igual.
     - Hay cosas que son específicas: creamos las clases \bld{Gerente} y \bld{Vendedor}.
 
-\centering\scalebox{0.6}{%
-\begin{tikzpicture}
+\tikzinlinec[0.6]{%
     \umlclass[x=0,y=0]{Empleado}{}{}
     \umlclass[x=-2,y=-3]{Gerente}{}{}
     \umlclass[x=2,y=-3]{Vendedor}{}{}
     \umlinherit{Gerente}{Empleado}
     \umlinherit{Vendedor}{Empleado}
-\end{tikzpicture}
 }
 
-## Miembros estáticos
+### Repaso: las relaciones en un D.C.
 
-### Miembros estáticos
+\subsubtitleB{Dependencia}
 
-\subsubtitleB{Atributos, hasta ahora:}
+- Útil para dejar explícito que una clase A \texthigh{depende} de otra B.
+    - Si B cambia, A \texthigh{posiblemente se verá afectada} y deberá ser revisada.
 
-- Ya hemos visto que las clases pueden tener atributos.
-    - Los valores de los atributos son propios de cada instancia (objeto) creado.
-        - La clase \texthigh{Aeroplano} posee el atributo \texthigh{color}.
-        - Una instancia puede ser de color \textcolor{orange}{naranja}.
-        - Otra instancia puede ser de color \textcolor{gray}{gris}.
-        - Otra instancia puede ser de color \textcolor{green}{verde}.
+- Las asociaciones (y todos sus tipos), herencia, interfaces y clases abstractas implican
+un grado de dependencia.
 
-\vfill
+- Cuando esta dependencia no es expresable de una manera más específica (como aquellas mencionadas arriba),
+se utiliza una flecha con una línea segmentada.
 
+\tikzinlinec[0.5]{%
+    \umlclass[x=0]{PlanificaciónCursos}{}{+agrega(Curso) : boolean\\+elimina(Curso) : boolean}
+    \umlclass[x=6]{Curso}{}{}
+    \umldep{PlanificaciónCursos}{Curso}
+}
+
+## Repaso: las interfaces en un D.C.
+
+### Repaso: las interfaces en un D.C.
+
+\subsubtitleB{Interfaces}
+
+- En OOP, el concepto de \texthigh{Interfaz} es muy importante.
+
+- Al hablar de él, nos referimos a un \texthigh{grupo de operaciones}.
+    - A este grupo la damos un nombre.
+
+- Una clase se dice que \texthigh{implementa} una o varias interfaces.
+
+- Si una clase implementa una interfaz, entonces:
+    - Se \itt{compromete} a darle una implementación (métodos) a cada operación de
+    la interfaz.
+
+\begin{rboxx}{}
+Una interfaz le da un caracter específico al comportamiento de las instancias de la clase.
+\end{rboxx}
+
+### Repaso: las interfaces en un D.C.
+
+\subsubtitleB{Interfaces: ejemplo}
+
+- Imaginémonos que en nuestro modelo están las clases \bld{Persona}, \bld{Avión} y \bld{Reserva}.
+
+- Por requisitos del cliente, es necesario poder comparar distintas personas entre sí, dependiendo de su edad.
+    - Y nos piden comparar aviones según su cantidad máxima de asientos.
+    - Y también nos piden comparar reservas según la antelación con que fueron hechas.
+
+- Vale decir, estas tres clases deben ser capaces de proveer la operación \texttt{compararCon(Objeto)}.
+
+### Repaso: las interfaces en un D.C.
+
+\subsubtitleB{Interfaces: ejemplo}
+
+- Para establecer el caracter de ``Comparable'' que tienen los objetos de estas tres clases:
+    - Definimos una \texthigh{interfaz} llamada \texthigh{Comparable}.
+    - Esta interfaz declara una operación llamada \texttt{compararCon(Objeto)}.
+
+\tikzinlinec{%
+    \umlemptyclass[x=-3,y=1]{Objeto}
+    \umlclass[type=interface,x=3,y=1]{Comparable}{}{+compararCon(Objeto)}
+    \umlemptyclass[x=-4,y=-3]{Persona}
+    \umlemptyclass[x=0,y=-3]{Avión}
+    \umlemptyclass[x=4,y=-3]{Reserva}
+    \umlinherit{Persona}{Objeto}
+    \umlinherit{Avión}{Objeto}
+    \umlinherit{Reserva}{Objeto}
+    \umlimpl{Persona}{Comparable}
+    \umlimpl{Avión}{Comparable}
+    \umlimpl{Reserva}{Comparable}
+}
+
+### Repaso: las interfaces en un D.C.
+
+\subsubtitleB{Interfaces}
+
+\vspace{-1.5em}
 \columnsbegin
-\column{0.33\textwidth}
-\centering\includegraphics[width=20mm]{icons/92-emoji_android_airplane.png}
-\column{0.33\textwidth}
-\centering\includegraphics[width=20mm]{icons/92-emoji_android_airplane_gray.png}
-\column{0.33\textwidth}
-\centering\includegraphics[width=20mm]{icons/92-emoji_android_airplane_green.png}
+\column{0.6\textwidth}
+
+- Ojo: una interfaz puede heredar de otra interfaz.
+- Notar los tipos de flecha que se usan:
+    - \texthigh{Segmentado}: entre una interfaz y una clase
+    - \texthigh{Continuo}: entre una interfaz y otra interfaz.
+- Las interfaces definen el comportamiento de otras clases:
+    - Ellas no pueden crear objetos propios.
+
+
+\column{0.4\textwidth}
+
+\tikzinlinec{%
+    \umlclass[type=interface,y=0]{Unible}{}{+unirCon(Objeto)}
+    \umlclass[type=interface,y=-4]{Comparable}{}{+compararCon(Objeto)}
+    \umlemptyclass[y=-8]{Conjunto}
+    \umlinherit{Comparable}{Unible}
+    \umlimpl{Conjunto}{Comparable}
+}
+
 \columnsend
 
-### Miembros estáticos
+### Repaso: las interfaces en un D.C.
 
-\subsubtitleB{Atributos estáticos:}
+\subsubtitleB{Interfaces: ejemplo}
 
-- Una clase puede definir algunos atributos como \bld{\texthigh{estáticos}}:
+- Tenemos un equipo de música que ofrece dos maneras de \texthigh{interactuar} con
+el usuario:
+    - Mediante su panel frontal.
+    - A distancia mediante un control remoto.
 
-\buildrboxx[0.9\textwidth]{}
-
-- Todas sus instancias tienen este atributo.
-- Pero todas ellas \texthigh{comparten el mismo valor} de este atributo.
-    - Si una de ellas lo cambia, las demás también lo verán cambiado.
-
-\finishrboxx
-
-- Se les llama también \texthigh{atributos de clase}.
-
-### Miembros estáticos
-
-\subsubtitleB{Operaciones, hasta ahora:}
-
-- Para el caso de las operaciones, sabemos que todas las instancias de una clase
-tienen a su disposición las operaciones de esa clase.
-    - Todos los aeroplanos pueden volar.
-        - Dependiendo de su ubicación y velocidad actual, cada aeroplano volará en cada instante
-        ``a su propia manera''.
-    - Todos los aeroplanos puede entregar su cantidad actual de pasajeros.
-        - Cada instancia entregará un número en particular.
-
-\vfill
+- Pero independiente de qué se use, necesitamos que nos ofrezcan las mismas acciones.
+    - Necesitamos una \texthigh{interfaz} común.
 
 \columnsbegin
-\column{0.33\textwidth}
-\centering\includegraphics[width=20mm]{icons/92-emoji_android_airplane_withpeople.png}
-\column{0.33\textwidth}
-\centering\includegraphics[width=20mm]{icons/92-emoji_android_airplane_gray_withpeople.png}
-\column{0.33\textwidth}
-\centering\includegraphics[width=20mm]{icons/92-emoji_android_airplane_green_withpeople.png}
+\column{0.3\textwidth}
+\centering\includegraphics[width=20mm]{icons/554-emoji_android_mobile_phone.png}
+\column{0.3\textwidth}
+\centering\includegraphics[width=20mm]{icons/562-emoji_android_radio.png}
+\column{0.1\textwidth}
+\column{0.3\textwidth}
+
+\vspace{-5em}
+1. Play/Pause
+1. Stop
+1. Next
+1. Previous
+
 \columnsend
 
-### Miembros estáticos
+## Clases abstractas
 
-\subsubtitleB{Operaciones estáticas:}
+### Clases abstractas
 
-- Una clase puede definir algunas operaciones como \bld{\texthigh{estáticas}}:
+\subsubtitleB{¿Por qué aparece el concepto de clase abstracta?}
 
-\buildrboxx[0.9\textwidth]{}
+- Ya sabemos que la \bld{herencia} nos permite \texthigh{agrupar comportamientos y/o características} que son
+compartidos por varias clases.
+    - Esto define una superclase y una o varias subclases.
+- Pero \texthigh{en algunos casos}, si bien sabemos el \texthigh{comportamiento que deberán tener las subclases}:
+    - También tenemos claro que ese \texthigh{comportamiento no será idéntico entre varias subclases} ``hermanas''.
 
-- Las instancias \texthigh{no tienen acceso} a esa operación.
-- Pasa a ser una operación \texthigh{propia de la clase}.
-- El resultado ---y la manera de obtenerlo--- no dependen de las particularidades de ninguna instancia de la clase.
+### Clases abstractas
 
-\finishrboxx
+\subsubtitleB{Clase abstracta: ejemplo}
 
-### Miembros estáticos
+Imaginémonos que estamos modelando figuras geométricas: \bld{Círculo}, \bld{Cilindro} y \bld{Rectángulo}.
 
-\subsubtitleB{Operaciones estáticas:}
+- De inmediato podemos pensar en una superclase llamada ---por ejemplo--- \bld{FiguraGeométrica}.
+    - Dentro de ella encapsularemos características y comportamientos comunes:
 
-- Hay clases que definen casi todas sus operaciones como estáticas:
-    - En Java, la clase \texttt{Math} provee funciones matemáticas.
-    - Calcular la tangente de un ángulo, o determinar el menor entre dos números, no son
-    operaciones que dependan de alguna circunstancia en particular.
-        - No existen ``distintas versiones de la matemática'' que las implementen de manera
-        diferenciada.
+\tikzinlinec{%
+    \umlclass[x=0,y=0]{FiguraGeométrica}%
+      {--colorLínea : String\\ --colorRelleno: String}%
+      {// setters, getters\\+calculaÁrea() : double\\+calculaPerímetro() : double}%
+}
 
-### Interfaces
+### Clases abstractas
 
-TODO:
+\subsubtitleB{Clase abstracta: ejemplo}
 
-\subsubtitleB{}
+\vspace{-1.5em}
+\columnsbegin
+\column{0.5\textwidth}
 
+- Tenemos un problema:
+    - Sabemos que tanto a Círculos como a Rectángulos se les puede calcular el área y el perímetro.
+    - Pero ambos cálculos son distintos dependiendo de la figura.
 
-### Relación entre D.C. y D.S.
+\column{0.5\textwidth}
+\tikzinlinec[0.55]{%
+    \umlclass[x=0,y=5]{FiguraGeométrica}%
+      {--colorLínea : String\\ --colorRelleno: String}%
+      {// setters, getters\\+calculaÁrea() : double\\+calculaPerímetro() : double}%
+    \umlclass[x=-2,y=0]{Círculo}%
+      {--radio : double}%
+      {// setters, getters}%
+    \umlclass[x=2,y=0]{Rectángulo}%
+      {--ancho : double\\--alto : double}%
+      {// setters, getters}%
+    \umlclass[x=0,y=9,simple]{Object}{}{}%
+    \umlinherit{FiguraGeométrica}{Object}
+    \umlinherit{Círculo}{FiguraGeométrica}
+    \umlinherit{Rectángulo}{FiguraGeométrica}
+}
 
-Entre los diagramas de clases y de secuencia tenemos:
+\columnsend
 
-- Ya sabemos que los objetos no son entes estáticos.
-    - No solamente guardan datos o propiedades de cada instancia.
-    - También \bld{interactúan} entre sí o con instancias de otras clases.
+### Clases abstractas
 
-- La interacción se lleva a cabo a través de \alert{mensajes}.
-    - Una instancia, al recibir un mensaje, la procesa mediante una operación (implementada en
-    un método).
-    - Al conjunto de mensajes que una instancia pueda antender, se le denomina \alert{interfaz}.
-        - \bld{Ojo} con los distintos usos de la palabra interfaz.
+\subsubtitleB{Clases abstractas en el D.C.}
+
+- Una operación que está \texthigh{declarada pero no implementada} se define como \bld{abstracta}.
+
+- Al suceder esto, toda la clase que la contiene también es abstracta.
+    - En el diagrama de clases se escribe en cursivas:
+        - El nombre de la clase.
+        - El nombre de las operaciones abstractas.
+
+\vspace{-1.5em}
+\columnsbegin
+\column{0.6\textwidth}
+
+- Al igual que las interfaces, una clase abstracta \texthigh{no puede crear objetos}.
+
+\column{0.4\textwidth}
+\tikzinlinec[0.5]{%
+    \umlclass[x=0,y=5,type=abstract]{FiguraGeométrica}%
+      {--colorLínea : String\\ --colorRelleno: String}%
+      {// setters, getters\\\itt{+calculaÁrea() : double}\\\itt{+calculaPerímetro() : double}}%
+}
+\columnsend
+
+### Clases abstractas
+
+\subsubtitleB{Ejemplos}
+
+\vspace{-1.5em}
+\columnsbegin
+
+\column{0.5\textwidth}
+
+- Para el ejemplo anterior, debemos:
+    - Escribir en cursiva el nombre de la clase abstracta.
+    - Escribir en cursiva sus operaciones abstractas.
+    - En cada clase que extienda a la clase abstracta, escribir
+    esas operaciones como ya implementadas.
+
+\column{0.5\textwidth}
+
+\tikzinlinec[0.5]{%
+    \umlclass[x=0,y=5,type=abstract]{FiguraGeométrica}%
+      {--colorLínea : String\\ --colorRelleno: String}%
+      {// setters, getters\\\itt{+calculaÁrea() : double}\\\itt{+calculaPerímetro() : double}}%
+    \umlclass[x=-3,y=0]{Círculo}%
+      {--radio : double}%
+      {// setters, getters\\+calculaÁrea() : double\\+calculaPerímetro() : double}%
+    \umlclass[x=3,y=0]{Rectángulo}%
+      {--ancho : double\\--alto : double}%
+      {// setters, getters\\+calculaÁrea() : double\\+calculaPerímetro() : double}%
+    \umlclass[x=0,y=9,simple]{Object}{}{}%
+    \umlinherit{FiguraGeométrica}{Object}
+    \umlinherit{Círculo}{FiguraGeométrica}
+    \umlinherit{Rectángulo}{FiguraGeométrica}
+}
+
+\columnsend
+
+### Clases abstractas
+
+\subsubtitleB{Ejemplos}
+
+\tikzinlinec[0.55]{%
+    \umlclass[x=0,type=interface]{Collection}%
+      {}%
+      {+equals()\\+add()}%
+    \umlclass[x=4,type=interface]{List}%
+      {}%
+      {+get()}%
+    \umlclass[x=8,type=abstract]{AbstractList}%
+      {}%
+      {+equals()\\+add()\\\itt{+get()}}%
+    \umlclass[x=12]{ArrayList}%
+      {}%
+      {+get()\\+add()}%
+    \umlinherit{List}{Collection}
+    \umlimpl{AbstractList}{List}
+    \umlinherit{ArrayList}{AbstractList}
+}
+
+- Tenemos un \bld{ArrayList} que es una lista de elementos.
+- Esta lista implementa dos interfaces:
+    - \bld{Collection}: una colección de elementos.
+    - \bld{List}: que permite obtener un elemento.
+- Tenemos una clase abstracta \bld{AbstractList}, la que solamente
+implementa las operaciones \bld{equals()} y \bld{add()}, dejando \bld{get()}
+como abstracta.
+- Finalmente, \bld{ArrayList} implementa \bld{get()}, y reimplementa la operación
+\bld{add()}.
+

@@ -21,6 +21,7 @@ $(TEXNAME).pdf: $(TEXNAME).tex in77j.sty $(TEXNAME)*.tex tex/*.tex
 	$(PANDOC) tex/1.06b.md.tex -t beamer -o tex/1.06b.tex
 	$(PANDOC) tex/1.07.md.tex -t beamer -o tex/1.07.tex
 	$(PANDOC) tex/1.08.md.tex -t beamer -o tex/1.08.tex
+	$(PANDOC) tex/1.08b.md.tex -t beamer -o tex/1.08b.tex
 	# biber $(TEXNAME) --output_format bibtex
 	$(TEXCOMM) -no-pdf $(TEXNAME).tex && rm -f $(TEXNAME).xdv
 	bibtex $(TEXNAME)

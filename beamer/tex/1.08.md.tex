@@ -426,6 +426,29 @@ el usuario:
 
 \columnsend
 
+### Repaso: las interfaces en un D.C.
+
+\subsubtitleB{Interfaces: algunas preguntas válidas}
+
+\begin{rboxx}[.9\textwidth]{}
+¿Por qué crear interfaces, si no son más que un índice de operaciones a implementar en otra clase?
+\end{rboxx}
+
+\begin{rboxx}[.9\textwidth]{}
+¿Para qué usarlas si me obligan a implementar todas sus operaciones, y yo quizás sólo necesite algunas de ellas?
+\end{rboxx}
+
+### Repaso: las interfaces en un D.C.
+
+\subsubtitleB{Interfaces: utilidad}
+
+- Establecen claramente \texthigh{cómo} una clase se va a comunicar con el exterior.
+    - Garantizan que las clases que las implementen proveerán una manera clara y conocida de comunicarse.
+- Permiten \texthigh{ordenar conceptualmente} las operaciones de una o varias clases.
+
+- Un sistema puede exigir que para que se comuniquen con él, las clases que lo hagan implementen determinadas interfaces:
+    - De esta manera, se garantiza una comunicación sin sobresaltos ni ``sorpresas''.
+
 ## Clases abstractas
 
 ### Clases abstractas
@@ -575,4 +598,25 @@ implementa las operaciones \bld{equals()} y \bld{add()}, dejando \bld{get()}
 como abstracta.
 - Finalmente, \bld{ArrayList} implementa \bld{get()}, y reimplementa la operación
 \bld{add()}.
+
+### Clases abstractas
+
+\subsubtitleB{Clases abstractas: unas preguntas válidas}
+
+\begin{rboxx}[.9\textwidth]{}
+¿En qué aporta una clase abstracta a nuestro modelo?
+\end{rboxx}
+
+\begin{rboxx}[.9\textwidth]{}
+¿Para qué ``avisar'' que algo debe ser implementado por sus subclases?
+\end{rboxx}
+
+### Clases abstractas
+
+\subsubtitleB{Clases abstractas: utilidad}
+
+- Fundamentalmente proveen una consistencia y homogeneidad entre las distintas subclases que heredan de ella.
+- Sirven para implementar al menos una parte de las funcionalidades comprometidas:
+    - Hace lo que puede hacer, y deja para sus subclases el resto.
+    - Fijarse en el ejemplo anterior de \itt{AbstractList}.
 

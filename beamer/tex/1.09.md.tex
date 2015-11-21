@@ -11,3 +11,23 @@ Entre los diagramas de clases y de secuencia tenemos:
     un método).
     - Al conjunto de mensajes que una instancia pueda antender, se le denomina \alert{interfaz}.
         - \bld{Ojo} con los distintos usos de la palabra interfaz.
+
+### Ejemplo de diagrama:
+
+\tikzinlinec[0.5]{%
+    \umlclass{Cliente}{--nombre : String}{}
+    \umlclass[x=8]{Orden}{--fecha : Date\\--estado : int}{+calcImpuesto() : double\\+calcTotal() : double}
+    \umlclass[x=5,y=-3]{Pago}{--monto : double}{}
+    \umlclass[x=0,y=-8]{Crédito}{--numTarj : String\\--tipo : int\\--expiracion : Date}{+validar() : boolean}
+    \umlclass[x=5,y=-8]{Efectivo}{}{}
+    \umlclass[x=10,y=-8]{Cheque}{--titular : String\\--banco : String}{+validar() : boolean}
+    \umlclass[x=15,y=-8]{DetalleOrden}{--cantidad : int}{+calcSubTotal() : double}
+    \umlclass[x=19,y=-8]{Item}{--peso : double\\--descripcion : String}{}
+    \umlinherit{Crédito}{Pago}
+    \umlinherit{Efectivo}{Pago}
+    \umlinherit{Cheque}{Pago}
+    \umlaggreg{Orden}{DetalleOrden}
+    \umluniassoc{Orden}{Pago}
+    \umlassoc{Cliente}{Orden}
+    \umluniassoc{Item}{DetalleOrden}
+}

@@ -94,13 +94,13 @@ Resultado:
 \begin{itemize}
 \item Está compuesto por: 
     \begin{itemize}
-        \item Un \bld{estado}.                 \tikz[inlineBlock] \coordinate (propiedadesFrame)    ;
-        \item Un \bld{comportamiento} definido.\tikz[inlineBlock] \coordinate (comportamientoFrame) ;
+        \item Un \bld{estado}.                 \inlineBlock{propiedadesFrame}
+        \item Un \bld{comportamiento} definido.\inlineBlock{comportamientoFrame}
     \end{itemize}
 \end{itemize}
 
 \column{0.4\textwidth}
-\begin{tikzpicture}[overlay]
+\begin{tikzpicture}[remember picture,overlay]
   \node[miniconcept, right=50mm of propiedadesFrame] (propiedadesFig) { Atributos };
   \draw[->, thick] (propiedadesFig.west) -- ([xshift=3mm]propiedadesFrame.east);
   \node[miniconcept, below=3mm of propiedadesFig] (comportamientoFig) { Métodos };

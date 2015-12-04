@@ -2,6 +2,7 @@
 \usetikzlibrary{calc, shapes, shapes, arrows, positioning, chains, matrix, fit, scopes, backgrounds}
 %\usetikzlibrary{shapes.geometric,shapes.arrows,decorations.pathmorphing}
 %\usetikzlibrary{matrix,chains,scopes,positioning,arrows,fit}
+
 \pgfdeclarelayer{foreground}
 \pgfsetlayers{main,foreground}
 
@@ -61,8 +62,28 @@
   {\begin{tikzpicture}[font=\sffamily\scriptsize,baseline={($(current bounding box.center)+(0,-0.5ex)$)},#1]}%
   {\end{tikzpicture}}
 
+%% Externalize diagrams
+% \usetikzlibrary{external}
+% \tikzexternalize
+% \tikzset{external/system call={xelatex \tikzexternalcheckshellescape -halt-on-error -interaction=batchmode -jobname "\image" "\texsource"}}
+% % \tikzset{external/force remake=true}
+% \tikzsetexternalprefix{exttikz/}
+
+% \usepackage{environ}
+% \usepackage{xargs}
+
+% \newcommandx{\NewEnvironx}[5][2,3]{%
+%     \expandafter\newcommandx\csname start#1\endcsname[#2][#3]{#4}%
+%     \NewEnviron{#1}{\csname start#1\expandafter\endcsname\BODY #5}}
+
+% \NewEnvironx{tikzflowchart}[1][1=]{%
+%   \begin{tikzpicture}[font=\sffamily\scriptsize,baseline={($(current bounding box.center)+(0,-0.5ex)$)},#1]}%
+%   {\end{tikzpicture}}
+
 \tikzstyle{namedArrow} = [midway, above=-1mm, color=black!70]
 
 \tikzstyle{every picture}+=[remember picture]
 % \tikzstyle{inlineBlock} = [shape=rectangle,inner sep=0pt, text depth=0pt]
 \tikzstyle{inlineBlock} = [baseline=-.5ex]
+% \newcommand{\inlineBlock}[1]{\tikzset{external/export next=false}\tikz[inlineBlock] \coordinate (#1) ;}
+\newcommand{\inlineBlock}[1]{\tikz[inlineBlock] \coordinate (#1) ;}

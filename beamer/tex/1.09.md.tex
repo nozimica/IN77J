@@ -1,33 +1,32 @@
-### Relación entre D.C. y D.S.
+## Descriptors
 
-Entre los diagramas de clases y de secuencia tenemos:
+### Descriptors
 
-- Ya sabemos que los objetos no son entes estáticos.
-    - No solamente guardan datos o propiedades de cada instancia.
-    - También \bld{interactúan} entre sí o con instancias de otras clases.
+\subsubtitleB{Definición de \itt{descriptors}}
 
-- La interacción se lleva a cabo a través de \alert{mensajes}.
-    - Una instancia, al recibir un mensaje, la procesa mediante una operación (implementada en
-    un método).
-    - Al conjunto de mensajes que una instancia pueda antender, se le denomina \alert{interfaz}.
-        - \bld{Ojo} con los distintos usos de la palabra interfaz.
+Junto con los modelos de clase, aparece el concepto de \texthigh{\itt{descriptors}}:\newline
 
-### Ejemplo de diagrama:
+\begin{description}
+\item[Full descriptor:] Es la descripción completa necesaria para describir a un objeto, considerando
+todos sus atributos, operaciones, métodos y asociaciones.
+\item[Segment descriptor:] Son los elementos que efectivamente se declaran en un modelo o en el código
+(clases, por ejemplo) y que contienen las propiedades heredables que son:
+    \begin{footnotesize}
+    \begin{itemize}
+        \item Atributos (\textsc{ATT}).
+        \item Operaciones.
+        \item Métodos.
+        \item Participación en asociaciones (pseudoatributos).
+    \end{itemize}
+    \end{footnotesize}
+\end{description}
 
-\tikzinlinec[0.5]{%
-    \umlclass{Cliente}{--nombre : String}{}
-    \umlclass[x=8]{Orden}{--fecha : Date\\--estado : int}{+calcImpuesto() : double\\+calcTotal() : double}
-    \umlclass[x=5,y=-3]{Pago}{--monto : double}{}
-    \umlclass[x=0,y=-8]{Crédito}{--numTarj : String\\--tipo : int\\--expiracion : Date}{+validar() : boolean}
-    \umlclass[x=5,y=-8]{Efectivo}{}{}
-    \umlclass[x=10,y=-8]{Cheque}{--titular : String\\--banco : String}{+validar() : boolean}
-    \umlclass[x=15,y=-8]{DetalleOrden}{--cantidad : int}{+calcSubTotal() : double}
-    \umlclass[x=19,y=-8]{Item}{--peso : double\\--descripcion : String}{}
-    \umlinherit{Crédito}{Pago}
-    \umlinherit{Efectivo}{Pago}
-    \umlinherit{Cheque}{Pago}
-    \umlaggreg{Orden}{DetalleOrden}
-    \umluniassoc{Orden}{Pago}
-    \umlassoc{Cliente}{Orden}
-    \umluniassoc{Item}{DetalleOrden}
-}
+### Full descriptors
+
+\subsubtitleB{¿Para qué sirven?}
+
+- Muestran un resumen de las características más importantes de las clases.
+    - Características desde un punto de vista estructural, no conceptual.
+- Son especialmente útiles cuando existen relaciones de herencia.
+    - Permiten ver cómo los métodos \texthigh{sobreescritos} ocultan a los de
+    las clases ascendientes.

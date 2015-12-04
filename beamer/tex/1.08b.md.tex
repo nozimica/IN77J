@@ -155,6 +155,8 @@ tienen a su disposición las operaciones de esa clase.
 
 ### Implementar una clase simple {.fragile}
 
+\subsubtitleB{Dos clases ya vistas:}
+
 \columnsbegin
 
 \column{0.5\textwidth}
@@ -167,7 +169,7 @@ tienen a su disposición las operaciones de esa clase.
 
 \column{0.5\textwidth}
 
-\vspace{-1em}
+\vspace{-2em}
 \begin{lstlisting}
 public class Vuelo {
     private int numDeVuelo;
@@ -175,11 +177,11 @@ public class Vuelo {
     private int duracionVuelo;
 
     public Date atrasarVuelo(int atraso) {
-        ...
+        // acciones
     }
 
     public Date obtHoraLlegada() {
-        ...
+        // acciones
     }
 }
 \end{lstlisting}
@@ -206,11 +208,11 @@ public class CuentaBancaria {
     private Date apertura;
 
     public boolean depositar(Money monto) {
-        ...
+        // acciones
     }
 
     public boolean sacar(Money monto) {
-        ...
+        // acciones
     }
 }
 \end{lstlisting}
@@ -278,4 +280,111 @@ public class Profesor {
 }
 \end{lstlisting}
 \columnsend
+
+### Relación entre D.C. y D.S.
+
+\subsubtitleB{Entre los diagramas de clases y de secuencia tenemos:}
+
+- Ya sabemos que los objetos no son entes estáticos.
+    - No solamente guardan datos o propiedades de cada instancia.
+    - También \bld{interactúan} entre sí o con instancias de otras clases.
+
+- La interacción se lleva a cabo a través de \alert{mensajes}.
+    - Una instancia, al recibir un mensaje, la procesa mediante una operación (implementada en
+    un método).
+    - Al conjunto de mensajes que una instancia pueda antender, se le denomina \alert{interfaz}.
+        - \bld{Ojo} con los distintos usos de la palabra interfaz.
+
+
+### Ejemplo: adm. propiedades
+
+\subsubtitleB{Introducción}
+
+- Analizaremos un caso de una administradora de propiedades.
+- En particular:
+    - El proceso de agregar un inmueble (Casa o Depto) al sistema.
+- Lo veremos en tres fases:
+    1. Un \bld{diagrama de clases} parcial.
+    1. Un \bld{diagrama de secuencia de sistema} con la interacción de un usuario con el sistema.
+    1. Un \bld{diagrama de clases} que incorpore la interacción ya descrita.
+
+### Ejemplo: adm. propiedades
+
+\subsubtitleB{Modelos iniciales}
+
+- Consideremos el siguiente modelo parcial:
+
+\tikzinlinec[0.55]{%
+    \exAdmProps
+}
+
+### Ejemplo: adm. propiedades
+
+\subsubtitleB{Modelos iniciales}
+
+- Y consideremos el siguiente diagrama de secuencia:
+
+\tikzinlinec[0.5]{
+    \begin{umlseqdiag}
+    \umlactor[no ddots,x=0]{Usuario}
+    \umlbasicobject[x=8]{Sistema}
+    \begin{umlcall}[op={datosInmueble(id,año,dir,nombre,rut)}]{Usuario}{Sistema}
+    \end{umlcall}
+    \begin{umlfragment}[type=alt,label=si es casa,inner xsep=8]
+        \begin{umlcall}[op={datosCasa(patio)},dt=7]{Usuario}{Sistema}
+        \end{umlcall}
+        \umlfpart[si es depto]
+        \begin{umlcall}[op={datosDepto(np, nd)},dt=5]{Usuario}{Sistema}
+        \end{umlcall}
+    \end{umlfragment}
+    \begin{umlcall}[op=concretarIngreso(),return=Confirmación]{Usuario}{Sistema}
+    \end{umlcall}
+    \end{umlseqdiag}
+}
+
+### Ejemplo: adm. propiedades
+
+\subsubtitleB{Incorporar interacción con sistema}
+
+Representemos en el D.C. la interacción entre un usuario y el sistema vista en el D.S. anterior:
+
+\tikzinlinec[0.45]{%
+    \exAdmPropsInteraction
+}
+
+### Ejemplo: adm. propiedades
+
+\subsubtitleB{Comentarios}
+
+- Fijarse la manera en que cada tipo de asociación se refleja en el código final.
+- ¿Por qué hay una dependencia entre \texthigh{AdmPropiedades} tanto con \texthigh{Casa} como
+con \texthigh{Departamento}?
+    - ¿Por qué esta dependencia no se dibuja entre \texthigh{AdmPropiedades} e \texthigh{Inmueble}?
+- En el diagrama anterior se podría haber incluido una \texthigh{interfaz} que fuera implementada
+por la clase \texthigh{AdmPropiedades}.
+    - ¿Por qué?
+- ¿Está bien crear una instancia de \texthigh{Propietario} tal como lo hicimos?
+
+### Ejemplo: adm. de órdenes de compra
+
+\subsubtitleA{Propuesto:}{¿Qué diagrama de secuencia podrían imaginarse para este modelo?}
+
+\tikzinlinec[0.45]{%
+    \umlclass{Cliente}{--nombre : String}{}
+    \umlclass[x=8]{Orden}{--fecha : Date\\--estado : int}{+calcImpuesto() : double\\+calcTotal() : double}
+    \umlclass[x=5,y=-4]{Pago}{--monto : double}{}
+    \umlclass[x=0,y=-9]{Crédito}{--numTarj : String\\--tipo : int\\--expiracion : Date}{+validar() : boolean}
+    \umlclass[x=5,y=-9]{Efectivo}{}{}
+    \umlclass[x=10,y=-9]{Cheque}{--titular : String\\--banco : String}{+validar() : boolean}
+    \umlclass[x=17]{DetalleOrden}{--cantidad : int}{+calcSubTotal() : double\\+calcPeso() : double}
+    \umlclass[x=17,y=-8]{Item}{--peso : double\\--descripcion : String}{+calcPeso() : double}
+%
+    \umlVHVinherit[anchor2=-120]{Crédito}{Pago}
+    \umlVHVinherit[anchor2=-90]{Efectivo}{Pago}
+    \umlVHVinherit[anchor2=-60]{Cheque}{Pago}
+    \umlaggreg[attr1=|1,attr2=itemLinea|1..*]{Orden}{DetalleOrden}
+    \umlassoc[attr1=|1,attr2=|*]{Cliente}{Orden}
+    \umlVHuniassoc[anchor1=-70,arg1=1,arg2=1..*,pos2=1.8]{Orden}{Pago}
+    \umluniassoc[attr1=|*,attr2=|1,pos1=0.1,pos2=0.9]{DetalleOrden}{Item}
+}
 

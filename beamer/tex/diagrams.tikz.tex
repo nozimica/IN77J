@@ -146,3 +146,31 @@
 \end{tikzpicture}
 }
 }
+
+\newcommand{\exAdmProps}{%
+    \umlclass[x=0,type=abstract]{Inmueble}%
+      {--id : Integer\\--año : Integer\\--dirección : String}%
+      {+asignaDuenno(dueño : Propietario)}%
+    \umlclass[x=10]{Propietario}%
+      {--nombre : String\\--rut : String}%
+      {+agrInmueble(nvoInm : Inmueble)}%
+    \umlclass[x=-3,y=-4.5]{Casa}%
+      {--tienePatio : boolean}%
+      {}%
+    \umlclass[x=3,y=-4.5]{Departamento}%
+      {--numPiso : Integer\\--numDepto : String}%
+      {}%
+    \umlVHVinherit[weight=0.45,anchor2=-120]{Casa}{Inmueble}
+    \umlVHVinherit[weight=0.45,anchor2=-60]{Departamento}{Inmueble}
+    \umlassoc[attr1=|*,attr2=dueño|1]{Inmueble}{Propietario}
+}
+\newcommand{\exAdmPropsInteraction}{%
+    \exAdmProps
+    \umlclass[x=-8,y=4]{AdmPropiedades}%
+      {--inmId : Integer\\--inmAño : Integer\\--inmDir : String}%
+      {+{datosInmueble(id,año,dir,nombre,rut)}\\+datosCasa(patio : boolean)\\+{datosDepto(np : Integer, nd : String)}\\+concretarIngreso() : boolean}
+    \umlHVuniassoc[anchors=-20 and 90,attr2=inmblObj|0..1]{AdmPropiedades}{Inmueble}
+    \umlHVuniassoc[anchors=0 and 90,attr2=propObj|0..1]{AdmPropiedades}{Propietario}
+    \umlVHdep{AdmPropiedades}{Casa}
+    \umlHVHdep[anchors=20 and 0,arm2=88mm]{AdmPropiedades}{Departamento}
+}

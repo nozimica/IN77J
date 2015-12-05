@@ -1,0 +1,32 @@
+## Descriptors
+
+### Descriptors
+
+\subsubtitleB{Definición de \itt{descriptors}}
+
+Junto con los modelos de clase, aparece el concepto de \texthigh{\itt{descriptors}}:\newline
+
+\begin{description}
+\item[Full descriptor:] Es la descripción completa necesaria para describir a un objeto, considerando
+todos sus atributos, operaciones, métodos y asociaciones.
+\item[Segment descriptor:] Son los elementos que efectivamente se declaran en un modelo o en el código
+(clases, por ejemplo) y que contienen las propiedades heredables que son:
+    \begin{footnotesize}
+    \begin{itemize}
+        \item Atributos (\textsc{ATT}).
+        \item Operaciones.
+        \item Métodos.
+        \item Participación en asociaciones (pseudoatributos).
+    \end{itemize}
+    \end{footnotesize}
+\end{description}
+
+### Full descriptors
+
+\subsubtitleB{¿Para qué sirven?}
+
+- Muestran un resumen de las características más importantes de las clases.
+    - Características desde un punto de vista estructural, no conceptual.
+- Son especialmente útiles cuando existen relaciones de herencia.
+    - Permiten ver cómo los métodos \texthigh{sobreescritos} ocultan a los de
+    las clases ascendientes.

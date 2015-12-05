@@ -4,6 +4,11 @@
 \setbeamertemplate{navigation symbols}{} 
 \setbeamertemplate{footline}[frame number]{}
 
+\title{Orientación a Objetos para E-Business}
+\subtitle{IN77J}
+
+\author{Nicolás Eugenio Ozimica\\Semestre de primavera de 2015}
+
 %%http://tex.stackexchange.com/questions/20654/length-between-nested-lists-in-beamer
 \setbeamertemplate{itemize/enumerate subbody begin}{\vspace{-1mm}}
 \setbeamertemplate{itemize/enumerate subbody end}{\vspace{-1mm}}
@@ -40,6 +45,7 @@
           Ligatures=TeX,
           BoldFont=FontinSansBold.otf,
           BoldItalicFont=FontinSansBoldItalic.otf,
+          SmallCapsFont=FontinSansSC.otf,
           ItalicFont=FontinSansItalic.otf]{FontinSans.otf}
         \setbeamerfont{frametitle}{size=\LARGE,series=\bfseries}
 %        \setmonofont[Mapping=tex-text]{Inconsolatazi4}
@@ -80,15 +86,6 @@
   \node (#1) [#2, below=\nextFig of #3.center] {#4};
   \node [textdesc, right=\nextDef of #1.center] {#5};
 }
-
-% Text descriptions of main flowchart elements.
-\def\InicioTxt{\textbf{Inicio:} Marca el comienzo de un algoritmo.}
-\def\FinTxt{\textbf{Fin:} Indica el término de un algoritmo.}
-\def\ProcesoTxt{\textbf{Proceso:} Actividad dentro del flujo actual.}
-\def\ProcesoPredefTxt{\textbf{Proceso predefinido:} Es un sub-algoritmo con su propio diagrama (corresponde a un proceso más complejo).}
-\def\DecisionTxt{\textbf{Decisión:} Utilizado para hacer una pregunta lógica y decidir qué hacer dependiendo de la respuesta.}
-\def\IOTxt{\textbf{Entrada} o \textbf{Salida}.}
-\def\RutaTxt{\textbf{Ruta:} Indica el camino a seguir a lo largo del diagrama.}
 
 %\setbeamercolor{item projected}{fg=red}
 %\setbeamertemplate{enumerate items}[default]
@@ -137,11 +134,6 @@
 }
 
 \newtheorem{ejercicio}{Ejercicio:} 
-
-\title{Orientación a Objetos para E-Business}
-\subtitle{IN77J}
-
-\author{Nicolás Eugenio Ozimica\\Semestre de primavera de 2015}
 
 \let\olditem\item
 % \renewcommand{\item}{\setlength{\itemsep}{\fill}\olditem}

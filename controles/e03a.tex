@@ -1,0 +1,105 @@
+\documentclass[11pt,letterpaper]{article}
+
+\newcommand{\hmwkCode}{Control 3, primera parte}
+\newcommand{\hmwkDueDate}{Entrega: mi\'{e}rcoles 16 de diciembre de 2015}
+\newcommand{\hmwkClassTime}{}
+\usepackage{in77j.exercise}
+
+\setlength{\parskip}{0.7\baselineskip}
+\setitemize{topsep=0pt}
+\begin{document}
+\begin{spacing}{1.2}
+\thispagestyle{empty}
+\evaluationTitle
+
+\newcommand{\separatorLine}{\begin{center}\rule{.6\textwidth}{1pt}\end{center}}
+
+\begin{Problem}
+
+\bld{Considere el análisis de los sueldos de jugadores de fútbol y de tenis.}
+
+En este problema analizaremos las similitudes y diferencias entre los jugadores de fútbol y de tenis,
+teniendo como objetivo final del análisis el elaborar un diseño orientado a objetos que sirva como
+base para un eventual sistema de información enfocado en analizar los sueldos anuales
+de estos jugadores.
+
+De ahora en adelante, cuando digamos \bld{deportista}, nos referiremos indistintamente a un jugador
+de fútbol o de tenis.
+
+Es importante que su modelo tenga en cuenta los puntos siguientes:
+\begin{itemize}
+    \item Solamente considere futbolistas y tenistas.
+    \item Un futbolista estará ---en todo momento--- asociado a lo más a un equipo
+        de fútbol. De estar en un equipo, tendrá asociado un contrato con un año de comienzo
+        y un año de término de contrato, y con un sueldo anual fijo.
+        \begin{itemize}
+            \item No se preocupe por contratos que terminan a mitad de año.
+        \end{itemize}
+    \item De un futbolista también tendremos registro de sus ganancias acumuladas hasta el último
+        contrato en que estuvo involucrado (no considerando al actual).
+    \item Un tenista nunca está asociado a equipo alguno pues supondremos que siempre
+        jugará de manera individual.
+    \item De las ganancias de los tenistas sí deberemos saber:
+    \begin{itemize}
+        \item Cuánto fue lo que ganaron en total hasta el año anterior.
+        \item Cuánto es lo que llevan ganado durante el año en curso.
+    \end{itemize}
+    \item Todo deportista tendrá un nombre, año de nacimiento, año en que comenzó a jugar profesionalmente
+        y el país al que está asociado.
+    \item Estos deportistas son representados por un \itt{manager}, del cual nos interesará
+        saber su nombre y el listado de deportistas que representa.
+    \item De los futbolistas nos interesa saber cuántos partidos han jugado por la selección de su país (da
+        lo mismo aquellos partidos donde estuvieron todo el tiempo en la banca de suplentes).
+    \item De los tenistas nos interesa saber cuántos partidos (singles o dobles) han jugado en la Copa Davis
+        representando a su país.
+\end{itemize}
+
+En base a la información anterior, su modelo debe proveer operaciones para cubrir los cálculos listados a continuación.
+Tenga presente que su modelo no debe realizar estos cálculos todavía, solamente debe declarar cómo se
+llamará la operación que entregue dicho cálculo y los parámetros que podrían ser relevantes.
+
+\begin{itemize}
+    \item Para cada deportista, necesitamos calcular las ganancias totales que acumulará hasta diciembre del
+        año actual (sea cual sea este año).
+    \item Para cada deportista, necesitamos saber si alguna vez ha representado a su país.
+    \item Para cada equipo de fútbol, necesitamos saber su listado de jugadores.
+    \item Para cada equipo de fútbol, necesitamos saber cuánto están pagando en total por concepto
+        de contratos a sus jugadores.
+    \item Por cada \itt{manager}, queremos saber el promedio de sueldo anual de sus jugadores de fútbol.
+    \item Por cada \itt{manager}, queremos saber el promedio de ganancias acumuladas hasta el año anterior
+        para sus jugadores de tenis.
+\end{itemize}
+
+\begin{ProbPart}%[difficulty={10}]
+
+    Diseñe un diagrama de dominio que modele adecuadamente esta situación.
+\end{ProbPart}
+
+\begin{ProbPart}%[difficulty={10}]
+
+    Diseñe un diagrama de clases completo, que modele adecuadamente esta situación, considerando como mínimo
+    todos los atributos mencionados en la descripción anterior. Si bien usted no debe mencionar
+    en su diagrama ni los \itt{setters} ni \itt{getters}, sí incluya todas aquellas operaciones que
+    permitan obtener toda información específicamente solicitada en la descripción anterior.
+
+\end{ProbPart}
+
+\begin{ProbPart}%[difficulty={10}]
+
+    ¿Qué agregaría en sus diagramas anteriores si ahora se le solicita considerar a entrenadores de equipos de fútbol?  
+    Para este caso suponga que:
+\begin{itemize}
+    \item Todo entrenador de fútbol fue anteriormente un jugador profesional.
+    \item Todo entrenador está asociado a lo más a un equipo de fútbol o a la selección de algún país.
+    \item En ambos casos, suponga que el contrato entre un entrenador y un equipo (o selección) tiene las mismas características 
+        que un contrato para los jugadores profesionales.
+    \item De un entrenador también tendremos registro de las ganancias que acumuló (sólo como entrenador) hasta el
+        último contrato no considerando al actual.
+\end{itemize}
+
+\end{ProbPart}
+
+\end{Problem}
+
+\end{spacing}
+\end{document}

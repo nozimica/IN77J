@@ -1,4 +1,4 @@
-CN=02
+CN=03a
 
 TEXNAME=e$(CN)
 TEXCOMM=pdflatex -halt-on-error

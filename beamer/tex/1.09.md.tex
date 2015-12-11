@@ -1,32 +1,100 @@
-## Descriptors
+# Arquitectura
 
-### Descriptors
+## Definición de arquitectura
 
-\subsubtitleB{Definición de \itt{descriptors}}
+### Definición de arquitectura
 
-Junto con los modelos de clase, aparece el concepto de \texthigh{\itt{descriptors}}:\newline
+\subsubtitleB{¿A qué nos referimos con arquitectura?}
+\vspace{-0.5em}
+\buildrboxx{}
+Establece la estructura global de una aplicación.
+\finishrboxx
 
-\begin{description}
-\item[Full descriptor:] Es la descripción completa necesaria para describir a un objeto, considerando
-todos sus atributos, operaciones, métodos y asociaciones.
-\item[Segment descriptor:] Son los elementos que efectivamente se declaran en un modelo o en el código
-(clases, por ejemplo) y que contienen las propiedades heredables que son:
-    \begin{footnotesize}
-    \begin{itemize}
-        \item Atributos (\textsc{ATT}).
-        \item Operaciones.
-        \item Métodos.
-        \item Participación en asociaciones (pseudoatributos).
-    \end{itemize}
-    \end{footnotesize}
-\end{description}
+- Define el marco para el diseño y el desarrollo de un Sistema de Información.
+    - Es un modelo que contiene:
+        - Un conjunto de componentes.
+        - Y sus relaciones.
+    - Provee una visión global para simplificar la comprensión de la solución modelada.
+- El nivel de abstracción es más alto que el del diseño.
 
-### Full descriptors
+### Definición de arquitectura
 
-\subsubtitleB{¿Para qué sirven?}
+\subsubtitleB{Características de las arquitecturas}
 
-- Muestran un resumen de las características más importantes de las clases.
-    - Características desde un punto de vista estructural, no conceptual.
-- Son especialmente útiles cuando existen relaciones de herencia.
-    - Permiten ver cómo los métodos \texthigh{sobreescritos} ocultan a los de
-    las clases ascendientes.
+- Se puede refinar en sucesivas iteraciones.
+    - Va mostrando cada vez \texthigh{más detalles}.
+    - Así se van modelando cada uno de los módulos que componen la solución.
+
+- Primero la arquitectura, después el diseño:
+    - El nivel de abstracción de la arquitectura permite manejar de mejor manera la complejidad
+    del problema.
+    - Una vez que esta complejidad esté bajo control, se profundiza en el
+    problema hasta llegar a la solución.
+
+- Se enfoca en diversos aspectos del problema.
+    - La estructura interna.
+    - La estructura de los datos.
+    - La estructura informática.
+
+### Definición de arquitectura
+
+\subsubtitleB{Arquitectura lógica: enfoque \itt{Top-Down}}
+
+- Es una de las maneras más típicas de abordar un problema.
+- Al principio se tiene una visión global del sistema.
+    - Se lo ve como un todo unitario.
+- Luego, se identifica sus componentes internos más primarios.
+- Más adelante, se sigue \texthigh{profundizando} en el análisis,
+caracterizando más detalladamente cada uno de esos componentes.
+- Se profundiza tantas veces como sea necesario:
+    - Para obtener una granularidad suficiente como para describir los
+    detalles escenciales de cada componente.
+
+### Definición de arquitectura
+
+\subsubtitleB{Arquitectura lógica: enfoque \itt{Top-Down}}
+
+\def\distFlow{2em}
+\begin{center}\begin{tikzflowchart}
+  \tikzstyle{flowElemSp} = [normalfig, rounded corners=3mm, text width=11mm, line width=1.5pt, minimum height=1.5em]
+  \tikzstyle{flowSp2} = [flow2, flowElemSp, draw=black!50!blue]
+  \tikzstyle{flowSp3} = [flow3, flowElemSp, draw=black!50!green]
+  \tikzstyle{flowSp2in} = [flow2, flowElemSp, draw=black!50!blue]
+  \tikzstyle{flowSp3in} = [flow3, flowElemSp, draw=black!50!green]
+  \node (a1) [flowSp3,text width=40mm, text height=2em] {};
+    \node[anchor=center] at (a1.center) {Sistema};
+  \node (a2) [flowSp3, text width=80mm, text height=3em, below=\distFlow of a1] {};
+    \node[anchor=north] at (a2.north) {Sistema};
+    \node [flowSp2, anchor=west] at ($ (a2.west)+(1em,-0.5em) $) {Comp1};
+    \node [flowSp2, anchor=center] at ($ (a2.center)+(0,-0.5em) $) {Comp2};
+    \node [flowSp2, anchor=east] at ($ (a2.east)+(-1em,-0.5em) $) {Comp3};
+  \node (a2a) [flowSp3, text width=34mm, text height=3em, below=\distFlow of a2] {};
+    \node[anchor=north] at (a2a.north) {Sistema, Comp2};
+    \node [flowSp2, anchor=west] at ($ (a2a.west)+(0.5em,-0.5em) $) {Comp2a};
+    \node [flowSp2, anchor=east] at ($ (a2a.east)+(-0.5em,-0.5em) $) {Comp2b};
+  \node (a2b) [flowSp3, text width=34mm, text height=3em, left=0.6em of a2a] {};
+    \node[anchor=north] at (a2b.north) {Sistema, Comp1};
+    \node [flowSp2, anchor=west] at ($ (a2b.west)+(0.5em,-0.5em) $) {Comp1a};
+    \node [flowSp2, anchor=east] at ($ (a2b.east)+(-0.5em,-0.5em) $) {Comp1b};
+  \node (a2c) [flowSp3, text width=34mm, text height=3em, right=0.6em of a2a] {};
+    \node[anchor=north] at (a2c.north) {Sistema, Comp3};
+    \node [flowSp2, anchor=west] at ($ (a2c.west)+(0.5em,-0.5em) $) {Comp3a};
+    \node [flowSp2, anchor=east] at ($ (a2c.east)+(-0.5em,-0.5em) $) {Comp3b};
+  \draw[arrow,line width=2pt] (a1) -- (a2);
+  \draw[arrow,line width=2pt] (a2) -- (a2a);
+  \draw[arrow,line width=2pt] (a2) -- (a2b);
+  \draw[arrow,line width=2pt] (a2) -- (a2c);
+\end{tikzflowchart}\end{center}
+
+### Definición de arquitectura
+
+\subsubtitleB{Arquitectura lógica: enfoque \itt{Top-Down}}
+
+- ¿Cuál será el término del refinamiento?
+    - Una descripción muy detalada de la solución.
+    - Una descripción que caracterice las componentes más internas de cada módulo.
+        - Corresponde al \texthigh{diagrama de clases}
+
+- Vale decir:
+    - En un extremo tenemos la arquitectura.
+    - En el otro extremo tenemos el diseño de clases.

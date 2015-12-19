@@ -4,6 +4,7 @@
 \newcommand{\hmwkDueDate}{Entrega: mi\'{e}rcoles 16 de diciembre de 2015}
 \newcommand{\hmwkClassTime}{}
 \usepackage{in77j.exercise}
+\usepackage{mathabx}
 
 \setlength{\parskip}{0.7\baselineskip}
 \setitemize{topsep=0pt}
@@ -100,6 +101,95 @@ llamará la operación que entregue dicho cálculo y los parámetros que podría
 \end{ProbPart}
 
 \end{Problem}
+
+\begin{NewAnswer}
+
+\begin{ProbPart}
+
+\begin{center}
+\begin{tikzpicture}
+    \umlclass[x=0,y=0]{Deportista}{-- nombre\\-- añoNac\\-- añosJugadorProf\\-- país}{}
+    \umlclass[x=-6,y=-6]{Manager}{-- nombre}{}
+    \umlclass[x=-7,y=0]{Tenista}{-- gananciasAnteriores\\-- gananciasActuales\\-- partidosDavis}{}
+    \umlclass[x=7,y=0]{Futbolista}{-- gananciasAcumuladas\\-- partidosSelección}{}
+    \umlclass[x=7,y=-6]{Contrato}{-- añoInicio\\-- añoTérmino\\-- sueldoAnual}{}
+    \umlclass[x=0,y=-6]{EquipoFútbol}{-- nombre}{}
+    \umlassoc[name=estenista]{Tenista}{Deportista}
+    \draw (estenista-1) {} node[above=2mm] (tr) {es $\blacktriangleright$};
+    \umlassoc[name=esfutbolista]{Futbolista}{Deportista}
+    \draw (esfutbolista-1) {} node[above=2mm] (tr) {$\blacktriangleleft$ es};
+    \umlassoc[name=representa,attr1=|1,attr2=|*,pos1=0.1,pos2=0.9]{Manager}{Deportista}
+    \draw (representa-1) {} node[above=2mm,rotate=45] (tr) {representa $\blacktriangleright$};
+    \umlassoc[name=tiene,attr1=|1,attr2=|0..1,pos1=0.1,pos2=0.9]{Futbolista}{Contrato}
+    \draw (tiene-1) {} node[above=2mm,rotate=-90] (tr) {tiene $\blacktriangleright$};
+    \umlassoc[name=con,attr1=|*,attr2=|1,pos1=0.1,pos2=0.9]{Contrato}{EquipoFútbol}
+    \draw (con-1) {} node[above=2mm] (tr) {$\blacktriangleleft$ con};
+\end{tikzpicture}
+\end{center}
+
+
+\end{ProbPart}
+
+\begin{ProbPart}
+
+\begin{center}
+\begin{tikzpicture}
+    \umlclass[x=0,y=0,type=abstract]{Deportista}{-- nombre\\-- añoNac\\-- añosJugadorProf\\-- país}{\umlvirt{+ calculaGananciasTotales()}\\\umlvirt{+ haRepresentadoPaís()}}
+    \umlclass[x=-6,y=-6]{Manager}{-- nombre}{+ obtListadoDeportistas()\\+ promSueldoAnualFutbolistas()\\+ promGananciasAñoAntTenistas()}
+    \umlclass[x=-7,y=0]{Tenista}{-- gananciasAnteriores\\-- gananciasActuales\\-- partidosDavis}{+ calculaGananciasTotales()\\+ haRepresentadoPaís()}
+    \umlclass[x=7,y=0]{Futbolista}{-- gananciasAcumuladas\\-- partidosSelección}{+ calculaGananciasTotales()\\+ haRepresentadoPaís()}
+    \umlclass[x=2,y=-6]{EquipoFútbol}{-- nombre}{+ obtListadoJugadores()\\+ pagoTotalJugadores()}
+    \umlinherit{Tenista}{Deportista}
+    \umlinherit{Futbolista}{Deportista}
+    \umlaggreg[name=enequipo,attr1=|0..1,attr2=|*,pos1=0.2,pos2=0.9]{EquipoFútbol}{Futbolista}
+    \umlassocclass[x=7,y=-5]{Contrato}{enequipo-1}{-- añoInicio\\-- añoTérmino\\-- sueldoAnual}{}
+    \umlassoc[attr1=representante|1,attr2=|*,pos1=0.2,pos2=0.9]{Manager}{Deportista}
+    % \umlassoc[name=tiene,attr1=|1,attr2=|0..1,pos1=0.1,pos2=0.9]{Futbolista}{Contrato}
+    % \umlassoc[name=con,attr1=|*,attr2=|1,pos1=0.1,pos2=0.9]{Contrato}{EquipoFútbol}
+\end{tikzpicture}
+\end{center}
+
+
+\end{ProbPart}
+
+\begin{ProbPart}
+
+\begin{center}
+\scalebox{0.8}{%
+\begin{tikzpicture}
+    \umlclass[x=0,y=0,type=abstract]{Deportista}{-- nombre\\-- añoNac\\-- añosJugadorProf\\-- país}{\umlvirt{+ calculaGananciasTotales()}\\\umlvirt{+ haRepresentadoPaís()}}
+    \umlclass[x=-12,y=0]{Manager}{-- nombre}{+ obtListadoDeportistas()\\+ promSueldoAnualFutbolistas()\\+ promGananciasAñoAntTenistas()}
+    \umlclass[x=-12,y=-6]{Tenista}{-- gananciasAnteriores\\-- gananciasActuales\\-- partidosDavis}{+ calculaGananciasTotales()\\+ haRepresentadoPaís()}
+    \umlclass[x=0,y=-6]{Futbolista}{-- gananciasAcumuladas\\-- partidosSelección}{+ calculaGananciasTotales()\\+ haRepresentadoPaís()}
+    \umlclass[x=3,y=-13]{EquipoFútbol}{-- nombre}{+ obtListadoJugadores()\\+ pagoTotalJugadores()}
+    \umlclass[x=-3,y=-13]{Selección}{-- país}{}
+    \umlclass[x=0,y=-17,type=abstract]{Plantel}{}{}
+    \umlclass[x=-7,y=-17]{Entrenador}{-- gananciasAcumEntrenador}{}
+%
+    \umlVHVinherit[anchors=90 and -130]{Tenista}{Deportista}
+    \umlinherit{Futbolista}{Deportista}
+    \umlaggreg[name=enequipo,attr1=|0..1,attr2=|*,pos1=0.2,pos2=0.8]{EquipoFútbol}{Futbolista}
+    \umlaggreg[attr1=|0..1,attr2=|*,pos1=0.2,pos2=0.8]{Selección}{Futbolista}
+%
+    \umlassoc[attr1=representante|1,attr2=|*,pos1=0.2,pos2=0.9]{Manager}{Deportista}
+    \umlassoc[name=enseleccion,attr1=|1,attr2=|0..1,pos1=0.2,pos2=0.9]{Entrenador}{Plantel}
+    \umlVHinherit{Entrenador}{Futbolista}
+    \umlinherit{EquipoFútbol}{Plantel}
+    \umlinherit{Selección}{Plantel}
+%
+    \umlassocclass[x=6,y=-9]{ContratoFubolista}{enequipo-1}{}{}
+    \umlassocclass[x=-3,y=-20]{ContratoEntrenador}{enseleccion-1}{}{}
+    \umlclass[x=6,y=-20,type=abstract]{Contrato}{-- añoInicio\\-- añoTérmino\\-- sueldoAnual}{}
+    \umlinherit{ContratoFubolista}{Contrato}
+    \umlinherit{ContratoEntrenador}{Contrato}
+\end{tikzpicture}
+}
+\end{center}
+
+
+\end{ProbPart}
+
+\end{NewAnswer}
 
 \end{spacing}
 \end{document}

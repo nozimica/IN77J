@@ -1,7 +1,7 @@
 CN=03a
 
 TEXNAME=e$(CN)
-TEXCOMM=pdflatex -halt-on-error
+TEXCOMM=xelatex -halt-on-error
 
 default: $(TEXNAME).pdf
 

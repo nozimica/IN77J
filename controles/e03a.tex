@@ -1,7 +1,7 @@
 \documentclass[11pt,letterpaper]{article}
 
-\newcommand{\hmwkCode}{Control 3, primera parte}
-\newcommand{\hmwkDueDate}{Entrega: mi\'{e}rcoles 16 de diciembre de 2015}
+\newcommand{\hmwkCode}{Control 3}
+\newcommand{\hmwkDueDate}{Entrega: mi\'{e}rcoles 23 de diciembre de 2015}
 \newcommand{\hmwkClassTime}{}
 \usepackage{in77j.exercise}
 \usepackage{mathabx}
@@ -185,10 +185,10 @@ llamará la operación que entregue dicho cálculo y los parámetros que podría
     \umlinherit{EquipoFútbol}{Plantel}
     \umlinherit{Selección}{Plantel}
 %
-    \umlassocclass[x=6,y=-9]{ContratoFubolista}{enequipo-1}{}{}
+    \umlassocclass[x=6,y=-9]{ContratoFutbolista}{enequipo-1}{}{}
     \umlassocclass[x=-3,y=-20]{ContratoEntrenador}{enseleccion-1}{}{}
     \umlclass[x=6,y=-20,type=abstract]{Contrato}{-- añoInicio\\-- añoTérmino\\-- sueldoAnual}{}
-    \umlinherit{ContratoFubolista}{Contrato}
+    \umlinherit{ContratoFutbolista}{Contrato}
     \umlinherit{ContratoEntrenador}{Contrato}
 \end{tikzpicture}
 }
@@ -203,20 +203,62 @@ llamará la operación que entregue dicho cálculo y los parámetros que podría
 
 \begin{Problem}
 
-    En este problema utilizaremos la solución planteada para el problema 1 en este mismo documento. Vale decir,
-    revísela bien porque solamente se podrá usar lo que ahí aparece, no lo que usted modeló en su respuesta a
-    ese problema hace unos días.
+    En este problema utilizaremos la solución planteada para el problema 1 en este mismo enunciado.
+    Revísela bien porque solamente se podrá usar lo que ahí aparece, no lo que usted modeló para su respuesta a
+    ese problema hace unos días atrás.
 
 \begin{ProbPart}
 
-Ahora usted debe modelar un proceso que al ejecutarse analiza la información contenida en las instancias
-de cada clase y que entrega lo siguiente:
+    Analice la implementación en Java de las tres clases siguientes (donde consideramos solamente los
+    atributos de cada una, no sus métodos), fijándose en cómo se puede
+implementar una ``clase de asociación'':
 
-\begin{itemize}
-    \item .
+    \begin{lstlisting}
+public class Futbolista Extends Deportista {
+    private long gananciasAcumuladas;
+    private int partidosSeleccion;
+    private ContratoFutbolista contratoFutbolista;
+    private Seleccion seleccion;
+}
+
+public class ContratoFutbolista Extends Contrato {
+    private Futbolista futbolista;
+    private EquipoFutbol equipoFutbol;
+}
+
+public class EquipoFutbol Extends Plantel {
+    private String nombre;
+    private ArrayList<ContratoFutbolista> contratoFutbolistas;
+}
+    \end{lstlisting}
+
+Indique ---para todas las clases que serán listadas a continuación--- la totalidad de sus atributos,
+vale decir no solamente aquellos explícitamente mencionados en la implementación, sino todos los
+que esas clases provean:
+
+\begin{itemize}[itemsep=0pt]
+    \item Futbolista; Entrenador; ContratoFutbolista; ContratoEntrenador; EquipoFútbol
 \end{itemize}
 
+\end{ProbPart}
 
+\begin{ProbPart}
+
+Imagínese que está usted pensando en cómo se implementará un módulo de un programa, donde
+para el entrenador de una selección de fútbol, se desea saber la suma de todos los sueldos anuales de los
+futbolistas que en el momento actual estén asociados a esa selección de fútbol.
+
+Suponga que usted tiene una instancia de la clase \bld{Entrenador}, que representa al entrenador de la
+selección de fútbol a la cual se le calculará lo expresado en el párrafo anterior.
+
+Indique paso a paso qué otros objetos necesita, y qué atributos y/u operaciones deberá utilizar para
+obtener el cálculo pedido. 
+
+\bld{Observaciones}
+\begin{itemize}[itemsep=0pt]
+    \item No le estamos solicitando que programe esta solución.
+    \item Solamente debe usted decir ``qué objetos invitar'' y para todos ellos, ``qué cosas les preguntaría''.
+\end{itemize}
 \end{ProbPart}
 
 \end{Problem}

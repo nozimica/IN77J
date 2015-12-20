@@ -104,9 +104,12 @@ llamará la operación que entregue dicho cálculo y los parámetros que podría
 
 \begin{NewAnswer}
 
+    A continuación se presenta una solución al problema \theExercise, para cada una de sus partes.
+
 \begin{ProbPart}
 
 \begin{center}
+\scalebox{0.8}{%
 \begin{tikzpicture}
     \umlclass[x=0,y=0]{Deportista}{-- nombre\\-- añoNac\\-- añosJugadorProf\\-- país}{}
     \umlclass[x=-6,y=-6]{Manager}{-- nombre}{}
@@ -125,6 +128,7 @@ llamará la operación que entregue dicho cálculo y los parámetros que podría
     \umlassoc[name=con,attr1=|*,attr2=|1,pos1=0.1,pos2=0.9]{Contrato}{EquipoFútbol}
     \draw (con-1) {} node[above=2mm] (tr) {$\blacktriangleleft$ con};
 \end{tikzpicture}
+}
 \end{center}
 
 
@@ -133,6 +137,7 @@ llamará la operación que entregue dicho cálculo y los parámetros que podría
 \begin{ProbPart}
 
 \begin{center}
+\scalebox{0.8}{%
 \begin{tikzpicture}
     \umlclass[x=0,y=0,type=abstract]{Deportista}{-- nombre\\-- añoNac\\-- añosJugadorProf\\-- país}{\umlvirt{+ calculaGananciasTotales()}\\\umlvirt{+ haRepresentadoPaís()}}
     \umlclass[x=-6,y=-6]{Manager}{-- nombre}{+ obtListadoDeportistas()\\+ promSueldoAnualFutbolistas()\\+ promGananciasAñoAntTenistas()}
@@ -147,10 +152,13 @@ llamará la operación que entregue dicho cálculo y los parámetros que podría
     % \umlassoc[name=tiene,attr1=|1,attr2=|0..1,pos1=0.1,pos2=0.9]{Futbolista}{Contrato}
     % \umlassoc[name=con,attr1=|*,attr2=|1,pos1=0.1,pos2=0.9]{Contrato}{EquipoFútbol}
 \end{tikzpicture}
+}
 \end{center}
 
 
 \end{ProbPart}
+
+\newpage
 
 \begin{ProbPart}
 
@@ -190,6 +198,29 @@ llamará la operación que entregue dicho cálculo y los parámetros que podría
 \end{ProbPart}
 
 \end{NewAnswer}
+
+\newpage
+
+\begin{Problem}
+
+    En este problema utilizaremos la solución planteada para el problema 1 en este mismo documento. Vale decir,
+    revísela bien porque solamente se podrá usar lo que ahí aparece, no lo que usted modeló en su respuesta a
+    ese problema hace unos días.
+
+\begin{ProbPart}
+
+Ahora usted debe modelar un proceso que al ejecutarse analiza la información contenida en las instancias
+de cada clase y que entrega lo siguiente:
+
+\begin{itemize}
+    \item .
+\end{itemize}
+
+
+\end{ProbPart}
+
+\end{Problem}
+
 
 \end{spacing}
 \end{document}

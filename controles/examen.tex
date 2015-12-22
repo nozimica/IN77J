@@ -1,7 +1,7 @@
 \documentclass[11pt,letterpaper]{article}
 
 \newcommand{\hmwkCode}{Examen}
-\newcommand{\hmwkDueDate}{Entrega: mi\'{e}rcoles 23 de diciembre de 2015}
+\newcommand{\hmwkDueDate}{Entrega: lunes 28 de diciembre de 2015}
 \newcommand{\hmwkClassTime}{}
 \usepackage{in77j.exercise}
 \usepackage{mathabx}
@@ -17,19 +17,63 @@
 
 \begin{Problem}
 
-    \bld{Ámbito del problema:} Considere un restaurant que está preparado para procesar
-    pedidos de diversas fuentes:
-    \begin{itemize}[itemsep=0pt]
-        \item De clientes presentes físicamente en el local.
-        \item De clientes que hacen su pedido telefónicamente.
-        \item De clientes que hacen su pedido por internet.
+    \bld{Ámbito del problema:} Un restaurant necesita modelar un sistema que le permita procesar
+    los pedidos de sus clientes desde su página web. Hasta ahora solamente atendían de manera presencial, pero se
+    han decidido a dar un paso adelante y ser capaces de procesar pedidos de sus clientes a través
+    de internet.
+    
+    Estos pedidos
+    están pensados para ser retirados en el local por los mismos clientes ---media hora después de haber sido
+    realizados--- o para ser entregados a domicilio.
+
+    Algunas observaciones:
+    \begin{itemize}[itemsep=0pt,topsep=0pt]
+        \item Un pedido consiste en un listado de productos, de los cuales se indica la cantidad solicitada.
+        \item Junto con lo anterior, los pedidos deben indicar si el cliente
+            los retirará personalmente o si prefiere recibirlos en su domicilio.
+        \item Los productos son seleccionados por el cliente de un menú donde se lista, en una sola y larga
+            página, todos los productos (ya sea platos de comida, bebestibles, postres, etc.).
+        \item Los clientes se identifican con su nombre y su número de teléfono. Este último dato
+            se usa como el identificador.
+        \item El pago de los pedidos se hace siempre en efectivo y 
+            cuando el cliente recibe los productos, ya sea cuando los
+    va a buscar al local o cuando los recibe en su domicilio.
+        \item Por ahora supondremos que ningún cliente se arrepiente de su pedido.
+        \item La cocina del restaurant está ocupada no solamente atentiendo pedidos
+            de internet, sino también procesando los pedidos realizados por los clientes 
+            que están físicamente en los comedores del restaurant.
+        \item Cada vez que un pedido es ingresado a través de internet, queda ``encolado''
+            hasta que un cocinero lo toma para procesarlo. Cuando el cocinero tiene el
+            pedido listo, actualiza en el sistema el estado del pedido, marcándolo como ``listo''.
+        \item Si un cliente llega al local antes de que su pedido esté listo, se le invita a
+            permanecer en un cómodo salón de espera, y cuando el pedido es marcado como ``listo'',
+            se le cobra al cliente y se le entrega su pedido.
+        \item Obviamente, si el cliente llega después de que su pedido esté listo, se le cobra
+            inmediatamente y se le entrega su pedido.
+        \item Para los pedidos a domicilio, éstos son repartidos una vez que han sido marcados
+            como ``listos'' por un cocinero. Suponga por ahora que siempre hay repartidores
+            listos para salir a terreno.
     \end{itemize}
 
-    A continuación le solicitaremos 
-\begin{ProbPart}
+    Considerando el problema completo, realice las siguientes tareas:
 
+    \begin{enumerate}
+        \item Establezca los requisitos funcionales y no funcionales.
+        \item Realice un diagrama de casos de uso para este problema, indicando como mínimo seis
+            casos de uso.
+        \item Escriba la narrativa de los \bld{dos} casos de uso que usted estime como los más
+            importantes de este sistema. Justifique su decisión.
+        \item Identifique las clases candidatas mediante un diagrama de dominio, indicando 
+            los atributos más importantes.
+        \item Realice un diagrama de secuencia que ilustre el proceso en que un cliente
+            realiza un pedido desde la página web. Considere toda la información que el sistema necesita
+            recibir de parte del cliente, y la información que este último requiere del sistema.
+        \begin{itemize}
+            \item Determine bien en este diagrama las interfaces, las entidades y el o los controladores.
+        \end{itemize}
+        \item Realice el diagrama de clases completo.
+    \end{enumerate}
 
-\end{ProbPart}
 
 \end{Problem}
 

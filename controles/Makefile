@@ -1,4 +1,4 @@
-CN=03a
+CN=xamen
 
 TEXNAME=e$(CN)
 TEXCOMM=xelatex -halt-on-error
@@ -14,7 +14,7 @@ $(TEXNAME).pdf: clean $(TEXNAME).tex in77j.exercise.sty
 	> flags.tex
 	$(TEXCOMM) $(TEXNAME).tex
 	$(TEXCOMM) $(TEXNAME).tex
-	$(MAKE) reduce
+	# $(MAKE) reduce
 
 clean:
 	rm -f *.aux *.blg *.log *.toc *.lot *.lof *.bbl *.nav *.out *.snm *.vrb *.xdv

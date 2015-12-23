@@ -7,7 +7,7 @@
 \usepackage{mathabx}
 
 \setlength{\parskip}{0.7\baselineskip}
-\setitemize{topsep=0pt}
+\setitemize{topsep=0pt,itemsep=1pt}
 \begin{document}
 \begin{spacing}{1.2}
 \thispagestyle{empty}
@@ -17,25 +17,30 @@
 
 \begin{Problem}
 
-    Un restaurant necesita modelar un sistema que le permita procesar
-    los pedidos de sus clientes desde su página web. Hasta ahora solamente atendían de manera presencial, pero se
-    han decidido a dar un paso adelante y ser capaces de procesar pedidos de sus clientes a través
-    de internet.
-    
-    Estos pedidos
+    Los dueños de un restaurant que hasta ahora solamente atendía de manera presencial, se
+    han decidido a dar un paso adelante y quieren procesar pedidos de sus clientes a través
+    de internet.  Estos pedidos
     están pensados para ser retirados en el local por los mismos clientes o para ser entregados a domicilio.
 
     Algunas observaciones:
-    \begin{itemize}[itemsep=0pt,topsep=0pt]
-        \item Un pedido consiste en un listado de productos, de los cuales se indica la cantidad solicitada.
+    \begin{itemize}
+        \item Un pedido consiste en un listado de productos, de los cuales se indica la cantidad solicitada de cada uno.
         \item Junto con lo anterior, los pedidos deben indicar si el cliente
             los retirará personalmente o si prefiere recibirlos en su domicilio.
-        \item Los productos son seleccionados por el cliente de un menú donde se lista, en una sola y larga
+        \item Los productos son seleccionados por el cliente a partir de un menú donde se lista, en una sola y larga
             página, todos los productos (ya sea platos de comida, bebestibles, postres, etc.).
-        \item Los clientes se identifican con su nombre y su número de teléfono. Este último dato
-            se usa como el identificador.
+        \begin{itemize}
+            \item Las bebidas solamente indican su nombre.
+            \item Los platos de comida, \itt{sandwichs} y postres deben indicar también sus ingredientes.
+        \end{itemize}
+        \item A los clientes se les pide su nombre, dirección y número de teléfono. Este último dato
+            se usa como identificador.
+        \item Se debe reconocer a los clientes que ya han hecho un pedido antes, para ofrecerles promociones.
+        \begin{itemize}
+            \item Cada pedido del cliente le permite acumular 1 punto por cada \$1.000 de compra.
+        \end{itemize}
         \item El pago de los pedidos se hace siempre en efectivo y 
-            cuando el cliente recibe los productos, ya sea cuando los
+            después de que el cliente reciba los productos, ya sea cuando los
     va a buscar al local o cuando los recibe en su domicilio.
         \item Por ahora supondremos que ningún cliente se arrepiente de su pedido.
         \item La cocina del restaurant está ocupada no solamente atentiendo pedidos
@@ -49,9 +54,11 @@
             se le cobra al cliente y se le entrega su pedido.
         \item Obviamente, si el cliente llega después de que su pedido esté listo, se le cobra
             inmediatamente y se le entrega su pedido.
-        \item Para los pedidos a domicilio, éstos son repartidos una vez que han sido marcados
+        \item Los pedidos a domicilio son repartidos una vez que hayan sido marcados
             como ``listos'' por un cocinero. Suponga por ahora que siempre hay repartidores
             listos para salir a terreno.
+        \item Es necesario que para todo envío a domicilio quede registrado el nombre del repartidor que
+            lo llevó a cabo.
     \end{itemize}
 
     Considerando el problema completo, realice las siguientes tareas:
@@ -62,15 +69,24 @@
             casos de uso.
         \item Escriba la narrativa de los \bld{dos} casos de uso que usted estime como los más
             importantes de este sistema. Justifique su decisión.
-        \item Identifique las clases candidatas mediante un diagrama de dominio, indicando 
-            los atributos más importantes.
+        % \item Identifique las clases candidatas mediante un diagrama de dominio, indicando 
+        %     los atributos más importantes.
         \item Realice un diagrama de secuencia que ilustre el proceso en que un cliente
             hace un pedido desde la página web. Considere toda la información que el sistema necesita
             recibir de parte del cliente, y la información que este último requiere del sistema.
         \begin{itemize}
             \item Determine bien en este diagrama las interfaces, las entidades y el o los controladores.
+            \item Considere este proceso desde el momento en que el cliente visita la página para hacer
+                el pedido, hasta que este último está ya ingresado en el sistema.
+            \item Explique qué cambiaría usted en este diagrama para proveer dos páginas web distintas,
+                una para \itt{notebooks} y computadores de escritorio; y otra para dispositivos móviles.
         \end{itemize}
-        \item Realice el diagrama de clases completo.
+        \item Realice el diagrama de clases completo, el cual debe ser capaz de representar todas
+            las instancias involucradas en este problema.
+        \begin{itemize}
+            \item No olvide pensar en cómo está estructurado un pedido.
+            \item Incorpore en este modelo adecuadamente las características ---mencionadas en la descripción--- de los productos ofrecidos.
+        \end{itemize}
     \end{enumerate}
 
 \end{Problem}

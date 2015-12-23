@@ -164,8 +164,8 @@
 \newcounter{nzuccounter}
 \newcommand{\nzuctitledef}{Caso de uso}
 \newcommand{\nzuctitle}[1]{\renewcommand{\nzuctitledef}{#1}}
-\newenvironment{nzusecase}[1][\scriptsize]{#1\begin{xtabular}{lcp{0.7\textwidth}}\toprule}
-{\bottomrule\end{xtabular}}
+\newenvironment{nzusecase}[1][\scriptsize]{#1\begin{tabular}{lcp{0.7\textwidth}}\toprule}
+{\bottomrule\end{tabular}\vspace{2em}}
 \newcommand*{\nzucheader}[1]{\bld{\nzuctitledef~\stepcounter{nzuccounter}\arabic{nzuccounter}} & & \bld{#1} \\ \midrule}
 \newcommand*{\nzucitem}[2]{\itt{#1:} & & #2 \\ \midrule}
 \newcommand*{\nzucitembig}[2]{\multicolumn{3}{l}{\itt{#1:}} \\%
@@ -175,3 +175,14 @@
         }
     } \\%
 }
+
+\newcommand*{\tikzinlinec}[2][0.6]{%
+    \begin{center}%
+    \scalebox{#1}{%
+    \begin{tikzpicture}%
+        #2%
+    \end{tikzpicture}%
+    }%
+    \end{center}%
+}
+

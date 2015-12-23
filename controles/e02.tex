@@ -71,25 +71,26 @@ Para cada una de las narrativas anteriores, haga el diagrama de secuencia ilustr
 
 El caso de uso es:
 
-\centering\scalebox{0.8}{%
 \begin{tikzpicture}%
     \umlactor[x=-3,y=-2]{Paciente}
-    \umlactor[x=15,y=-2]{Funcionario}
-    \umlactor[x=15,y=-6]{Doctor}
+    \umlactor[x=13,y=-3]{Funcionario}
+    \umlactor[x=13,y=-10]{Médico}
     \begin{umlsystem}[x=2]{Hospital}
-        \umlusecase[x=3,y=2,name=anular]{Anular hora médica}
-        \umlusecase[x=3,name=agendarMedico,width=7em]{Agenda hora\\con médico}
-        \umlusecase[y=-2,name=calendDoc,width=8em]{Obtiene agenda\\del doctor}
-        \umlusecase[x=3,y=-5,name=agendarEspec,width=7em]{Agenda hora\\por especialidad}
-        \umlusecase[x=6,y=-3,name=listadoDocs,width=8em]{Obtiene doctores\\por especialidad}
-        \umlusecase[x=3,y=-7,name=atenderse]{Atenderse}
-        \umlusecase[x=0,y=-9,name=obtFicha,width=6em]{Buscar ficha\\paciente}
-        \umlusecase[x=6,y=-9,name=pagarAtencion,width=6em]{Pagar\\bono}
+        \umlusecase[x=3,y=3,name=anular]{Anular hora médica}
+        \umlusecase[x=3,y=1,name=agendarMedico,width=7em]{Agenda hora\\con médico}
+        \umlusecase[y=-1.5,name=calendDoc,width=8em]{Obtiene agenda\\del médico}
+        \umlusecase[x=3,y=-6,name=agendarEspec,width=7em]{Agenda hora\\por especialidad}
+        \umlusecase[x=6,y=-3.5,name=listadoDocs,width=8em]{Obtiene médicos\\por especialidad}
+        \umlusecase[x=3,y=-8,name=atenderse]{Atenderse}
+        \umlusecase[x=0,y=-10,name=obtFicha,width=6em]{Buscar ficha\\paciente}
+        \umlusecase[x=3,y=-12,name=pagarAtencion,width=6em]{Pagar\\bono}
+        \umlusecase[x=6,y=-10,name=verDoc,width=6em]{Ver al\\médico}
         \umlinclude{agendarMedico}{calendDoc}
         \umlinclude{agendarEspec}{listadoDocs}
         \umlinclude{listadoDocs}{calendDoc}
         \umlinclude{atenderse}{obtFicha}
         \umlinclude{atenderse}{pagarAtencion}
+        \umlinclude{atenderse}{verDoc}
     \end{umlsystem}
     \umlassoc{Paciente}{agendarMedico}
     \umlassoc{Funcionario}{agendarMedico}
@@ -98,21 +99,24 @@ El caso de uso es:
     \umlassoc{Paciente}{anular}
     \umlassoc{Funcionario}{anular}
     \umlassoc{Paciente}{atenderse}
-    \umlassoc{Doctor}{atenderse}
+    \umlassoc{Funcionario}{atenderse}
+    \umlassoc{Médico}{verDoc}
 \end{tikzpicture}%
-}
 
 \end{ProbPart}
 
+\newpage
+
 \begin{ProbPart}[difficulty={30}]
 
-\begin{center}
+    He aquí cuatro ejemplos de narrativas:
+
 \begin{nzusecase}
 \nzucheader{Agendar hora con médico}
 \nzucitem{Alcance}{Módulo principal}
 \nzucitem{Actor principal}{Paciente, Funcionario}
 \nzucitem{Sinopsis}{El paciente solicita una hora para atenderse con un médico en particular, siempre y cuando haya horas disponibles de atención con aquel profesional.}
-\nzucitem{Precondiciones}{}
+\nzucitem{Precondiciones}{El paciente sabe el nombre del médico. El paciente está físicamente en el hospital.}
 \nzucitem{Postcondiciones}{Garantía: El paciente tendrá su hora agendada.}
 \nzucitembig{Escenario principal}{%
     \item Paciente indica el nombre del médico de su preferencia.
@@ -129,15 +133,13 @@ El caso de uso es:
 \item[4a.] Paciente no le sirve o no puede asistir a ninguna de las horas disponibles.
 }
 \end{nzusecase}
-\end{center}
 
-\begin{center}
 \begin{nzusecase}
 \nzucheader{Agendar hora por especialidad}
-\nzucitem{Alcance}{}
+\nzucitem{Alcance}{Módulo principal}
 \nzucitem{Actor principal}{Paciente, Funcionario}
 \nzucitem{Sinopsis}{El paciente solicita una hora para atenderse con cualquier médico disponible de una especialidad en particular.}
-\nzucitem{Precondiciones}{}
+\nzucitem{Precondiciones}{El paciente sabe el nombre de la especialidad. El paciente está físicamente en el hospital.}
 \nzucitem{Postcondiciones}{Garantía: El paciente tendrá su hora agendada.}
 \nzucitembig{Escenario principal}{%
     \item Paciente indica la especialidad en la que necesita atenderse.
@@ -154,15 +156,13 @@ El caso de uso es:
 \item[4a.] Paciente no le sirve o no puede asistir a ninguna de las horas disponibles.
 }
 \end{nzusecase}
-\end{center}
 
-\begin{center}
 \begin{nzusecase}
 \nzucheader{Anular hora con médico}
-\nzucitem{Alcance}{}
+\nzucitem{Alcance}{Módulo principal}
 \nzucitem{Actor principal}{Paciente, Funcionario}
-\nzucitem{Sinopsis}{El paciente solicita anular una hora que tenía previamente agendada con algún doctor en el hospital.}
-\nzucitem{Precondiciones}{}
+\nzucitem{Sinopsis}{El paciente solicita anular una hora que tenía previamente agendada con algún médico en el hospital.}
+\nzucitem{Precondiciones}{El paciente sabe el nombre del médico. El paciente está físicamente en el hospital.}
 \nzucitem{Postcondiciones}{Garantía: El paciente anulará su hora. La hora quedará disponible para otro paciente.}
 \nzucitembig{Escenario principal}{%
     \item Paciente indica el médico y la hora en que tenía agendada una atención.
@@ -171,24 +171,105 @@ El caso de uso es:
     \item Funcionario le confirma al paciente la hora anulada.
 }
 \end{nzusecase}
-\end{center}
 
-\begin{center}
 \begin{nzusecase}
 \nzucheader{Atenderse}
-\nzucitem{Alcance}{}
-\nzucitem{Actor principal}{}
-\nzucitem{Sinopsis}{}
-\nzucitem{Precondiciones}{}
-\nzucitem{Postcondiciones}{}
+\nzucitem{Alcance}{Módulo principal}
+\nzucitem{Actor principal}{Paciente, Funcionario}
+\nzucitem{Sinopsis}{El paciente va al hospital a ser atendido por el médico.}
+\nzucitem{Precondiciones}{El paciente tiene una hora agendada con el médico. El paciente está físicamente en el hospital.}
+\nzucitem{Postcondiciones}{El paciente sale del hospital ya atendido y dependiendo del caso, con un diagnóstico.}
 \nzucitembig{Escenario principal}{%
-\item asdf
+    \item Paciente indica el médico y la hora que tiene agendada.
+    \item Funcionario verifica que el paciente tenga la hora agendada.
+    \item Funcionario indica el valor del bono a cancelar.
+    \item Paciente paga el bono.
+    \item Funcionario se encarga de solicitar que se envíe la ficha del paciente a la oficina del médico.
+    \item Paciente espera a ser atendido por el médico.
+    \item Médico atiende a paciente.
+}
+\nzucitembig{Escenarios alternativos}{%
+\item[2a.] Paciente no tiene hora agendada.
+}
+\nzucitembig{Escenarios alternativos}{%
+\item[4a.] Paciente no puede cancelar bono.
 }
 \end{nzusecase}
-\end{center}
+
 \end{ProbPart}
 
+\newpage
+
 \begin{ProbPart}[difficulty={30}]
+
+\vspace{1em}
+\bld{Agendar hora con médico:}
+
+\tikzinlinec[0.9]{%
+    \begin{umlseqdiag}
+    \umlactor[no ddots]{Paciente}
+    \umlactor[no ddots]{Funcionario}
+    \umlboundary[no ddots]{Sistema}
+    \umlcontrol[no ddots]{Controlador}
+    \umlentity[no ddots]{Médicos}
+    % \umlbasicobject{AgendaMédicos}
+    \begin{umlcall}[op=solicitaHora(médico)]{Paciente}{Funcionario}
+        \begin{umlcall}[op=consultaHoras(médico)]{Funcionario}{Sistema}
+            \begin{umlcall}[op=consultaHoras(médico),return=horasMédico]{Sistema}{Controlador}
+                \begin{umlcall}[op=consultaHoras(médico),return=horasMédico]{Controlador}{Médicos}
+                \end{umlcall}
+            \end{umlcall}
+        \end{umlcall}
+    \end{umlcall}
+    \begin{umlcall}[op=muestraHoras()]{Funcionario}{Paciente}
+    \end{umlcall}
+    \begin{umlcall}[op=seleccionaHora()]{Paciente}{Funcionario}
+        \begin{umlcall}[op=agendar({hora,médico})]{Funcionario}{Sistema}
+            \begin{umlcall}[op=agendar({hora,médico}),return=éxito]{Sistema}{Controlador}
+                \begin{umlcall}[op=agendar({hora,médico}),return=éxito]{Controlador}{Médicos}
+                \end{umlcall}
+            \end{umlcall}
+        \end{umlcall}
+    \end{umlcall}
+    \begin{umlcall}[op=confirmaHora()]{Funcionario}{Paciente}
+    \end{umlcall}
+    \end{umlseqdiag}
+}
+
+
+\vspace{1em}
+\bld{Agendar hora por especialidad}
+
+\tikzinlinec[0.9]{%
+    \begin{umlseqdiag}
+    \umlactor[no ddots]{Paciente}
+    \umlactor[no ddots]{Funcionario}
+    \umlboundary[no ddots]{Sistema}
+    \umlcontrol[no ddots]{Controlador}
+    \umlentity[no ddots]{Médicos}
+    % \umlbasicobject{AgendaMédicos}
+    \begin{umlcall}[op=solicitaHora(espec)]{Paciente}{Funcionario}
+        \begin{umlcall}[op=consultaHoras(espec)]{Funcionario}{Sistema}
+            \begin{umlcall}[op=consultaHoras(espec),return=horasMédicos]{Sistema}{Controlador}
+                \begin{umlcall}[op=consultaHoras(espec),return=horasMédicos]{Controlador}{Médicos}
+                \end{umlcall}
+            \end{umlcall}
+        \end{umlcall}
+    \end{umlcall}
+    \begin{umlcall}[op=muestraHoras()]{Funcionario}{Paciente}
+    \end{umlcall}
+    \begin{umlcall}[op=seleccionaHora()]{Paciente}{Funcionario}
+        \begin{umlcall}[op=agendar({hora,médico})]{Funcionario}{Sistema}
+            \begin{umlcall}[op=agendar({hora,médico}),return=éxito]{Sistema}{Controlador}
+                \begin{umlcall}[op=agendar({hora,médico}),return=éxito]{Controlador}{Médicos}
+                \end{umlcall}
+            \end{umlcall}
+        \end{umlcall}
+    \end{umlcall}
+    \begin{umlcall}[op=confirmaHora()]{Funcionario}{Paciente}
+    \end{umlcall}
+    \end{umlseqdiag}
+}
 
 \end{ProbPart}
 

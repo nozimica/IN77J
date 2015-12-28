@@ -1,7 +1,7 @@
 \documentclass[11pt,letterpaper]{article}
 
 \newcommand{\hmwkCode}{Examen}
-\newcommand{\hmwkDueDate}{Entrega: lunes 28 de diciembre de 2015}
+\newcommand{\hmwkDueDate}{Entrega: miércoles 30 de diciembre de 2015}
 \newcommand{\hmwkClassTime}{}
 \usepackage{in77j.exercise}
 \usepackage{mathabx}
@@ -46,12 +46,20 @@
         \item La cocina del restaurant está ocupada no solamente atentiendo pedidos
             de internet, sino también procesando los pedidos realizados por los clientes 
             que están físicamente en los comedores del restaurant.
-        \item Cada vez que un pedido es ingresado a través de internet, queda ``encolado''
-            hasta que un cocinero lo toma para procesarlo. Cuando el cocinero tiene el
-            pedido listo, actualiza en el sistema el estado del pedido, marcándolo como ``listo''.
+        \item Cada vez que un pedido se ingresa a través de internet, queda ``encolado''
+            hasta que un cocinero lo toma para procesarlo.
+        \begin{itemize}
+            \item Suponga que el cocinero hace todo el proceso, tanto de preparar el plato
+                como de recolectar las bebidas y postres, dejando todo dentro de una caja para que
+                el cliente se la lleve a su casa o para que le sea llevada a su domicilio.
+            \item  El sistema debe proveer una interfaz para ser usada por los cocineros, a través de la cual
+                vean los detalles del pedido y lo marquen como ``procesando''.
+            \item Cuando el cocinero tenga el
+            pedido listo, actualizará en el sistema el estado del pedido marcándolo como ``listo''.
+        \end{itemize}
         \item Si un cliente llega al local antes de que su pedido esté listo, se le invita a
-            permanecer en un cómodo salón de espera, y cuando el pedido es marcado como ``listo'',
-            se le cobra al cliente y se le entrega su pedido.
+            permanecer en un cómodo salón de espera, y cuando el pedido sea marcado como ``listo'',
+            se le cobrará al cliente y se le entregará su pedido.
         \item Obviamente, si el cliente llega después de que su pedido esté listo, se le cobra
             inmediatamente y se le entrega su pedido.
         \item Los pedidos a domicilio son repartidos una vez que hayan sido marcados
@@ -61,6 +69,7 @@
             lo llevó a cabo.
     \end{itemize}
 
+    \vspace{1em}
     Considerando el problema completo, realice las siguientes tareas:
 
     \begin{enumerate}

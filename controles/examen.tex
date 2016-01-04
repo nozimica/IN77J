@@ -39,12 +39,12 @@
         \begin{itemize}
             \item Cada pedido del cliente le permite acumular 1 punto por cada \$1.000 de compra.
         \end{itemize}
-        \item El pago de los pedidos se hace siempre en efectivo y 
+        \item El pago de los pedidos se hace siempre en efectivo y
             después de que el cliente reciba los productos, ya sea cuando los
     va a buscar al local o cuando los recibe en su domicilio.
         \item Por ahora supondremos que ningún cliente se arrepiente de su pedido.
         \item La cocina del restaurant está ocupada no solamente atentiendo pedidos
-            de internet, sino también procesando los pedidos realizados por los clientes 
+            de internet, sino también procesando los pedidos realizados por los clientes
             que están físicamente en los comedores del restaurant.
         \item Cada vez que un pedido se ingresa a través de internet, queda ``encolado''
             hasta que un cocinero lo toma para procesarlo.
@@ -78,7 +78,7 @@
             casos de uso.
         \item Escriba la narrativa de los \bld{dos} casos de uso que usted estime como los más
             importantes de este sistema. Justifique su decisión.
-        % \item Identifique las clases candidatas mediante un diagrama de dominio, indicando 
+        % \item Identifique las clases candidatas mediante un diagrama de dominio, indicando
         %     los atributos más importantes.
         \item Realice un diagrama de secuencia que ilustre el proceso en que un cliente
             hace un pedido desde la página web. Considere toda la información que el sistema necesita
@@ -99,6 +99,44 @@
     \end{enumerate}
 
 \end{Problem}
+
+\begin{NewAnswer}
+    \begin{itemize}
+        \item (4 puntos) Requisitos funcionales y no funcionales.
+        \item (18 puntos) Diagrama de casos de uso:
+        \begin{itemize}
+            \item 3 puntos por cada caso de uso:
+            \item Generar menú de productos.
+            \item Cliente hace un pedido.
+            \item Identificar cliente como conocido
+            \item Cocinero procesa un pedido.
+            \item Cocinero marca un pedido como listo.
+            \item Cliente va a buscar pedido.
+            \item Se envía un pedido a domicilio.
+        \end{itemize}
+        \item Narrativas de casos de uso:
+        \begin{itemize}
+            \item (2 puntos) Estructura de ambas narrativas.
+            \item (4 puntos) Contenido de ambas narrativas.
+        \end{itemize}
+        \item Diagrama de secuencia del proceso de hacer un pedido.
+        \begin{itemize}
+            \item (2 puntos) Determine bien en este diagrama las interfaces, las entidades y el o los controladores.
+            \item (2 puntos) Estructura del diagrama.
+            \item (2 puntos) Explique qué cambiaría usted en este diagrama para proveer dos páginas web distintas,
+                una para \itt{notebooks} y computadores de escritorio; y otra para dispositivos móviles.
+        \end{itemize}
+        \item Diagrama de clases completo.
+        \begin{itemize}
+            \item Clases:
+cliente
+pedido
+producto
+cocinero
+repartidor.
+        \end{itemize}
+    \end{itemize}
+\end{NewAnswer}
 
 \end{spacing}
 \end{document}

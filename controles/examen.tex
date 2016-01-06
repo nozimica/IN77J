@@ -134,10 +134,19 @@
             \item Clases:
             \begin{itemize}
                 \item cliente
-                \item pedido
                 \item producto
+                \item pedido
+                \item detallePedido
                 \item cocinero
-                \item repartidor.
+                \item repartidor (opcional).
+            \end{itemize}
+            \item Relaciones:
+            \begin{itemize}
+                \item agregación de productos en pedido
+                \item clase de asociación detallePedido
+                \item un cliente puede tener muchos pedidos
+                \item un repartidor puede encargarse de muchos pedidos
+                \item un cocinero puede atender muchos pedidos
             \end{itemize}
             \item Penalizaciones: si considera clases que no son tal.
         \end{itemize}

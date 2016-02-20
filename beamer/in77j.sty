@@ -195,13 +195,13 @@
 
 \AtBeginSection[]{%
     \begin{frame}<*>{}
-      % \begin{multicols}{2}
+      \begin{multicols}{2}
         \frametitle{Contenidos}
         \linespread{0.4}
         \scriptsize
         \tableofcontents[currentsection,currentsubsection,sectionstyle=show/show,
           subsectionstyle=show/show/hide]
-      % \end{multicols}
+      \end{multicols}
     \end{frame}
     \addtocounter{framenumber}{-1}% If you don't want them to affect the slide number
 }

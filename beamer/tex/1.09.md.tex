@@ -13,17 +13,21 @@ Establece la estructura global de una aplicación.
 - Define el marco para el diseño y el desarrollo de un Sistema de Información.
     - Es un modelo que contiene:
         - Un conjunto de componentes.
-        - Y sus relaciones.
+        - Sus relaciones.
     - Provee una visión global para simplificar la comprensión de la solución modelada.
-- El nivel de abstracción es más alto que el del diseño.
 
 ### Definición de arquitectura
 
 \subsubtitleB{Características de las arquitecturas}
 
+- El nivel de abstracción es más alto que el del diseño.
 - Se puede refinar en sucesivas iteraciones.
     - Va mostrando cada vez \texthigh{más detalles}.
     - Así se van modelando cada uno de los módulos que componen la solución.
+
+### Definición de arquitectura
+
+\subsubtitleB{Características de las arquitecturas}
 
 - Primero la arquitectura, después el diseño:
     - El nivel de abstracción de la arquitectura permite manejar de mejor manera la complejidad
@@ -84,6 +88,9 @@ caracterizando más detalladamente cada uno de esos componentes.
   \draw[arrow,line width=2pt] (a2) -- (a2a);
   \draw[arrow,line width=2pt] (a2) -- (a2b);
   \draw[arrow,line width=2pt] (a2) -- (a2c);
+  \coordinate[right=30mm of a1] (c1) {};
+  \coordinate[below=35mm of c1] (c2) {};
+  \draw[arrow,draw=red!30,line width=3pt] (c1) -- (c2) node [midway,above,sloped] {\textcolor{red}{\textbf{Refinamiento}}};
 \end{tikzflowchart}\end{center}
 
 ### Definición de arquitectura
@@ -95,6 +102,149 @@ caracterizando más detalladamente cada uno de esos componentes.
     - Una descripción que caracterice las componentes más internas de cada módulo.
         - Corresponde al \texthigh{diagrama de clases}
 
+\vfill
+
 - Vale decir:
-    - En un extremo tenemos la arquitectura.
-    - En el otro extremo tenemos el diseño de clases.
+    - \bld{En un extremo} tenemos la \texthigh{arquitectura}.
+    - \bld{En el otro extremo} tenemos el \texthigh{diseño de clases}.
+
+\buildrboxx{}
+Ojo: El límite entre ambos es difuso.
+\finishrboxx
+
+### Definición de arquitectura
+
+\subsubtitleB{Arquitectura lógica: enfoque \itt{Top-Down}}
+
+- Se hace útil el tener alguna manera de guiar el proceso de refinamiento.
+
+\buildrboxx{}
+Sí existen, y se denominan patrones de arquitectura.
+\finishrboxx
+
+- Son genéricos.
+- La elección de uno u otro depende del problema que se está modelando.
+- Su enfoque es \texthigh{asignar responsabilidades específicas} a los componentes
+resultantes del refinamiento aplicado.
+
+
+### Arquitecturas en acción
+
+\subsubtitleB{Aspectos de una aplicación}
+
+- Toda aplicación es posible de describir como la interacción de diversos aspectos.
+    - No siempre son los mismos.
+    - Una buena definición de aspectos redunda en un diseño más flexible.
+
+- Bondades de dividir un problema, en este caso en aspectos:
+    - Ya hemos visto que todo problema subdividido es más fácil de abordar.
+    - Cada aspecto puede desarrollarse y evolucionar de manera independiente.
+    - Incluso es posible reutilizar aspectos ya modelados y entendidos en otras
+    aplicaciones similares.
+
+### Arquitecturas en acción
+
+\subsubtitleB{Aspectos de una aplicación}
+
+\begin{center}\begin{tikzflowchart}
+  \draw[arrow,draw=red!30,line width=3pt,line cap=round] (0,0) -- (7,0) node [very near start,below] {\textcolor{red}{\textbf{menor}}} node [very near end,below] {\textcolor{red}{\textbf{mayor}}} node [midway,below=4mm] {\textcolor{red}{\textbf{separación de aspectos}}};
+  \draw[arrow,draw=red!30,line width=3pt,line cap=round] (0,0) -- (0,5) node [very near start,above,sloped] {\textcolor{red}{\textbf{menor}}} node [very near end,above,sloped] {\textcolor{red}{\textbf{mayor}}} node [midway,above=4mm,sloped] {\textcolor{red}{\textbf{simplificación}}};
+  \draw[arrow,draw=blue!30,line width=3pt] (1,4) -- (6,1) node [very near start,above,sloped] {\textcolor{blue}{\textbf{arquitectura}}};
+  \draw[arrow,draw=green!60!black,line width=3pt] (1,1) -- (6,4) node [very near end,above,sloped] {\textcolor{green}{\textbf{diseño}}};
+\end{tikzflowchart}\end{center}
+
+
+### Arquitecturas en acción
+
+\subsubtitleB{Aspectos de una aplicación}
+
+- Una separación muy utilizada divide toda la aplicación en tres grandes aspectos:
+
+\begin{center}\begin{tikzflowchart}
+  \node [startstop, text width=20mm, minimum height=2em] (mvc1) {Presentación};
+  \node [startstop, text width=20mm, minimum height=2em] at (2,-1.5) (mvc2) {Lógica};
+  \node [startstop, text width=20mm, minimum height=2em] at (4,0) (mvc3) {Persistencia};
+  \draw [arrow,<->,line width=2pt] (mvc1) -- (mvc2);
+  \draw [arrow,<->,line width=2pt] (mvc3) -- (mvc2);
+\end{tikzflowchart}\end{center}
+
+\pause
+
+\begin{description}
+    \item[Presentación:] Permite la interacción entre el sistema y el exterior.
+    \item[Lógica:] Procesa las acciones y los datos desde y hacia el exterior.
+    \item[Persistencia:] Conserva los datos para poder usarlos más tarde.
+\end{description}
+
+### Arquitecturas en acción
+
+\subsubtitleB{Aspectos de una aplicación}
+
+- ¿Cómo reflejamos lo anterior al momento de diseñar las clases?
+    - ¿Conviven todos los aspectos dentro de una misma clase?
+
+\pause
+
+- Lo más sano es que cada aspecto sea interpretado por una o varias clases.
+- Sin mezclar dos o más aspectos dentro de una de ellas.
+
+### Arquitecturas en acción
+
+\subsubtitleB{Arquitectura en capas}
+
+- En este caso el particionado de la aplicación se basa en \texthigh{capas concéntricas}.
+    - Cada capa es un \bld{nivel}.
+    - Elementos en un mismo nivel tienen responsabilidades similares.
+    - Existe una jerarquía:
+        - Los elementos de un nivel atienden las peticiones provenientes del nivel superior.
+
+### Arquitecturas en acción
+
+\subsubtitleB{Arquitectura en capas}
+
+\begin{center}\begin{tikzflowchart}
+\coordinate (O) at (0,0);
+\draw[fill=gray!30] (O) circle (3);
+\draw[fill=gray!50] (O) circle (2);
+\draw[fill=gray!70] (O) circle (1);
+\node at (0,0) {capa 1};
+\node at (1.5,0) {capa 2};
+\node at (2.5,0) {capa 3};
+\umlactor[x=-5,y=0,scale=0.7]{usuario 1};
+\umlactor[x=5,y=1,scale=0.7]{usuario 2};
+\umlactor[x=5,y=-1,scale=0.7]{usuario 3};
+\draw [arrow,line width=3pt] (usuario 1) -- (-3.2,0);
+\draw [arrow,line width=3pt] (usuario 2) -- (3.2,0.7);
+\draw [arrow,line width=3pt] (usuario 3) -- (3.2,-0.7);
+\end{tikzflowchart}\end{center}
+
+### Arquitecturas en acción
+
+\subsubtitleB{Arquitectura en capas}
+
+- Los aspectos que vimos anteriormente sí son compatibles con la arquitectura en capas.
+- De hecho, podemos definir una arquitectura en 3 capas:
+    - Presentación.
+    - Lógica.
+    - Persistencia.
+
+\vfill
+\pause
+
+- \bld{Importante:} Los usuario solamente \texthigh{interactúan con la capa de presentación}.
+- Podemos pensar que la capa de \texthigh{persistencia} no requiere la atención de ninguna otra.
+
+### Arquitecturas en acción
+
+\subsubtitleB{Arquitectura en capas: ¿qué hay en cada una de ellas?}
+
+- \texthigh{Presentación:} clases que proveen la capacidad de interactuar con el usuario:
+    - Capturando datos de entrada.
+    - Presentando datos de salida.
+- \texthigh{Lógica:} clases que:
+    - Describen los objetos que contienen la lógica de negocio para
+satisfacer cada uno de los \texthigh{casos de uso} ya definidos.
+    - Clases que permiten comunicarse con los datos almacenados en la capa de persistencia.
+- \texthigh{Persistencia:} clases que implementan el almacenamiento de los datos, en el o los formatos
+que sean necesarios: base de datos, XML, JSON, texto, video, etc.
+

@@ -1,29 +1,26 @@
-CN=in77j
+################################################################################
+### Parameters:
 
 # export TEXINPUTS:=.:./texmf:~/texmf:${TEXINPUTS}
 export TEXMFHOME:=.:./texmf:~/texmf:${TEXMFHOME}
 
-TEXNAME=$(CN)
+TEXNAME=in77j
 TEXCOMM=xelatex -halt-on-error
 #TEXCOMM=pdflatex -halt-on-error
-PANDOC=$(HOME)/.cabal/bin/pandoc -f markdown --filter overlay_filter --slide-level=3
+PANDOC=$(HOME)/.cabal/bin/pandoc -f markdown -t beamer --filter overlay_filter --slide-level=3
+
+MD_INFILES := $(wildcard tex/*.md.tex)
+MD_OUTFILES := $(MD_INFILES:.md.tex=.tex)
+
+################################################################################
+### Rules:
 
 default: $(TEXNAME).pdf
 
-$(TEXNAME).pdf: $(TEXNAME).tex in77j.sty $(TEXNAME)*.tex tex/*.tex
-	$(PANDOC) tex/1.01.md.tex -t beamer -o tex/1.01.tex
-	$(PANDOC) tex/1.01b.md.tex -t beamer -o tex/1.01b.tex
-	$(PANDOC) tex/1.02.md.tex -t beamer -o tex/1.02.tex
-	$(PANDOC) tex/1.03.md.tex -t beamer -o tex/1.03.tex
-	$(PANDOC) tex/1.04.md.tex -t beamer -o tex/1.04.tex
-	$(PANDOC) tex/1.05.md.tex -t beamer -o tex/1.05.tex
-	$(PANDOC) tex/1.06.md.tex -t beamer -o tex/1.06.tex
-	$(PANDOC) tex/1.06b.md.tex -t beamer -o tex/1.06b.tex
-	$(PANDOC) tex/1.07.md.tex -t beamer -o tex/1.07.tex
-	$(PANDOC) tex/1.08.md.tex -t beamer -o tex/1.08.tex
-	$(PANDOC) tex/1.08b.md.tex -t beamer -o tex/1.08b.tex
-	$(PANDOC) tex/1.08c.md.tex -t beamer -o tex/1.08c.tex
-	$(PANDOC) tex/1.09.md.tex -t beamer -o tex/1.09.tex
+%.tex: %.md.tex
+	$(PANDOC) $? -o $@
+
+$(TEXNAME).pdf: $(TEXNAME).tex $(MD_OUTFILES) in77j.sty
 	# biber $(TEXNAME) --output_format bibtex
 	$(TEXCOMM) -no-pdf $(TEXNAME).tex && rm -f $(TEXNAME).xdv
 	bibtex $(TEXNAME)

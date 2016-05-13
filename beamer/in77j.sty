@@ -193,6 +193,7 @@
 
 \setbeamerfont{subsection in toc}{size=\scriptsize}
 
+\setbeamertemplate{section in toc shaded}[default][40]
 \AtBeginSection[]{%
     \begin{frame}<*>{}
       \frametitle{Contenidos}
@@ -201,13 +202,11 @@
         \column{.45\textwidth}
         % \linespread{0.4}
         \scriptsize
-          \tableofcontents[part={1},currentsection,currentsubsection,sectionstyle=show/show,
-          subsectionstyle=show/show/hide]
+          \tableofcontents[part={1},currentsection,currentsubsection,subsectionstyle=show/show/hide]
         \column{.45\textwidth}
         % \linespread{0.4}
         \scriptsize
-          \tableofcontents[part={2},currentsection,currentsubsection,sectionstyle=show/show,
-          subsectionstyle=show/show/hide]
+          \tableofcontents[part={2},currentsection,currentsubsection,subsectionstyle=show/show/hide]
         \column{.05\textwidth}
       \end{columns}
     \end{frame}

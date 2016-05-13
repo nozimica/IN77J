@@ -1,2 +1,3 @@
-# IN77j
-Orientación a Objetos para e-Business
+# IN77J: Orientación a Objetos para e-Business
+
+Material docente: cátedras y controles.

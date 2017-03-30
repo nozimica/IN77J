@@ -25,6 +25,19 @@
 
 %\includeonly{tex/1.08, tex/1.08b, tex/1.08c, tex/1.08d, tex/1.08e}
 
+\usepackage[style=authoryear,backend=biber]{biblatex}
+\setbeamertemplate{bibliography item}{%
+  \ifboolexpr{ test {\ifentrytype{book}} or test {\ifentrytype{mvbook}}
+    or test {\ifentrytype{collection}} or test {\ifentrytype{mvcollection}}
+    or test {\ifentrytype{reference}} or test {\ifentrytype{mvreference}} }
+    {\setbeamertemplate{bibliography item}[book]}
+    {\ifentrytype{online}
+       {\setbeamertemplate{bibliography item}[online]}
+       {\setbeamertemplate{bibliography item}[article]}}%
+  \usebeamertemplate{bibliography item}}
+\renewcommand*{\bibfont}{\footnotesize}
+\addbibresource{bibliog.bib}
+
 \begin{document}
 
 %----------- titlepage ----------------------------------------------%
@@ -42,9 +55,13 @@
 \input{tex/diagrams.tikz.tex}
 \include{tex/1.01}
 \begin{frame}{Bibliografía}
-    \nocite{*} \bibliographystyle{apalike}
-    {\scriptsize
-    \bibliography{bibliog}}
+    % \nocite{*} \bibliographystyle{unsrt}
+    \begin{columns}
+        \column{.15\paperwidth}
+        \column{.75\paperwidth}
+        \nocite{*} \printbibliography
+        \column{.1\paperwidth}
+    \end{columns}
 \end{frame}
 \include{tex/1.01b}
 \include{tex/1.02}

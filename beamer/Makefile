@@ -5,6 +5,8 @@
 export TEXMFHOME:=.:./texmf:~/texmf:${TEXMFHOME}
 
 TEXNAME=in77j
+TEXDEPENDS=in77j.sty tex/diagrams.tikz.tex bibliog.bib
+
 TEXCOMM=xelatex -halt-on-error
 #TEXCOMM=pdflatex -halt-on-error
 PANDOC=$(HOME)/.cabal/bin/pandoc -f markdown -t beamer --filter overlay_filter --slide-level=3
@@ -20,10 +22,10 @@ default: $(TEXNAME).pdf
 %.tex: %.md.tex
 	$(PANDOC) $? -o $@
 
-$(TEXNAME).pdf: $(TEXNAME).tex $(MD_OUTFILES) in77j.sty
+$(TEXNAME).pdf: $(TEXNAME).tex $(MD_OUTFILES) $(TEXDEPENDS)
 	# biber $(TEXNAME) --output_format bibtex
 	$(TEXCOMM) -no-pdf $(TEXNAME).tex && rm -f $(TEXNAME).xdv
-	bibtex $(TEXNAME)
+	biber $(TEXNAME)
 	$(TEXCOMM) -interaction=batchmode $(TEXNAME).tex
 	# $(TEXCOMM) $(TEXNAME).tex
 
@@ -49,7 +51,7 @@ reduce:
 		-sOutputFile=$(TEXNAME)-reduc.pdf $(TEXNAME).pdf
 
 compileLive:
-	~/.local/bin/when-changed tex/1.*.md.tex tex/diagrams.tikz.tex in77j.tex -c make
+	~/.local/bin/when-changed $(TEXNAME).tex $(MD_INFILES) $(TEXDEPENDS) -c make
 
 getOldPgf:
 	mkdir -p texmf/tex
